@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stampRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_stamp_retro_cam"
+    android:paddingHorizontal="14dp"
+    android:paddingVertical="9dp">
+
+    <!-- Container for Texts (Centered / Left) -->
+    <LinearLayout
+        android:id="@+id/layoutTexts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivEditIcon"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Prominent Digital Amber Date & Time -->
+        <TextView
+            android:id="@+id/tvDigitalDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:letterSpacing="0.06"
+            android:maxLines="1"
+            android:text="'26 10 24   15:09:22"
+            android:textColor="#FFAA00"
+            android:textSize="13sp" />
+
+        <!-- Location & Coordinates Line -->
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:maxLines="1"
+            android:text="📍 Islamabad, Pakistan  •  33.7294° N, 73.0551° E"
+            android:textColor="#E2E8F0"
+            android:textSize="9.5sp" />
+
+    </LinearLayout>
+
+    <!-- Edit Pencil Circle (Top-Right Corner per Image 2) -->
+    <ImageView
+        android:id="@+id/ivEditIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_edit_circle"
+        android:contentDescription="Edit"
+        android:padding="3.5dp"
+        android:src="@drawable/ic_edit_pen"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#FFAA00"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

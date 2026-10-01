@@ -1,0 +1,26 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="32dp"
+    android:viewportWidth="48"
+    android:viewportHeight="32">
+    <!-- White background -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M0,0h48v32H0z" />
+    <!-- Red/Blue Taegeuk circle -->
+    <path
+        android:fillColor="#CD2E3A"
+        android:pathData="M24,16m-7,0a7,7 0 1,0 14,0a7,7 0 1,0 -14,0" />
+    <path
+        android:fillColor="#0047A0"
+        android:pathData="M17,16a7,7 0 0,0 7,7a3.5,3.5 0 0,0 0,-7a3.5,3.5 0 0,1 0,-7a7,7 0 0,0 -7,7z" />
+    <!-- Trigram bars hints -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M9,7l2,-2 2,2 -2,2zM35,23l2,-2 2,2 -2,2zM35,7l2,2 -2,2 -2,-2zM9,23l2,2 -2,2 -2,-2z" />
+    <!-- Light subtle border -->
+    <path
+        android:strokeColor="#CBD5E1"
+        android:strokeWidth="1"
+        android:pathData="M0.5,0.5h47v31h-47z" />
+</vector>

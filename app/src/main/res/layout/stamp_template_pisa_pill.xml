@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stampRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_stamp_capsule_oval"
+    android:paddingHorizontal="32dp"
+    android:paddingVertical="12dp">
+
+    <!-- Centered Content Stack -->
+    <LinearLayout
+        android:id="@+id/layoutTexts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Top Time Header (e.g. ⏰ 4:23 PM) -->
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="⏰ 4:23 PM"
+            android:textColor="#FFFFFF"
+            android:textSize="12.5sp" />
+
+        <!-- Location / Address Line -->
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="Pisa, 56126 pisa, Province of paisa,Italy"
+            android:textColor="#E5E7EB"
+            android:textSize="10.5sp" />
+
+        <!-- Coordinates Line -->
+        <TextView
+            android:id="@+id/tvCoordinates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Lat: 43.7311°    |    Long: 10.3965°"
+            android:textColor="#CBD5E1"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <!-- Edit Pencil Circle -->
+    <ImageView
+        android:id="@+id/ivEditIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_edit_circle"
+        android:contentDescription="Edit"
+        android:padding="3.5dp"
+        android:src="@drawable/ic_edit_pen"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#FFFFFF"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

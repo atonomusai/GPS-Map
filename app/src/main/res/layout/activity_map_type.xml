@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mapTypeRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fitsSystemWindows="true">
+
+    <!-- Top App Bar / Header -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbarLayout"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circular_back_button"
+            android:contentDescription="@string/app_name"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back_arrow_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvMapTypeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Map Type"
+            android:textColor="#1A1C20"
+            android:textSize="18sp"
+            app:fontFamily="@font/instrument_sans_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Map Grid Content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/btnSave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="24dp">
+
+            <!-- ROW 1: Normal and Hybrid -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- CARD 1: NORMAL -->
+                <LinearLayout
+                    android:id="@+id/cardMapNormal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_map_card_unselected"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivMapNormal"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:contentDescription="Normal Map"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_map_normal"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearance.MapRounded" />
+
+                    <TextView
+                        android:id="@+id/tvMapNormal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="Normal"
+                        android:textColor="#1A1C20"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <!-- CARD 2: HYBRID -->
+                <LinearLayout
+                    android:id="@+id/cardMapHybrid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_map_card_selected"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivMapHybrid"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:contentDescription="Hybrid Map"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_map_hybrid"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearance.MapRounded" />
+
+                    <TextView
+                        android:id="@+id/tvMapHybrid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="Hybrid"
+                        android:textColor="#5263FF"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- ROW 2: Satellite and Terrain -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <!-- CARD 3: SATELLITE -->
+                <LinearLayout
+                    android:id="@+id/cardMapSatellite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_map_card_unselected"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivMapSatellite"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:contentDescription="Satellite Map"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_map_satellite"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearance.MapRounded" />
+
+                    <TextView
+                        android:id="@+id/tvMapSatellite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="Satellite"
+                        android:textColor="#1A1C20"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <!-- CARD 4: TERRAIN -->
+                <LinearLayout
+                    android:id="@+id/cardMapTerrain"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_map_card_unselected"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivMapTerrain"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:contentDescription="Terrain Map"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_map_terrain"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearance.MapRounded" />
+
+                    <TextView
+                        android:id="@+id/tvMapTerrain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="Terrain"
+                        android:textColor="#1A1C20"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Save Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSave"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_button_save_pill"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:text="Save"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:fontFamily="@font/instrument_sans_bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

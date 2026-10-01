@@ -1,0 +1,44 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="54dp"
+    android:height="54dp"
+    android:viewportWidth="54"
+    android:viewportHeight="54">
+    <!-- Background map tile -->
+    <path
+        android:pathData="M0,0h54v54h-54z"
+        android:fillColor="#E8ECE9" />
+    <!-- Green park area 1 -->
+    <path
+        android:pathData="M6,8 C12,5 20,6 26,10 C28,14 26,20 20,22 C14,24 8,20 5,14 Z"
+        android:fillColor="#C8DFC9" />
+    <!-- Green park area 2 -->
+    <path
+        android:pathData="M32,24 C38,20 48,22 50,28 C52,36 44,42 36,40 C30,38 28,30 32,24 Z"
+        android:fillColor="#CBE2CC" />
+    <!-- Green park area 3 -->
+    <path
+        android:pathData="M8,32 C14,30 22,34 24,40 C25,46 18,50 12,48 C6,46 4,38 8,32 Z"
+        android:fillColor="#D3E7D4" />
+    <!-- Main roads/streets (white) -->
+    <path
+        android:pathData="M0,27 L54,27"
+        android:strokeWidth="3.5"
+        android:strokeColor="#FFFFFF" />
+    <path
+        android:pathData="M27,0 L27,54"
+        android:strokeWidth="3.5"
+        android:strokeColor="#FFFFFF" />
+    <path
+        android:pathData="M4,10 L50,44"
+        android:strokeWidth="2.5"
+        android:strokeColor="#FFFFFF" />
+    <path
+        android:pathData="M10,50 L44,4"
+        android:strokeWidth="2"
+        android:strokeColor="#FFFFFF" />
+    <!-- Subtle secondary streets -->
+    <path
+        android:pathData="M0,14 L54,14 M0,40 L54,40 M14,0 L14,54 M40,0 L40,54"
+        android:strokeWidth="1.2"
+        android:strokeColor="#FFFFFF" />
+</vector>

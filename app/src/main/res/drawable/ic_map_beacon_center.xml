@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="54dp"
+    android:height="54dp"
+    android:viewportWidth="54"
+    android:viewportHeight="54">
+    <!-- Outer Soft Translucent Radar Halo -->
+    <path
+        android:fillAlpha="0.32"
+        android:fillColor="#3B82F6"
+        android:pathData="M27,27m-24,0a24,24 0,1,1 48,0a24,24 0,1,1 -48,0" />
+    <!-- Solid Vibrant Blue Core Circle -->
+    <path
+        android:fillColor="#1D68FE"
+        android:pathData="M27,27m-10,0a10,10 0,1,1 20,0a10,10 0,1,1 -20,0" />
+    <!-- Crisp White Center Dot -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M27,27m-4,0a4,4 0,1,1 8,0a4,4 0,1,1 -8,0" />
+</vector>

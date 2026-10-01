@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/compassCameraRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- 1. FULL SCREEN LIVE CAMERA PREVIEW -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 2. SUBTLE CINEMATIC GRADIENT SCRIM (Improves legibility of dials and text) -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#33000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 3. TOP ACTION BAR -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutTopBar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/btnBack"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_camera_top_box"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:contentDescription="Back"
+                android:src="@drawable/ic_back_arrow_dark"
+                app:tint="#FFFFFF" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Compass on Camera"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:fontFamily="@font/instrument_sans_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/btnOverflowMenu"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_camera_top_box"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:contentDescription="More Options"
+                android:src="@drawable/ic_more_vert_dark"
+                app:tint="#FFFFFF" />
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 4. CENTER COMPASS CARD / DIAL -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/compassCenterContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutTopBar"
+        app:layout_constraintVertical_bias="0.40">
+
+        <!-- COMPASS DIAL CONTAINER -->
+        <FrameLayout
+            android:id="@+id/compassDialContainer"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- Theme Image Dial -->
+            <ImageView
+                android:id="@+id/ivThemeCompassDial"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:contentDescription="Compass Theme Dial"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_theme_classic_dial" />
+
+            <!-- Rotating Canvas Dial (Fallback / Dynamic) -->
+            <com.autonoumus.ai.presentation.compass.CompassDialView
+                android:id="@+id/compassDialView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <!-- Pointer Arrow -->
+            <ImageView
+                android:id="@+id/ivCompassPointer"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginTop="2dp"
+                android:contentDescription="Compass Pointer"
+                android:src="@drawable/ic_compass_pointer" />
+
+            <!-- Center Digital Readout Circle -->
+            <LinearLayout
+                android:id="@+id/centerReadoutLayout"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_compass_center_circle"
+                android:elevation="6dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvBearingDegrees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="245°"
+                    android:textColor="#007AFF"
+                    android:textSize="22sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvBearingDirection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-2dp"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="SW"
+                    android:textColor="#FF3B30"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- Direction Full Name (e.g. South-West) -->
+        <TextView
+            android:id="@+id/tvDirectionFullName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:shadowColor="#80000000"
+            android:shadowDx="0"
+            android:shadowDy="2"
+            android:shadowRadius="4"
+            android:text="South-West"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            app:fontFamily="@font/instrument_sans_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/compassDialContainer" />
+
+        <!-- Magnetic Declination -->
+        <TextView
+            android:id="@+id/tvMagneticDeclination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:shadowColor="#80000000"
+            android:shadowDx="0"
+            android:shadowDy="2"
+            android:shadowRadius="3"
+            android:text="Magnetic Declination +1.8°"
+            android:textColor="#CCFFFFFF"
+            android:textSize="14sp"
+            app:fontFamily="@font/instrument_sans_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDirectionFullName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 5. BOTTOM NOTIFICATION TOAST PILL -->
+    <LinearLayout
+        android:id="@+id/layoutPillNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/bg_pill_toast"
+        android:elevation="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="Success"
+            android:src="@drawable/ic_check_circle_green" />
+
+        <TextView
+            android:id="@+id/tvPillMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/instrument_sans_medium"
+            android:text="Compass telemetry copied to clipboard!"
+            android:textColor="#1A1C20"
+            android:textSize="13sp"
+            app:fontFamily="@font/instrument_sans_medium" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

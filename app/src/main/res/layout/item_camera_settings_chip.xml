@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tvChipLabel"
+    android:layout_width="0dp"
+    android:layout_height="40dp"
+    android:layout_weight="1"
+    android:background="@drawable/bg_segment_pill_unselected"
+    android:fontFamily="@font/instrument_sans_semibold"
+    app:fontFamily="@font/instrument_sans_semibold"
+    android:gravity="center"
+    android:paddingHorizontal="4dp"
+    android:singleLine="true"
+    android:ellipsize="end"
+    android:textColor="#1E293B"
+    android:textSize="13sp"
+    tools:text="1080p Full HD" />

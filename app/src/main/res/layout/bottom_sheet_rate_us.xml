@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_dialog"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="24dp">
+
+        <!-- Drag Handle -->
+        <View
+            android:layout_width="44dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_bottom_sheet_drag_handle" />
+
+        <!-- Top Rate Us Graphic Illustration -->
+        <ImageView
+            android:id="@+id/ivRateIllustration"
+            android:layout_width="match_parent"
+            android:layout_height="145dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="Rate Us Illustration"
+            android:scaleType="fitCenter"
+            android:src="@drawable/rate_us_img" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvRateTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Rate Us"
+            android:textColor="#5263FF"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <!-- Subtitle -->
+        <TextView
+            android:id="@+id/tvRateSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Your opinion matters to us!"
+            android:textColor="#1E293B"
+            android:textSize="14dp"
+            android:textStyle="bold" />
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/tvRateDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:paddingHorizontal="32dp"
+            android:fontFamily="@font/instrument_sans_medium"
+            android:gravity="center"
+            android:text="We work super hard to make application better for you, and would love to know"
+            android:textColor="#64748B"
+            android:textSize="12sp" />
+
+        <!-- 5 Interactive Stars Row -->
+        <LinearLayout
+            android:id="@+id/layoutStars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp">
+
+            <ImageView
+                android:id="@+id/ivStar1"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginHorizontal="5dp"
+                android:contentDescription="1 Star"
+                android:padding="2dp"
+                android:src="@drawable/ic_star_filled" />
+
+            <ImageView
+                android:id="@+id/ivStar2"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginHorizontal="5dp"
+                android:contentDescription="2 Stars"
+                android:padding="2dp"
+                android:src="@drawable/ic_star_filled" />
+
+            <ImageView
+                android:id="@+id/ivStar3"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginHorizontal="5dp"
+                android:contentDescription="3 Stars"
+                android:padding="2dp"
+                android:src="@drawable/ic_star_filled" />
+
+            <ImageView
+                android:id="@+id/ivStar4"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginHorizontal="5dp"
+                android:contentDescription="4 Stars"
+                android:padding="2dp"
+                android:src="@drawable/ic_star_filled" />
+
+            <ImageView
+                android:id="@+id/ivStar5"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginHorizontal="5dp"
+                android:contentDescription="5 Stars"
+                android:padding="2dp"
+                android:src="@drawable/ic_star_filled" />
+
+        </LinearLayout>
+
+        <!-- Feedback Input Box Container (Shows when rating &lt; 4) -->
+        <LinearLayout
+            android:id="@+id/layoutFeedbackBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_feedback_input_box"
+            android:orientation="vertical"
+            android:padding="14dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <EditText
+                android:id="@+id/etFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:fontFamily="@font/instrument_sans_regular"
+                android:gravity="top|start"
+                android:hint="Describe the issue you’ve encountered here."
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine|textCapSentences"
+                android:minLines="4"
+                android:maxLines="7"
+                android:scrollbars="vertical"
+                android:textColor="#1E293B"
+                android:textColorHint="#DFDFDF"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <!-- Primary Action Button (Rate Us / Submit Feedback) -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSubmitRate"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_btn_rate_us_primary"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Rate Us"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16dp"
+            app:backgroundTint="@null"
+            app:elevation="0dp" />
+
+        <!-- Secondary Exit App Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnExitFromRate"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_btn_rate_us_exit"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Exit App"
+            android:textAllCaps="false"
+            android:textColor="#475569"
+            android:textSize="16dp"
+            app:backgroundTint="@null"
+            app:elevation="0dp" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tripSummaryRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC">
+
+    <!-- 1. MAP SECTION (TOP BACKGROUND PREVIEW) -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapPreview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/guidelineMid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/mapTouchOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toTopOf="@id/guidelineMid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineMid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.38" />
+
+    <!-- 2. TOP HEADER BAR CONTAINER -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutTopBarContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutTopBar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_circular_back_button"
+                android:contentDescription="Back"
+                android:elevation="2dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_back_arrow_dark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="Trip Summary"
+                android:textColor="#111827"
+                android:textSize="18sp"
+                app:fontFamily="@font/instrument_sans_bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Floating View Route Map Pill on Map (Top Right) -->
+    <LinearLayout
+        android:id="@+id/btnViewFullMap"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_trip_filter_selected"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutTopBarContainer">
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:contentDescription="Map"
+            android:src="@drawable/ic_expand"
+            app:tint="#FFFFFF" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Full Map"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+    </LinearLayout>
+
+    <!-- 3. SCROLLABLE SUMMARY CONTENT -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutTopBarContainer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Spacer so the top map preview is nicely exposed -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="105dp" />
+
+            <!-- SOLID SHEET CONTAINER WITH NO MAP BLEEDING -->
+            <LinearLayout
+                android:id="@+id/layoutSheetContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_trip_summary_bottom_sheet"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="24dp">
+
+                <!-- CARD 1: SPEED DISTRIBUTION -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="#F1F5F9"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/instrument_sans_bold"
+                            android:letterSpacing="0.04"
+                            android:text="SPEED DISTRIBUTION"
+                            android:textColor="#475569"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/instrument_sans_bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <!-- Donut Progress Chart View -->
+                            <com.autonoumus.ai.presentation.speedometer.view.SpeedDistributionDonutView
+                                android:id="@+id/donutSpeedDistribution"
+                                android:layout_width="96dp"
+                                android:layout_height="96dp" />
+
+                            <!-- Legend Items -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="24dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <!-- Safe -->
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <View
+                                        android:layout_width="8dp"
+                                        android:layout_height="8dp"
+                                        android:background="@drawable/bg_circle_icon_green"
+                                        android:backgroundTint="#4F65F6" />
+
+                                    <TextView
+                                        android:id="@+id/tvSafePercent"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:fontFamily="@font/instrument_sans_bold"
+                                        android:text="Safe: 100%"
+                                        android:textColor="#1E293B"
+                                        android:textSize="13sp"
+                                        app:fontFamily="@font/instrument_sans_bold" />
+                                </LinearLayout>
+
+                                <!-- Warning -->
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <View
+                                        android:layout_width="8dp"
+                                        android:layout_height="8dp"
+                                        android:background="@drawable/bg_circle_icon_green"
+                                        android:backgroundTint="#F59E0B" />
+
+                                    <TextView
+                                        android:id="@+id/tvWarningPercent"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:fontFamily="@font/instrument_sans_bold"
+                                        android:text="Warning: 0%"
+                                        android:textColor="#1E293B"
+                                        android:textSize="13sp"
+                                        app:fontFamily="@font/instrument_sans_bold" />
+                                </LinearLayout>
+
+                                <!-- Over Speed -->
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <View
+                                        android:layout_width="8dp"
+                                        android:layout_height="8dp"
+                                        android:background="@drawable/bg_circle_icon_green"
+                                        android:backgroundTint="#EF4444" />
+
+                                    <TextView
+                                        android:id="@+id/tvOverSpeedPercent"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:fontFamily="@font/instrument_sans_bold"
+                                        android:text="Over Speed: 0%"
+                                        android:textColor="#1E293B"
+                                        android:textSize="13sp"
+                                        app:fontFamily="@font/instrument_sans_bold" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 2-COLUMN GRID (TOTAL DISTANCE, DURATION, AVG SPEED, MAX SPEED, LIMIT EXCEEDED, TOP SPEED LOC) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- ROW 1: TOTAL DISTANCE & DURATION -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- 1. TOTAL DISTANCE -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="78dp"
+                            android:layout_marginEnd="6dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#F1F5F9"
+                            app:strokeWidth="1dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical"
+                                android:paddingHorizontal="14dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:letterSpacing="0.04"
+                                    android:text="TOTAL DISTANCE"
+                                    android:textColor="#64748B"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+
+                                <TextView
+                                    android:id="@+id/tvTotalDistanceValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:text="0.0 km"
+                                    android:textColor="#0F172A"
+                                    android:textSize="17sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- 2. DURATION -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="78dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#F1F5F9"
+                            app:strokeWidth="1dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical"
+                                android:paddingHorizontal="14dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:letterSpacing="0.04"
+                                    android:text="DURATION"
+                                    android:textColor="#64748B"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+
+                                <TextView
+                                    android:id="@+id/tvDurationValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:text="00:00:00"
+                                    android:textColor="#0F172A"
+                                    android:textSize="17sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+
+                    <!-- ROW 2: AVG SPEED & MAX SPEED -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- 3. AVG SPEED -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="78dp"
+                            android:layout_marginEnd="6dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#F1F5F9"
+                            app:strokeWidth="1dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical"
+                                android:paddingHorizontal="14dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:letterSpacing="0.04"
+                                    android:text="AVG SPEED"
+                                    android:textColor="#64748B"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+
+                                <TextView
+                                    android:id="@+id/tvAvgSpeedValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:text="0.0 km/h"
+                                    android:textColor="#0F172A"
+                                    android:textSize="17sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- 4. MAX SPEED -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="78dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#F1F5F9"
+                            app:strokeWidth="1dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical"
+                                android:paddingHorizontal="14dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:letterSpacing="0.04"
+                                    android:text="MAX SPEED"
+                                    android:textColor="#64748B"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+
+                                <TextView
+                                    android:id="@+id/tvMaxSpeedValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:text="0.0 km/h"
+                                    android:textColor="#0F172A"
+                                    android:textSize="17sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+
+                    <!-- ROW 3: LIMIT EXCEEDED & TOP SPEED LOC -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- 5. LIMIT EXCEEDED -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="78dp"
+                            android:layout_marginEnd="6dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#F1F5F9"
+                            app:strokeWidth="1dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical"
+                                android:paddingHorizontal="14dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:letterSpacing="0.04"
+                                    android:text="LIMIT EXCEEDED"
+                                    android:textColor="#64748B"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+
+                                <TextView
+                                    android:id="@+id/tvLimitExceededValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:text="0 times"
+                                    android:textColor="#EF4444"
+                                    android:textSize="17sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- 6. TOP SPEED LOC -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="78dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#FFFFFF"
+                            app:cardCornerRadius="16dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="#F1F5F9"
+                            app:strokeWidth="1dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical"
+                                android:paddingHorizontal="14dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:letterSpacing="0.04"
+                                    android:text="TOP SPEED LOC."
+                                    android:textColor="#64748B"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+
+                                <TextView
+                                    android:id="@+id/tvTopSpeedLocValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:ellipsize="end"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:maxLines="1"
+                                    android:text="Main Highway"
+                                    android:textColor="#0F172A"
+                                    android:textSize="15sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- 4. BOTTOM ACTION BUTTONS: SHARE & TRIP HISTORY -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="12dp"
+                    android:orientation="horizontal">
+
+                    <!-- Share Button -->
+                    <LinearLayout
+                        android:id="@+id/btnShareTrip"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_btn_share_pill"
+                        android:clickable="true"
+                        android:elevation="1dp"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/instrument_sans_bold"
+                            android:text="Share"
+                            android:textColor="#4F65F6"
+                            android:textSize="15sp"
+                            app:fontFamily="@font/instrument_sans_bold" />
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginStart="8dp"
+                            android:contentDescription="Share"
+                            android:src="@drawable/ic_menu_share"
+                            app:tint="#4F65F6" />
+                    </LinearLayout>
+
+                    <!-- Trip History Button -->
+                    <TextView
+                        android:id="@+id/btnTripHistoryAction"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_btn_history_pill"
+                        android:clickable="true"
+                        android:elevation="1dp"
+                        android:focusable="true"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:gravity="center"
+                        android:text="Trip History"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

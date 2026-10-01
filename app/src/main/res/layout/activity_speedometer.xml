@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/speedometerRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFC">
+
+    <!-- 1. TOP ACTION BAR -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutTopBar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back_arrow_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="GPS Speedometer"
+            android:textColor="#111827"
+            android:textSize="18sp"
+            app:fontFamily="@font/instrument_sans_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnHistory"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Trip History"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_trip_history"
+            app:tint="#111827"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnSettings"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnSettings"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Settings"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_setting"
+            app:tint="#111827"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 2. SCROLLABLE / FLEXIBLE CONTENT -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutTopBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- SEGMENTED MODE TOGGLE (Analog Gauge vs Digital HUD) -->
+            <LinearLayout
+                android:id="@+id/layoutModeToggle"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_speed_toggle_track"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvModeAnalog"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_speed_toggle_selected"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:gravity="center"
+                    android:text="Analog Gauge"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvModeDigital"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:gravity="center"
+                    android:text="Digital HUD"
+                    android:textColor="#64748B"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+            </LinearLayout>
+
+            <!-- SPEED DISPLAY CONTAINER (FrameLayout for zero-layout-shift smooth crossfade) -->
+            <FrameLayout
+                android:id="@+id/containerSpeedDisplay"
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                android:layout_marginTop="8dp">
+
+                <!-- 1. ANALOG GAUGE VIEW -->
+                <com.autonoumus.ai.presentation.speedometer.view.SpeedometerDialView
+                    android:id="@+id/speedometerDialView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:visibility="visible" />
+
+                <!-- 2. DIGITAL HUD CONTAINER -->
+                <LinearLayout
+                    android:id="@+id/layoutDigitalHud"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="4dp"
+                    android:visibility="gone">
+
+                    <!-- 7-Segment Digital Speed Display (e.g. 54) -->
+                    <com.autonoumus.ai.presentation.speedometer.view.SevenSegmentSpeedView
+                        android:id="@+id/sevenSegmentSpeedView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="125dp"
+                        android:layout_gravity="center_horizontal" />
+
+                    <!-- Unit Subtitle (KM/H) -->
+                    <TextView
+                        android:id="@+id/tvDigitalSpeedUnit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="KM/H"
+                        android:textColor="#64748B"
+                        android:textSize="17sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                    <!-- Horizontal Multi-Color Speed Bar -->
+                    <com.autonoumus.ai.presentation.speedometer.view.HorizontalSpeedBarView
+                        android:id="@+id/horizontalSpeedBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="14dp"
+                        android:layout_marginTop="20dp" />
+
+                    <!-- Bar Range Labels (0 KM/H and No Limit Set / Limit: 120 KM/H) -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:paddingHorizontal="2dp">
+
+                        <TextView
+                            android:id="@+id/tvDigitalBarMin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/instrument_sans_medium"
+                            android:text="0 KM/H"
+                            android:textColor="#64748B"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/instrument_sans_medium" />
+
+                        <TextView
+                            android:id="@+id/tvDigitalBarLimit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:fontFamily="@font/instrument_sans_bold"
+                            android:text="No Limit Set"
+                            android:textColor="#3B82F6"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/instrument_sans_bold" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <!-- SPEED LEGEND ROW (Safe / Warning / Over Speed) -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="34dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- 1. Safe -->
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/bg_circle_icon_green"
+                    android:backgroundTint="#10B981" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:text="Safe"
+                    android:textColor="#475569"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/instrument_sans_medium" />
+
+                <!-- 2. Warning -->
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_marginStart="24dp"
+                    android:background="@drawable/bg_circle_icon_green"
+                    android:backgroundTint="#F59E0B" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:text="Warning"
+                    android:textColor="#475569"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/instrument_sans_medium" />
+
+                <!-- 3. Over Speed -->
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:layout_marginStart="24dp"
+                    android:background="@drawable/bg_circle_icon_green"
+                    android:backgroundTint="#EF4444" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:text="Over Speed"
+                    android:textColor="#475569"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/instrument_sans_medium" />
+
+            </LinearLayout>
+
+            <!-- DYNAMIC SPEED LIMIT PILL BADGE -->
+            <LinearLayout
+                android:id="@+id/layoutSpeedLimitBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_speed_pill_safe"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/ivSpeedLimitAlert"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginEnd="6dp"
+                    android:contentDescription="Alert"
+                    android:src="@drawable/bx_error"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvSpeedLimitText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="SPEED LIMIT: 60 KM/H"
+                    android:textColor="#0F9D58"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+            </LinearLayout>
+
+            <!-- BOTTOM 3 METRICS CARDS (Avg Speed, Max Speed, Distance) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <!-- 1. Avg Speed Card -->
+                <LinearLayout
+                    android:id="@+id/cardAvgSpeed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_speed_card"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="14dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/instrument_sans_regular"
+                            android:text="Avg Speed"
+                            android:textColor="#64748B"
+                            android:textSize="11sp"
+                            app:fontFamily="@font/instrument_sans_regular" />
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:contentDescription="Speed"
+                            android:src="@drawable/gauge"
+                            app:tint="#64748B" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvAvgSpeedValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="0.0 km/h"
+                        android:textColor="#111827"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <!-- 2. Max Speed Card -->
+                <LinearLayout
+                    android:id="@+id/cardMaxSpeed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_speed_card"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="14dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/instrument_sans_regular"
+                            android:text="Max Speed"
+                            android:textColor="#64748B"
+                            android:textSize="11sp"
+                            app:fontFamily="@font/instrument_sans_regular" />
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:contentDescription="Max"
+                            android:src="@drawable/icon_arrow"
+                            app:tint="#64748B" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvMaxSpeedValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="0.0 km/h"
+                        android:textColor="#111827"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <!-- 3. Distance Card -->
+                <LinearLayout
+                    android:id="@+id/cardDistance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_speed_card"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="14dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/instrument_sans_regular"
+                            android:text="Distance"
+                            android:textColor="#64748B"
+                            android:textSize="11sp"
+                            app:fontFamily="@font/instrument_sans_regular" />
+
+                        <ImageView
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:contentDescription="Distance"
+                            android:src="@drawable/boxicons_location"
+                            app:tint="#6E737F" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvDistanceValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="0.0 km"
+                        android:textColor="#111827"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnStartStopTracking"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="45dp"
+                android:background="@drawable/bg_speed_start_button"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="Start"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

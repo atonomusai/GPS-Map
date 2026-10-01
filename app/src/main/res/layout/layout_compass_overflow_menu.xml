@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="260dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_popup_menu_card"
+    android:elevation="8dp"
+    android:orientation="vertical"
+    android:paddingVertical="6dp">
+
+    <!-- ITEM 1: Copy Bearing & GPS -->
+    <LinearLayout
+        android:id="@+id/itemCopyBearing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="Copy"
+            android:src="@drawable/ic_menu_copy" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="Copy Bearing &amp; GPS"
+                android:textColor="#1A1C20"
+                android:textSize="14sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+            <TextView
+                android:id="@+id/tvCopySubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:fontFamily="@font/instrument_sans_regular"
+                android:text="Copies 245° SW + Lat/Long"
+                android:textColor="#8E95A5"
+                android:textSize="11sp"
+                app:fontFamily="@font/instrument_sans_regular" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F1F5F9" />
+
+    <!-- ITEM 2: Share Detail -->
+    <LinearLayout
+        android:id="@+id/itemShareDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="13dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="Share"
+            android:src="@drawable/ic_menu_share" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Share Detail"
+            android:textColor="#1A1C20"
+            android:textSize="14sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F1F5F9" />
+
+    <!-- ITEM 3: Compass Themes -->
+    <LinearLayout
+        android:id="@+id/itemCompassThemes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="13dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="Themes"
+            android:src="@drawable/ic_menu_compass_theme" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Compass Themes"
+            android:textColor="#1A1C20"
+            android:textSize="14sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F1F5F9" />
+
+    <!-- ITEM 4: Calibrate Sensor -->
+    <LinearLayout
+        android:id="@+id/itemCalibrateSensor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="13dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="Calibrate"
+            android:src="@drawable/ic_menu_calibrate" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Calibrate Sensor"
+            android:textColor="#1A1C20"
+            android:textSize="14sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+    </LinearLayout>
+
+</LinearLayout>

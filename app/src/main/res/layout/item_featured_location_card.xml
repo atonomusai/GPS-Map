@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="220dp"
+    android:layout_height="130dp"
+    android:layout_marginEnd="12dp"
+    app:cardBackgroundColor="#E2E8F0"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="0dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivFeaturedThumb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/img_street_view_mountain" />
+
+        <!-- Top-left LIVE Badge: hidden - featured cards show a representative photo, not a live feed -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="top|start"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_live_badge"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="3dp">
+
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_tab_live"
+                app:tint="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="LIVE"
+                android:textColor="#FFFFFF"
+                android:textSize="9sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+        </LinearLayout>
+
+        <!-- Bottom Gradient Scrim -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/bg_media_bottom_scrim" />
+
+        <!-- Bottom Location Details -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/tvFeaturedTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:maxLines="1"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                app:fontFamily="@font/instrument_sans_bold"
+                tools:text="Times Square, NYC" />
+
+            <TextView
+                android:id="@+id/tvFeaturedSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/instrument_sans_regular"
+                android:maxLines="1"
+                android:textColor="#E2E8F0"
+                android:textSize="11sp"
+                app:fontFamily="@font/instrument_sans_regular"
+                tools:text="10 live cameras" />
+        </LinearLayout>
+    </FrameLayout>
+</androidx.cardview.widget.CardView>

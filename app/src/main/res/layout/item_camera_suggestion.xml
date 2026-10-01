@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="7dp">
+
+    <!-- Thumbnail Card with rounded corners and duration badge -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="128dp"
+        android:layout_height="74dp"
+        app:cardBackgroundColor="#1E293B"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivSuggestionThumb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/img_street_view_mountain" />
+
+          <!--  &lt;!&ndash; Duration Badge on bottom right &ndash;&gt;
+            <TextView
+                android:id="@+id/tvSuggestionDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_suggestion_duration_pill"
+                android:fontFamily="@font/instrument_sans_semibold"
+                android:paddingHorizontal="5dp"
+                android:paddingVertical="1.5dp"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp"
+                app:fontFamily="@font/instrument_sans_semibold"
+                tools:text="15:20" />-->
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Info Column -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvSuggestionTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:lineSpacingExtra="1.5dp"
+            android:maxLines="2"
+            android:textColor="#FFFFFF"
+            android:textSize="13.5sp"
+            app:fontFamily="@font/instrument_sans_bold"
+            tools:text="Must-See Miami Views &amp; Hidden Bars" />
+
+        <TextView
+            android:id="@+id/tvSuggestionAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:maxLines="1"
+            android:textColor="#94A3B8"
+            android:textSize="12sp"
+            app:fontFamily="@font/instrument_sans_regular"
+            tools:text="Abdul Manan" />
+
+        <TextView
+            android:id="@+id/tvSuggestionViews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1.5dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:maxLines="1"
+            android:textColor="#64748B"
+            android:textSize="11sp"
+            app:fontFamily="@font/instrument_sans_regular"
+            tools:text="120K views • 1 week ago" />
+    </LinearLayout>
+
+</LinearLayout>

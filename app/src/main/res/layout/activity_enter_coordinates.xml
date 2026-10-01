@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <!-- TOP TOOLBAR -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        android:paddingHorizontal="16dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_circular_back_button"
+            android:contentDescription="Back"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back_arrow_dark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Enter Coordinates"
+            android:textColor="#111827"
+            android:textSize="18sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <TextView
+            android:id="@+id/btnClearAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:padding="6dp"
+            android:text="Clear"
+            android:textColor="#EF4444"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- SEGMENTED TABS (Decimal Degrees | DMS) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_segmented_container"
+                android:orientation="horizontal"
+                android:padding="3dp">
+
+                <TextView
+                    android:id="@+id/tabDecimal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_tab_selected"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:gravity="center"
+                    android:text="Decimal Degrees"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tabDms"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:gravity="center"
+                    android:text="DMS (Degrees/Mins)"
+                    android:textColor="#64748B"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+            </LinearLayout>
+
+            <!-- CONTAINER 1: DECIMAL INPUTS -->
+            <LinearLayout
+                android:id="@+id/layoutDecimalInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_mode_card"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Latitude -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="Latitude"
+                    android:textColor="#374151"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <EditText
+                    android:id="@+id/etDecimalLatitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input_field"
+                    android:fontFamily="@font/instrument_sans_regular"
+                    android:hint="e.g. 28.6139 (-90 to 90)"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:paddingHorizontal="12dp"
+                    android:textColor="#111827"
+                    android:textColorHint="#9CA3AF"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/instrument_sans_regular" />
+
+                <TextView
+                    android:id="@+id/tvDecimalLatError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/instrument_sans_regular"
+                    android:textColor="#EF4444"
+                    android:textSize="11sp"
+                    android:visibility="gone"
+                    app:fontFamily="@font/instrument_sans_regular" />
+
+                <!-- Longitude -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="Longitude"
+                    android:textColor="#374151"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <EditText
+                    android:id="@+id/etDecimalLongitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="46dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_input_field"
+                    android:fontFamily="@font/instrument_sans_regular"
+                    android:hint="e.g. 77.2090 (-180 to 180)"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:paddingHorizontal="12dp"
+                    android:textColor="#111827"
+                    android:textColorHint="#9CA3AF"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/instrument_sans_regular" />
+
+                <TextView
+                    android:id="@+id/tvDecimalLonError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/instrument_sans_regular"
+                    android:textColor="#EF4444"
+                    android:textSize="11sp"
+                    android:visibility="gone"
+                    app:fontFamily="@font/instrument_sans_regular" />
+
+            </LinearLayout>
+
+            <!-- CONTAINER 2: DMS INPUTS -->
+            <LinearLayout
+                android:id="@+id/layoutDmsInputs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_mode_card"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="gone">
+
+                <!-- Latitude DMS -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="Latitude (DMS)"
+                    android:textColor="#374151"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etDmsLatDeg"
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_field"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:gravity="center"
+                        android:hint="Deg °"
+                        android:inputType="number"
+                        android:textColor="#111827"
+                        android:textColorHint="#9CA3AF"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                    <EditText
+                        android:id="@+id/etDmsLatMin"
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_field"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:gravity="center"
+                        android:hint="Min '"
+                        android:inputType="number"
+                        android:textColor="#111827"
+                        android:textColorHint="#9CA3AF"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                    <EditText
+                        android:id="@+id/etDmsLatSec"
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1.2"
+                        android:background="@drawable/bg_input_field"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:gravity="center"
+                        android:hint="Sec ''"
+                        android:inputType="numberDecimal"
+                        android:textColor="#111827"
+                        android:textColorHint="#9CA3AF"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                    <TextView
+                        android:id="@+id/btnLatDir"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/bg_direction_pill_selected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:gravity="center"
+                        android:text="N"
+                        android:textColor="#4F46E5"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <!-- Longitude DMS -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="Longitude (DMS)"
+                    android:textColor="#374151"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/etDmsLonDeg"
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_field"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:gravity="center"
+                        android:hint="Deg °"
+                        android:inputType="number"
+                        android:textColor="#111827"
+                        android:textColorHint="#9CA3AF"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                    <EditText
+                        android:id="@+id/etDmsLonMin"
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_input_field"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:gravity="center"
+                        android:hint="Min '"
+                        android:inputType="number"
+                        android:textColor="#111827"
+                        android:textColorHint="#9CA3AF"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                    <EditText
+                        android:id="@+id/etDmsLonSec"
+                        android:layout_width="0dp"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1.2"
+                        android:background="@drawable/bg_input_field"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:gravity="center"
+                        android:hint="Sec ''"
+                        android:inputType="numberDecimal"
+                        android:textColor="#111827"
+                        android:textColorHint="#9CA3AF"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                    <TextView
+                        android:id="@+id/btnLonDir"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/bg_direction_pill_selected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:gravity="center"
+                        android:text="E"
+                        android:textColor="#4F46E5"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- ADD POINT BUTTON -->
+            <LinearLayout
+                android:id="@+id/btnAddPoint"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_trip_add_button"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="+ Add Point"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+            </LinearLayout>
+
+            <!-- ADDED POINTS HEADER -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/tvPointsHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="Added Points (0)"
+                    android:textColor="#111827"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvMinPointsHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/instrument_sans_regular"
+                    android:text="Min 3 points for area"
+                    android:textColor="#64748B"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/instrument_sans_regular" />
+
+            </RelativeLayout>
+
+            <!-- EMPTY STATE -->
+            <TextView
+                android:id="@+id/tvEmptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="24dp"
+                android:fontFamily="@font/instrument_sans_regular"
+                android:gravity="center"
+                android:text="No points added yet.\nEnter coordinates above to plot your polygon."
+                android:textColor="#94A3B8"
+                android:textSize="13sp"
+                app:fontFamily="@font/instrument_sans_regular" />
+
+            <!-- ADDED POINTS LIST -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAddedPoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- BOTTOM ACTION BAR: CALCULATE AREA BUTTON -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp">
+
+        <LinearLayout
+            android:id="@+id/btnCalculateArea"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_trip_add_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="Calculate"
+                android:src="@drawable/ic_ruler_measure"
+                app:tint="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/tvCalculateBtnText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="Calculate Area (Need 3+ points)"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

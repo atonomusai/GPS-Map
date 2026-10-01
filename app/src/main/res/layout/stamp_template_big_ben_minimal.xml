@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stampRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_stamp_paris_glass"
+    android:padding="10dp">
+
+    <!-- Left Map Badge with Guaranteed Rounded Corners -->
+    <com.autonoumus.ai.core.stamp.view.RoundedImageView
+        android:id="@+id/ivMapBadge"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:contentDescription="Map Thumbnail"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_map_normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_cornerRadius="12dp"
+        app:riv_isCircle="false"
+        app:riv_strokeColor="#30FFFFFF"
+        app:riv_strokeWidth="1dp" />
+
+    <!-- Container for Texts (Right of Map) -->
+    <LinearLayout
+        android:id="@+id/layoutTexts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivEditIcon"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/ivMapBadge"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Prominent Time -->
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_semibold"
+            android:maxLines="1"
+            android:text="3:45 PM"
+            android:textColor="#FFFFFF"
+            android:textSize="12dp" />
+
+        <!-- Location -->
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:maxLines="2"
+            android:text="Big Ben, London SW1A 0AA United Kingdom"
+            android:textColor="#E5E7EB"
+            android:textSize="9sp" />
+
+    </LinearLayout>
+
+    <!-- Edit Pencil Circle (Top-Right Corner per Image 2) -->
+    <ImageView
+        android:id="@+id/ivEditIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_edit_circle"
+        android:contentDescription="Edit"
+        android:padding="3.5dp"
+        android:src="@drawable/ic_edit_pen"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#FFFFFF"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

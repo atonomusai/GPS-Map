@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_dialog"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="24dp">
+
+    <!-- Centered Drag Handle -->
+    <View
+        android:layout_width="38dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/bg_bottom_sheet_drag_handle" />
+
+    <!-- Top Header: Title + Close/Dropdown Button -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Stamp Text Color"
+            android:textColor="#111827"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnClose"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnClose"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_circular_subtle_button"
+            android:contentDescription="Close"
+            android:padding="7dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_chevron_down_red"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Section: CHOOSE COLOR -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:letterSpacing="0.06"
+        android:text="CHOOSE COLOR"
+        android:textAllCaps="true"
+        android:textColor="#64748B"
+        android:textSize="12sp" />
+
+    <!-- Preset Color Swatches Row -->
+    <LinearLayout
+        android:id="@+id/layoutColorSwatches"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/cardColorRed"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true">
+            <View
+                android:id="@+id/viewColorRed"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/cardColorBlack"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true">
+            <View
+                android:id="@+id/viewColorBlack"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/cardColorBlue"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true">
+            <View
+                android:id="@+id/viewColorBlue"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/cardColorOrange"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true">
+            <View
+                android:id="@+id/viewColorOrange"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/cardColorGreen"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true">
+            <View
+                android:id="@+id/viewColorGreen"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/cardColorWhite"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true">
+            <View
+                android:id="@+id/viewColorWhite"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <!-- Section: CUSTOM COLOR -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:letterSpacing="0.06"
+        android:text="CUSTOM COLOR"
+        android:textAllCaps="true"
+        android:textColor="#64748B"
+        android:textSize="12sp" />
+
+    <!-- Custom Color Input Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!-- Active Color Swatch (rounded square) -->
+        <View
+            android:id="@+id/viewActiveColorPreview"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="12dp" />
+
+        <!-- Input Box with HEX label -->
+        <LinearLayout
+            android:id="@+id/layoutHexBox"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="14dp">
+
+            <EditText
+                android:id="@+id/etHexCode"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:fontFamily="@font/instrument_sans_semibold"
+                android:hint="#EF4444"
+                android:imeOptions="actionDone"
+                android:inputType="textCapCharacters|textNoSuggestions"
+                android:maxLength="7"
+                android:text="#EF4444"
+                android:textColor="#111827"
+                android:textColorHint="#94A3B8"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvHexLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/instrument_sans_semibold"
+                android:text="HEX"
+                android:textColor="#64748B"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Save Text Color Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSaveTextColor"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="26dp"
+        android:backgroundTint="#5263FF"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:text="Save Text Color"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:cornerRadius="14dp"
+        app:elevation="0dp" />
+
+</LinearLayout>

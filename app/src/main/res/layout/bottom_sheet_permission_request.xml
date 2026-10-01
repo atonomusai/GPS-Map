@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_dialog"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="24dp">
+
+    <!-- Drag Handle -->
+    <View
+        android:layout_width="44dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_bottom_sheet_drag_handle" />
+
+    <!-- Circular Icon Container -->
+    <FrameLayout
+        android:id="@+id/layoutPermissionIconCircle"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/bg_permission_circle_icon">
+
+        <ImageView
+            android:id="@+id/ivPermissionIcon"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:contentDescription="Permission Icon"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_location" />
+
+    </FrameLayout>
+
+    <!-- Title Heading -->
+    <TextView
+        android:id="@+id/tvPermissionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:gravity="center"
+        android:text="Enable Location for Geotagging"
+        android:textColor="#5263FF"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <!-- Subtitle / Description -->
+    <TextView
+        android:id="@+id/tvPermissionDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="28dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/instrument_sans_regular"
+        android:gravity="center"
+        android:lineSpacingExtra="3dp"
+        android:text="To stamp real-time address, coordinates, and map location on your photos, allow location access."
+        android:textColor="#64748B"
+        android:textSize="14sp" />
+
+    <!-- Primary Action Button (Allow Access) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAllowPermission"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/bg_btn_rate_us_primary"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:text="Allow Location Access"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
+        app:elevation="0dp" />
+
+    <!-- Secondary Action Button (Continue without Permission) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnContinueWithoutPermission"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:text="Continue without Location"
+        android:textAllCaps="false"
+        android:textColor="#64748B"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
+        app:elevation="0dp"
+        app:rippleColor="#1A5263FF" />
+
+</LinearLayout>

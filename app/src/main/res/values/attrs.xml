@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundedImageView">
+        <attr name="riv_cornerRadius" format="dimension" />
+        <attr name="riv_isCircle" format="boolean" />
+        <attr name="riv_strokeWidth" format="dimension" />
+        <attr name="riv_strokeColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ShimmerOverlayView">
+        <attr name="shimmerCornerRadius" format="dimension" />
+        <attr name="shimmerBaseColor" format="color" />
+        <attr name="shimmerHighlightColor" format="color" />
+        <attr name="shimmerShowTextPlaceholder" format="boolean" />
+        <attr name="shimmerTextPlaceholderColor" format="color" />
+        <!-- Number of skeleton text bars to draw (default 1: a single bar near the bottom) -->
+        <attr name="shimmerTextLines" format="integer" />
+    </declare-styleable>
+</resources>

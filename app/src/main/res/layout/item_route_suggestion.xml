@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="12dp">
+
+    <!-- Icon -->
+    <ImageView
+        android:id="@+id/ivSuggestionIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:contentDescription="Location"
+        android:src="@drawable/ic_location_pin_blue"
+        app:tint="#4F46E5" />
+
+    <!-- Text details -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvSuggestionTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:maxLines="1"
+            android:text="Centaurus Mall"
+            android:textColor="#0F172A"
+            android:textSize="14sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <TextView
+            android:id="@+id/tvSuggestionSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:maxLines="1"
+            android:text="Jinnah Ave, Islamabad • 4.6 km away"
+            android:textColor="#64748B"
+            android:textSize="12sp"
+            app:fontFamily="@font/instrument_sans_regular" />
+
+    </LinearLayout>
+
+</LinearLayout>

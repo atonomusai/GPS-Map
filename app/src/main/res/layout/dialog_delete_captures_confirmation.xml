@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_rounded_card"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="28dp"
+    android:paddingBottom="24dp">
+
+    <!-- Top Red Trash Icon Badge -->
+    <FrameLayout
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/bg_delete_dialog_circle">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_trash_dialog_red" />
+
+    </FrameLayout>
+
+    <!-- Dialog Title -->
+    <TextView
+        android:id="@+id/tvDeleteDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:gravity="center"
+        android:textColor="#111827"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/instrument_sans_bold"
+        tools:text="Delete 3 Selected Captures?" />
+
+    <!-- Dialog Message Description -->
+    <TextView
+        android:id="@+id/tvDeleteDialogMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/instrument_sans_regular"
+        android:gravity="center"
+        android:lineSpacingExtra="3dp"
+        android:text="This action will permanently delete these items and their recorded GPS coordinate stamps from the application storage. This cannot be undone."
+        android:textColor="#6B7280"
+        android:textSize="13sp"
+        app:fontFamily="@font/instrument_sans_regular" />
+
+    <!-- Checkbox option: Also remove original media from device photos -->
+    <LinearLayout
+        android:id="@+id/layoutCheckboxRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="4dp">
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cbRemoveFromDevice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:buttonTint="#5865F2" />
+
+        <TextView
+            android:id="@+id/tvRemoveOptionText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/instrument_sans_medium"
+            android:text="Also remove original media from device photos"
+            android:textColor="#374151"
+            android:textSize="13sp"
+            app:fontFamily="@font/instrument_sans_medium" />
+
+    </LinearLayout>
+
+    <!-- Delete Red Action Button -->
+    <TextView
+        android:id="@+id/btnConfirmDeleteCaptures"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/bg_btn_delete_red"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/instrument_sans_bold"
+        tools:text="Delete Captures (3)" />
+
+    <!-- Keep Files Outlined Action Button -->
+    <TextView
+        android:id="@+id/btnKeepFiles"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_btn_keep_files"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:gravity="center"
+        android:text="Keep Files"
+        android:textColor="#374151"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/instrument_sans_bold" />
+
+</LinearLayout>

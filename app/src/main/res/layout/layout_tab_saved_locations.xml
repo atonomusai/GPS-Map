@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutSavedLocationsRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Empty State Container -->
+    <LinearLayout
+        android:id="@+id/layoutEmptySavedLocations"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="32dp"
+        android:paddingBottom="60dp"
+        android:visibility="visible"
+        tools:visibility="visible">
+
+        <!-- Icon Illustration Badge -->
+        <FrameLayout
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:background="@drawable/bg_blue_circle_badge">
+
+            <ImageView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:contentDescription="Empty Location"
+                android:src="@drawable/ic_location"
+                app:tint="#4F46E5" />
+
+        </FrameLayout>
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="No Saved Locations Yet"
+            android:textColor="#0F172A"
+            android:textSize="18sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <!-- Subtitle -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:gravity="center"
+            android:lineSpacingExtra="3dp"
+            android:text="Tap the + button below to create custom location templates and stamp them anywhere in the world."
+            android:textColor="#64748B"
+            android:textSize="13.5sp"
+            app:fontFamily="@font/instrument_sans_regular" />
+
+        <!-- Add Custom Location Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnEmptyAddLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="46dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_btn_customize_template"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:paddingHorizontal="24dp"
+            android:text="+ Add Custom Location"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+    </LinearLayout>
+
+    <!-- Saved Locations List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSavedLocations"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="96dp"
+        android:visibility="gone"
+        tools:listitem="@layout/item_saved_location_template"
+        tools:visibility="gone" />
+
+</FrameLayout>

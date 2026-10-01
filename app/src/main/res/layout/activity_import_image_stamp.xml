@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/importImageRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fitsSystemWindows="true">
+
+    <!-- Top Toolbar Header -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbarLayout"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circular_back_button"
+            android:contentDescription="@string/app_name"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back_arrow_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvImageTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:ellipsize="middle"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Image name"
+            android:textColor="#111827"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/instrument_sans_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnSettings"
+            app:layout_constraintStart_toEndOf="@+id/btnBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnSettings"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circular_back_button"
+            android:contentDescription="Timestamp Settings"
+            android:padding="9dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_setting"
+            app:tint="#111827"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Center Photo & Timestamp Stamp Preview Area -->
+    <FrameLayout
+        android:id="@+id/layoutPhotoContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/bottomActionsBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarLayout">
+
+        <ImageView
+            android:id="@+id/ivImportedPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Imported Photo"
+            android:scaleType="fitCenter" />
+
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <!-- Live Stamp Overlay rendered on top of the imported image / video -->
+        <com.autonoumus.ai.presentation.camera.view.StampOverlayView
+            android:id="@+id/stampOverlayView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- Loading Progress Bar for quick image processing -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="#5865F2"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <!-- Bottom Actions Dock: Share, Locate, Save, Delete -->
+    <LinearLayout
+        android:id="@+id/bottomActionsBar"
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- 1. Share Action -->
+        <LinearLayout
+            android:id="@+id/btnShare"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="Share"
+                android:src="@drawable/ic_menu_share"
+                app:tint="#374151" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/instrument_sans_medium"
+                android:text="Share"
+                android:textColor="#374151"
+                android:textSize="12sp"
+                app:fontFamily="@font/instrument_sans_medium" />
+
+        </LinearLayout>
+
+        <!-- 2. Locate Action -->
+        <LinearLayout
+            android:id="@+id/btnLocate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="Locate"
+                android:src="@drawable/boxicons_location"
+                app:tint="#374151" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/instrument_sans_medium"
+                android:text="Locate"
+                android:textColor="#374151"
+                android:textSize="12sp"
+                app:fontFamily="@font/instrument_sans_medium" />
+
+        </LinearLayout>
+
+        <!-- 3. Save Action -->
+        <LinearLayout
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="Save"
+                android:src="@drawable/ic_download_save" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/instrument_sans_medium"
+                android:text="Save"
+                android:textColor="#374151"
+                android:textSize="12sp"
+                app:fontFamily="@font/instrument_sans_medium" />
+
+        </LinearLayout>
+
+        <!-- 4. Delete Action -->
+        <LinearLayout
+            android:id="@+id/btnDelete"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:contentDescription="Delete"
+                android:src="@drawable/ic_retake" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/instrument_sans_medium"
+                android:text="Retake"
+                android:textColor="#374151"
+                android:textSize="12sp"
+                app:fontFamily="@font/instrument_sans_medium" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Dedicated Stamping Progress Overlay with Percentage -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutProgressOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#A6000000"
+        android:clickable="true"
+        android:elevation="20dp"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="28dp"
+            app:cardBackgroundColor="#1A202C"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="28dp">
+
+                <TextView
+                    android:id="@+id/tvProgressPercent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="0%"
+                    android:textColor="#FFFFFF"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvProgressTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="Processing Video..."
+                    android:textColor="#F3F4F6"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvProgressSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:gravity="center"
+                    android:text="Embedding GPS timestamp &amp; details"
+                    android:textColor="#9CA3AF"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_medium" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progressIndicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:max="100"
+                    android:progress="0"
+                    app:indicatorColor="#5865F2"
+                    app:trackColor="#374151"
+                    app:trackCornerRadius="4dp"
+                    app:trackThickness="8dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCancelProgress"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:text="Cancel"
+                    android:textColor="#EF4444"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/instrument_sans_medium" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,985 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fitsSystemWindows="true">
+
+    <!-- Top App Bar / Header -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvHeaderTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="GPS Camera"
+            android:textColor="@color/text_primary"
+            android:textSize="16dp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <TextView
+            android:id="@+id/tvHeaderSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:text="Timestamp Camera"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            app:fontFamily="@font/instrument_sans_regular" />
+    </LinearLayout>
+
+    <!-- Scrollable Home Content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollViewContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:paddingBottom="76dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="38dp">
+
+            <!-- DYNAMIC TOP BANNER AREA -->
+
+
+            <FrameLayout
+                android:paddingHorizontal="16dp"
+                android:id="@+id/bannerContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp">
+
+                <!-- STATE A: Permission Not Granted -->
+                <LinearLayout
+                    android:id="@+id/cardPermissionRequest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_gradient_permission_card"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="22dp"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="26dp"
+                        android:layout_height="32dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/boxicons_location"
+                        app:tint="#FFF" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/instrument_sans_semibold"
+                        android:gravity="center"
+                        android:text="Activate GPS to Unlock Features"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:gravity="center"
+                        android:lineSpacingExtra="2dp"
+                        android:paddingHorizontal="8dp"
+                        android:text="GPS permission is required to geotag your photos and videos and enable all mapping tools. Tap below to enable."
+                        android:textColor="#E0E4FF"
+                        android:textSize="12dp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEnableGps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="14dp"
+                        android:background="@drawable/bg_white_button_pill"
+                        android:fontFamily="@font/instrument_sans_semibold"
+                        android:letterSpacing="0"
+                        android:minWidth="140dp"
+                        android:paddingHorizontal="24dp"
+                        android:text="Enable GPS"
+                        android:textAllCaps="false"
+                        android:textColor="@color/primary"
+                        android:textSize="14dp"
+                        app:backgroundTint="@null"
+                        app:cornerRadius="20dp"
+                        app:elevation="0dp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+                </LinearLayout>
+
+                <!-- STATE B: GPS Active Live Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardGpsActive"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:visibility="visible"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    tools:visibility="visible">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_current_location_famous_place"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img_home_banner_active"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <!-- Dark top gradient for status badges -->
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:background="#1D000000"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <!-- Top row: GPS Active Badge & Focus Icon -->
+                        <LinearLayout
+                            android:id="@+id/badgeGpsActive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="14dp"
+                            android:background="@drawable/green_bg"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:contentDescription="@null"
+                                android:src="@drawable/icon_park_outline_signal" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:fontFamily="@font/instrument_sans_semibold"
+                                android:text="GPS Active"
+                                android:textColor="#FFFFFF"
+                                android:textSize="10.5sp"
+                                app:fontFamily="@font/instrument_sans_semibold" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/ivFocusIcon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="14dp"
+                            android:contentDescription="@null"
+                            android:src="@drawable/expand_blur"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <TextView
+                            android:id="@+id/tvGreetingSubtitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/instrument_sans_semibold"
+                            android:text="Famous Landmark"
+                            android:textColor="#FFFFFF"
+                            android:textSize="14sp"
+                            android:shadowColor="#99000000"
+                            android:shadowDx="0"
+                            android:shadowDy="1"
+                            android:shadowRadius="4"
+                            android:singleLine="true"
+                            android:ellipsize="end"
+                            app:fontFamily="@font/instrument_sans_semibold"
+                            app:layout_constraintBottom_toTopOf="@+id/innerLocationCard"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                        <!-- Bottom Location Glass Card -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/innerLocationCard"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/bg_inner_glass_card"
+                            android:padding="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <!-- Mini map thumbnail -->
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/ivMapThumb"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/img_map_normal"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/ShapeAppearance.AppIconRounded" />
+
+                            <!-- Location text details -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="6dp"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/ivCompassBadge"
+                                app:layout_constraintStart_toEndOf="@+id/ivMapThumb"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:id="@+id/tvCityName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:maxLines="1"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="14dp"
+                                    app:fontFamily="@font/instrument_sans_bold"
+                                    tools:text="San Francisco, CA, USA" />
+
+                                <TextView
+                                    android:id="@+id/tvStreetAddress"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:fontFamily="@font/instrument_sans_regular"
+                                    android:maxLines="1"
+                                    android:textColor="#D1D5DB"
+                                    android:textSize="11dp"
+                                    app:fontFamily="@font/instrument_sans_regular"
+                                    tools:text="Market Street, San Francisco" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="16dp"
+                                        android:layout_height="16dp"
+                                        android:contentDescription="@null"
+                                        android:src="@drawable/boxicons_location" />
+
+                                    <TextView
+                                        android:id="@+id/tvGpsCoordinates"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:fontFamily="@font/instrument_sans_regular"
+                                        android:textColor="#E5E7EB"
+                                        android:textSize="10dp"
+                                        app:fontFamily="@font/instrument_sans_regular"
+                                        tools:text="37.7749° N, 122.4194° W" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_marginTop="2dp"
+                                    android:gravity="center_vertical"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <ImageView
+                                        android:layout_width="16dp"
+                                        android:layout_height="16dp"
+                                        android:contentDescription="@null"
+                                        android:src="@drawable/stash_data_date_solid" />
+
+                                    <TextView
+                                        android:id="@+id/tvTimestamp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:fontFamily="@font/instrument_sans_regular"
+                                        android:textColor="#E5E7EB"
+                                        android:textSize="10dp"
+                                        app:fontFamily="@font/instrument_sans_regular"
+                                        tools:text="May 20, 2026" />
+
+                                    <ImageView
+                                        android:layout_marginStart="8dp"
+                                        android:layout_width="16dp"
+                                        android:layout_height="16dp"
+                                        android:contentDescription="@null"
+                                        android:src="@drawable/griddy_icons_time" />
+
+                                    <TextView
+                                        android:id="@+id/tvTimestampTime"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:fontFamily="@font/instrument_sans_regular"
+                                        android:textColor="#E5E7EB"
+                                        android:textSize="10dp"
+                                        app:fontFamily="@font/instrument_sans_regular"
+                                        tools:text="09:31 AM" />
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/ivCompassBadge"
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:contentDescription="@null"
+                                android:src="@drawable/overlay"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Shown while a location fix is being fetched after permission is granted,
+                     until real data replaces it (see MainActivity.renderUiState). -->
+                <com.autonoumus.ai.presentation.common.view.ShimmerOverlayView
+                    android:id="@+id/viewHomeLocationShimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    app:shimmerBaseColor="#33FFFFFF"
+                    app:shimmerCornerRadius="18dp"
+                    app:shimmerHighlightColor="#80FFFFFF"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+            </FrameLayout>
+
+            <!-- PRIMARY CAPTURE ACTION CARDS (Take Photo & Record Video) -->
+            <LinearLayout
+                android:paddingHorizontal="16dp"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <!-- Take Photo Card -->
+                <LinearLayout
+                    android:id="@+id/cardTakePhoto"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_gradient_take_photo"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <FrameLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_white_translucent_circle">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_camera"
+                            app:tint="#FFFFFF" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="Take Photo"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15dp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:text="With GPS Stamp"
+                        android:textColor="#DDE7FF"
+                        android:textSize="11dp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+                </LinearLayout>
+
+                <!-- Record Video Card -->
+                <LinearLayout
+                    android:id="@+id/cardRecordVideo"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_gradient_record_video"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <FrameLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_white_translucent_circle">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_video_home"
+                            app:tint="#FFFFFF" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="Record Video"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15dp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:text="With GPS Stamp"
+                        android:textColor="#D1FAE5"
+                        android:textSize="11dp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <!-- QUICK TOOLS SECTION -->
+            <LinearLayout
+                android:paddingHorizontal="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="Quick Tools"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16dp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/btnViewAllTools"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:padding="4dp"
+                    android:text="View All"
+                    android:textColor="@color/primary"
+                    android:textSize="14dp"
+                    app:fontFamily="@font/instrument_sans_semibold" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:paddingHorizontal="16dp"
+                android:id="@+id/rvQuickTools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="10"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_quick_tool"
+                tools:spanCount="5" />
+
+            <!-- STREET VIEW CAMERAS SECTION -->
+            <LinearLayout
+                android:id="@+id/layoutStreetViewHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="Street View Cameras"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:text="(Famous places)"
+                        android:textColor="#64748B"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/btnViewAllStreetView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:fontFamily="@font/instrument_sans_semibold"
+                    android:padding="4dp"
+                    android:text="View All"
+                    android:textColor="@color/primary"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_semibold" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvStreetViewCameras"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="6dp"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_street_view_camera"
+                tools:visibility="visible" />
+
+            <!-- Shown while the street view camera list is being fetched (needs a live GPS fix
+                 plus a network call, so it can take a few seconds) - displays a sleek shimmer skeleton list. -->
+            <HorizontalScrollView
+                android:id="@+id/layoutStreetViewShimmer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:clipToPadding="false"
+                android:paddingStart="16dp"
+                android:paddingEnd="6dp"
+                android:scrollbars="none"
+                android:overScrollMode="never"
+                android:visibility="visible"
+                tools:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.autonoumus.ai.presentation.common.view.ShimmerOverlayView
+                        android:layout_width="140dp"
+                        android:layout_height="90dp"
+                        android:layout_marginEnd="10dp"
+                        app:shimmerBaseColor="#E2E8F0"
+                        app:shimmerCornerRadius="12dp"
+                        app:shimmerHighlightColor="#FFFFFF"
+                        app:shimmerShowTextPlaceholder="true"
+                        app:shimmerTextPlaceholderColor="#CBD5E1" />
+
+                    <com.autonoumus.ai.presentation.common.view.ShimmerOverlayView
+                        android:layout_width="140dp"
+                        android:layout_height="90dp"
+                        android:layout_marginEnd="10dp"
+                        app:shimmerBaseColor="#E2E8F0"
+                        app:shimmerCornerRadius="12dp"
+                        app:shimmerHighlightColor="#FFFFFF"
+                        app:shimmerShowTextPlaceholder="true"
+                        app:shimmerTextPlaceholderColor="#CBD5E1" />
+
+                    <com.autonoumus.ai.presentation.common.view.ShimmerOverlayView
+                        android:layout_width="140dp"
+                        android:layout_height="90dp"
+                        android:layout_marginEnd="10dp"
+                        app:shimmerBaseColor="#E2E8F0"
+                        app:shimmerCornerRadius="12dp"
+                        app:shimmerHighlightColor="#FFFFFF"
+                        app:shimmerShowTextPlaceholder="true"
+                        app:shimmerTextPlaceholderColor="#CBD5E1" />
+
+                    <com.autonoumus.ai.presentation.common.view.ShimmerOverlayView
+                        android:layout_width="140dp"
+                        android:layout_height="90dp"
+                        android:layout_marginEnd="10dp"
+                        app:shimmerBaseColor="#E2E8F0"
+                        app:shimmerCornerRadius="12dp"
+                        app:shimmerHighlightColor="#FFFFFF"
+                        app:shimmerShowTextPlaceholder="true"
+                        app:shimmerTextPlaceholderColor="#CBD5E1" />
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- RECENT CAPTURES SECTION -->
+            <LinearLayout
+                android:paddingHorizontal="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="Recent Captures"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/btnSeeAllCaptures"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:fontFamily="@font/instrument_sans_semibold"
+                    android:padding="4dp"
+                    android:text="See All"
+                    android:textColor="@color/primary"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_semibold" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:paddingHorizontal="16dp"
+                android:id="@+id/rvRecentCaptures"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="4"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_recent_capture"
+                tools:spanCount="2" />
+
+            <!-- EMPTY STATE FOR RECENT CAPTURES -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/layoutEmptyRecentCaptures"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="#F8FAFC"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#E2E8F0"
+                app:strokeWidth="1dp"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="22dp">
+
+                    <FrameLayout
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:background="@drawable/bg_white_translucent_circle"
+                        android:backgroundTint="#EEF2FF">
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_camera"
+                            app:tint="#5865F2" />
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/tvEmptyTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        app:fontFamily="@font/instrument_sans_bold"
+                        android:textStyle="bold"
+                        android:text="No Captures Yet"
+                        android:textColor="#1E293B"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvEmptySubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        app:fontFamily="@font/instrument_sans_regular"
+                        android:gravity="center"
+                        android:text="You haven't captured anything yet.\nTake a photo or record a video with GPS Stamp!"
+                        android:textColor="#64748B"
+                        android:textSize="13sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEmptyTakePhoto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="14dp"
+                        android:backgroundTint="#5865F2"
+                        android:fontFamily="@font/instrument_sans_semibold"
+                        app:fontFamily="@font/instrument_sans_semibold"
+                        android:paddingHorizontal="20dp"
+                        android:text="Capture Photo"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="13sp"
+                        app:cornerRadius="20dp"
+                        app:icon="@drawable/ic_camera"
+                        app:iconGravity="textStart"
+                        app:iconPadding="6dp"
+                        app:iconSize="16dp"
+                        app:iconTint="@android:color/white" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- BOTTOM NAVIGATION BAR WITH ELEVATED CENTER CAMERA FAB -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomNavContainer"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Top subtle separator line -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#EBEFF5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- 1. Home Tab (Active) -->
+            <LinearLayout
+                android:id="@+id/navHome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_home"
+                    app:tint="@color/primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:text="Home"
+                    android:textColor="@color/primary"
+                    android:textSize="10.5sp"
+                    app:fontFamily="@font/instrument_sans_medium" />
+            </LinearLayout>
+
+            <!-- 2. Route Finder Tab -->
+            <LinearLayout
+                android:id="@+id/navRouteFinder"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_route_finder"
+                    app:tint="#8E95A5" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:text="Route Finder"
+                    android:textColor="#8E95A5"
+                    android:textSize="10.5sp"
+                    app:fontFamily="@font/instrument_sans_medium" />
+            </LinearLayout>
+
+            <!-- 3. Center Camera Placeholder in bar -->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <!-- 4. Templates Tab -->
+            <LinearLayout
+                android:id="@+id/navTemplates"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_template"
+                    app:tint="#8E95A5" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:text="Templates"
+                    android:textColor="#8E95A5"
+                    android:textSize="10.5sp"
+                    app:fontFamily="@font/instrument_sans_medium" />
+            </LinearLayout>
+
+            <!-- 5. Settings Tab -->
+            <LinearLayout
+                android:id="@+id/navSettings"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_setting"
+                    app:tint="#8E95A5" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:text="Settings"
+                    android:textColor="#8E95A5"
+                    android:textSize="10.5sp"
+                    app:fontFamily="@font/instrument_sans_medium" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- FLOATING CENTER CAMERA FAB -->
+    <FrameLayout
+        android:id="@+id/navCameraCenter"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:background="@drawable/bg_circle_fab_camera"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="-10dp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:outlineProvider="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bottomNavContainer">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_camera" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

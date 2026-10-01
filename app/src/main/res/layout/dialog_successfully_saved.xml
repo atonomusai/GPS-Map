@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="28dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="26dp"
+    app:cardElevation="16dp"
+    app:cardPreventCornerOverlap="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="28dp">
+
+        <!-- Circular Green Checkmark Badge -->
+        <FrameLayout
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:background="@drawable/bg_success_circle_badge">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:contentDescription="Success"
+                android:src="@drawable/ic_check_white" />
+
+        </FrameLayout>
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvSavedDialogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:text="Successfully Saved!"
+            android:textColor="#0F172A"
+            android:textSize="21sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <!-- Subtitle -->
+        <TextView
+            android:id="@+id/tvSavedDialogSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:gravity="center"
+            android:lineSpacingExtra="3dp"
+            android:text="Your template has been saved\nsuccessfully."
+            android:textColor="#64748B"
+            android:textSize="14.5sp"
+            app:fontFamily="@font/instrument_sans_regular" />
+
+        <!-- Done Action Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDone"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/bg_btn_saved_done"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:stateListAnimator="@null"
+            android:text="Done"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="15.5sp"
+            app:backgroundTint="@null"
+            app:elevation="0dp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

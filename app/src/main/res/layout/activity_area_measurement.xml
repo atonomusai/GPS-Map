@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC"
+    android:fitsSystemWindows="true">
+
+    <!-- 1. FULLSCREEN OSMDROID MAP VIEW -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 2. FLOATING TOP LEFT CONTROLS: Back Button + Measurement Tooltip -->
+    <LinearLayout
+        android:id="@+id/topLeftControlsContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="top"
+        android:orientation="horizontal"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@+id/topRightControlsContainer"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Back Circular Button with Border -->
+        <FrameLayout
+            android:id="@+id/btnBack"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_map_action_circle"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:focusable="true"
+            android:outlineProvider="none">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:contentDescription="Back"
+                android:src="@drawable/ic_back_arrow_dark" />
+
+        </FrameLayout>
+
+        <!-- FLOATING CENTER MEASUREMENT TOOLTIP -->
+        <LinearLayout
+            android:id="@+id/layoutMeasurementTooltip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_area_tooltip"
+            android:elevation="0dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:outlineProvider="none"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="10dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="Measure"
+                android:src="@drawable/ic_ruler_measure" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="Area: "
+                        android:textColor="#111827"
+                        android:textSize="13.5sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                    <TextView
+                        android:id="@+id/tvLiveArea"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="0.0 m²"
+                        android:textColor="#4F46E5"
+                        android:textSize="13.5sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                    <!-- Unit Dropdown Pill -->
+                    <LinearLayout
+                        android:id="@+id/btnUnitDropdown"
+                        android:layout_width="wrap_content"
+                        android:layout_height="22dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_unit_dropdown_pill"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="6dp">
+
+                        <TextView
+                            android:id="@+id/tvSelectedUnit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/instrument_sans_bold"
+                            android:text="m²"
+                            android:textColor="#4F46E5"
+                            android:textSize="11sp"
+                            app:fontFamily="@font/instrument_sans_bold" />
+
+                        <ImageView
+                            android:layout_width="12dp"
+                            android:layout_height="12dp"
+                            android:layout_marginStart="2dp"
+                            android:contentDescription="Dropdown"
+                            android:src="@drawable/ic_dropdown_arrow" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:text="Perimeter: "
+                        android:textColor="#64748B"
+                        android:textSize="11.5sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                    <TextView
+                        android:id="@+id/tvLivePerimeter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="0.0 m"
+                        android:textColor="#334155"
+                        android:textSize="11.5sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvMapHint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/instrument_sans_regular"
+                    android:text="Tap map to add vertices (3+ for area)"
+                    android:textColor="#94A3B8"
+                    android:textSize="10sp"
+                    app:fontFamily="@font/instrument_sans_regular" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 3. FLOATING MAP CONTROLS: TOP RIGHT (Edit & Layers in VERTICAL DIRECTION) -->
+    <LinearLayout
+        android:id="@+id/topRightControlsContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="14dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Edit Coordinates Mode Button (42dp circle) -->
+        <FrameLayout
+            android:id="@+id/btnSwitchMode"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_map_action_circle"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:focusable="true"
+            android:outlineProvider="none">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:contentDescription="Choose Mode"
+                android:src="@drawable/ic_edit_pencil"
+                app:tint="#4F46E5" />
+        </FrameLayout>
+
+        <!-- Map Layer Toggle Button (42dp circle, vertical below Edit button) -->
+        <FrameLayout
+            android:id="@+id/btnMapLayers"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_map_action_circle"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:focusable="true"
+            android:outlineProvider="none">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:contentDescription="Map Layers"
+                android:src="@drawable/ic_map_layers_icon" />
+        </FrameLayout>
+
+        <!-- MAP TYPES VERTICAL PANEL (Satellite, Hybrid, Terrain, Street) -->
+        <LinearLayout
+            android:id="@+id/panelMapTypes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <!-- SATELLITE -->
+            <LinearLayout
+                android:id="@+id/cardSatellite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/flSatelliteBorder"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_map_type_thumb_unselected">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2.5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_map_satellite"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearance.GSMCAMER.RoundedCard" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvSatelliteLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="SATELLITE"
+                    android:textColor="#475569"
+                    android:textSize="9sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+            </LinearLayout>
+
+            <!-- HYBRID -->
+            <LinearLayout
+                android:id="@+id/cardHybrid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/flHybridBorder"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_map_type_thumb_unselected">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="1.5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_map_hybrid"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearance.GSMCAMER.RoundedCard" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvHybridLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="HYBRID"
+                    android:textColor="#475569"
+                    android:textSize="9sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+            </LinearLayout>
+
+            <!-- TERRAIN -->
+            <LinearLayout
+                android:id="@+id/cardTerrain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/flTerrainBorder"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_map_type_thumb_unselected">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="1.5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_map_terrain"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearance.GSMCAMER.RoundedCard" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvTerrainLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="TERRAIN"
+                    android:textColor="#475569"
+                    android:textSize="9sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+            </LinearLayout>
+
+            <!-- STREET -->
+            <LinearLayout
+                android:id="@+id/cardStreet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/flStreetBorder"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_map_type_thumb_selected">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="1.5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_map_normal"
+                        app:shapeAppearanceOverlay="@style/ShapeAppearance.GSMCAMER.RoundedCard" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tvStreetLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="STREET"
+                    android:textColor="#3B82F6"
+                    android:textSize="9sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- FLOATING MAP CONTROLS: BOTTOM LEFT (Undo) -->
+    <FrameLayout
+        android:id="@+id/btnUndo"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_undo_fab"
+        android:clickable="true"
+        android:elevation="0dp"
+        android:focusable="true"
+        android:outlineProvider="none"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/bottomActionBar"
+        app:layout_goneMarginBottom="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:contentDescription="Undo"
+            android:src="@drawable/ic_undo_arrow" />
+    </FrameLayout>
+
+    <!-- FLOATING MAP CONTROLS: BOTTOM RIGHT (My Location & Zoom Controls) -->
+    <LinearLayout
+        android:id="@+id/bottomRightControlsContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/bottomActionBar"
+        app:layout_goneMarginBottom="24dp"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- My Location (42dp circle) -->
+        <FrameLayout
+            android:id="@+id/btnMyLocation"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_map_action_circle"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:focusable="true"
+            android:outlineProvider="none">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:contentDescription="My Location"
+                android:src="@drawable/ic_target_reticle"
+                app:tint="#4F65F6" />
+        </FrameLayout>
+
+        <!-- Zoom Controls Pill Card (+ / -) (42dp x 80dp) -->
+        <LinearLayout
+            android:id="@+id/cardZoomControls"
+            android:layout_width="42dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_zoom_pill_card"
+            android:elevation="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:outlineProvider="none">
+
+            <TextView
+                android:id="@+id/btnZoomIn"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="#334155"
+                android:textSize="20sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E2E8F0" />
+
+            <TextView
+                android:id="@+id/btnZoomOut"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:gravity="center"
+                android:text="−"
+                android:textColor="#334155"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- BOTTOM ACTION BUTTONS: RESET & DONE (FLOATING OVER MAP) -->
+    <LinearLayout
+        android:id="@+id/bottomActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="24dp"
+        android:background="@android:color/transparent"
+        android:elevation="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible">
+
+        <!-- Reset Button -->
+        <TextView
+            android:id="@+id/btnResetMeasurement"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_reset_pill"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:focusable="true"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:outlineProvider="none"
+            android:text="Reset"
+            android:textColor="#3730A3"
+            android:textSize="15sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <!-- Done Button -->
+        <TextView
+            android:id="@+id/btnDoneMeasurement"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_done_pill"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:focusable="true"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:outlineProvider="none"
+            android:text="Done"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

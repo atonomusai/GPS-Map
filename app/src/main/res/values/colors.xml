@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#5263FF</color>
+    <color name="primary_variant">#3D4CD8</color>
+    <color name="primary_light">#E7ECFE</color>
+    <color name="on_primary">#FFFFFF</color>
+
+    <color name="background">#F7FAFF</color>
+    <color name="surface">#FFFFFF</color>
+    
+    <color name="text_primary">#1A1C20</color>
+    <color name="text_secondary">#7E8594</color>
+    <color name="text_hint">#9EA5B4</color>
+
+    <color name="progress_track">#EBF0FE</color>
+    <color name="progress_fill">#5263FF</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="amber_500">#F59E0B</color>
+    <color name="emerald_500">#10B981</color>
+    <color name="cyan_400">#38BDF8</color>
+    <color name="dock_bg">#0F131C</color>
+    <color name="pill_container_bg">#1C212D</color>
+    <color name="skip_button_bg">#E8F1FE</color>
+    <color name="skip_button_text">#0066FE</color>
+    <color name="splash_bg_start">#018EF8</color>
+    <color name="splash_bg_end">#2CA6EF</color>
+    <color name="splash_button_text">#018EF8</color>
+</resources>

@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/imagesOnMapRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC">
+
+    <!-- 1. FULLSCREEN OSMDROID MAP -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <!-- 2. TOP FLOATING BAR (Back Button + Search Bar + Layer Toggle Button) -->
+    <LinearLayout
+        android:id="@+id/topBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:paddingStart="14dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="14dp">
+
+        <!-- Top Header Row: Back Button, Search Bar Pill, Layers Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Back Circular Button -->
+            <FrameLayout
+                android:id="@+id/btnBack"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_map_action_circle"
+                android:clickable="true"
+                android:elevation="0dp"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Back"
+                    android:src="@drawable/ic_back_arrow_dark" />
+
+            </FrameLayout>
+
+            <!-- Search Bar Pill Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardSearchBar"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="22dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:contentDescription="Search"
+                        android:src="@drawable/ic_search" />
+
+                    <EditText
+                        android:id="@+id/etSearchCaptures"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:hint="Search geotagged captures..."
+                        android:imeOptions="actionSearch"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"
+                        android:textColor="#1A1C20"
+                        android:textColorHint="#94A3B8"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_medium" />
+
+                    <ImageView
+                        android:id="@+id/btnClearSearch"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Clear"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_close_gray"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Layers Circular Button with Green Dot -->
+            <FrameLayout
+                android:id="@+id/btnLayerToggle"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_map_action_circle"
+                android:clickable="true"
+                android:elevation="0dp"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Layers"
+                    android:src="@drawable/ic_map_layers_icon" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 3. TOP-RIGHT MAP TYPES PANEL (Directly under Layers Button, Hidden by default) -->
+    <LinearLayout
+        android:id="@+id/panelMapTypes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topBarContainer"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="14dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <!-- SATELLITE Tile -->
+        <LinearLayout
+            android:id="@+id/cardSatellite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/flSatelliteBorder"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_map_type_thumb_unselected">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2.5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_map_satellite"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.GSMCAMER.RoundedCard" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvSatelliteLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="SATELLITE"
+                android:textColor="#475569"
+                android:textSize="9sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+        </LinearLayout>
+
+        <!-- HYBRID Tile -->
+        <LinearLayout
+            android:id="@+id/cardHybrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/flHybridBorder"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_map_type_thumb_unselected">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1.5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_map_hybrid"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.GSMCAMER.RoundedCard" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvHybridLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="HYBRID"
+                android:textColor="#475569"
+                android:textSize="9sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+        </LinearLayout>
+
+        <!-- TERRAIN Tile -->
+        <LinearLayout
+            android:id="@+id/cardTerrain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/flTerrainBorder"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_map_type_thumb_unselected">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1.5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_map_terrain"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.GSMCAMER.RoundedCard" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvTerrainLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="TERRAIN"
+                android:textColor="#475569"
+                android:textSize="9sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+        </LinearLayout>
+
+        <!-- STREET Tile -->
+        <LinearLayout
+            android:id="@+id/cardStreet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/flStreetBorder"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_map_type_thumb_selected">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1.5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_map_normal"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.GSMCAMER.RoundedCard" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvStreetLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="STREET"
+                android:textColor="#3B82F6"
+                android:textSize="9sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 4. BOTTOM SECTION CONTAINER (Floating Map Action Controls + Bottom Preview Card) -->
+    <LinearLayout
+        android:id="@+id/bottomSectionContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="end"
+        android:orientation="vertical">
+
+        <!-- FLOATING MAP ACTION CONTROLS (Right Side above Bottom Card) -->
+        <LinearLayout
+            android:id="@+id/layoutMapControls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- Share Button -->
+            <FrameLayout
+                android:id="@+id/btnShareMap"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_map_action_circle"
+                android:clickable="true"
+                android:elevation="0dp"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Share"
+                    android:src="@drawable/ic_menu_share" />
+
+            </FrameLayout>
+
+            <!-- My Location Button -->
+            <FrameLayout
+                android:id="@+id/btnMyLocation"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_map_action_circle"
+                android:clickable="true"
+                android:elevation="0dp"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="My Location"
+                    android:src="@drawable/ic_target_reticle"
+                    app:tint="#4F65F6" />
+
+            </FrameLayout>
+
+            <!-- Zoom Controls Pill Card (+ / -) -->
+            <LinearLayout
+                android:id="@+id/cardZoomControls"
+                android:layout_width="42dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_zoom_pill_card"
+                android:elevation="0dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/btnZoomIn"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="#334155"
+                    android:textSize="20sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E2E8F0" />
+
+                <TextView
+                    android:id="@+id/btnZoomOut"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:gravity="center"
+                    android:text="−"
+                    android:textColor="#334155"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- 5. BOTTOM FLOATING CAPTURE PREVIEW CARD -->
+        <LinearLayout
+            android:id="@+id/cardBottomPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_card_bottom_preview"
+            android:clickable="true"
+            android:elevation="10dp"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <!-- Capture Thumbnail Image -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivPreviewThumb"
+                android:layout_width="62dp"
+                android:layout_height="62dp"
+                android:background="#F1F5F9"
+                android:contentDescription="Capture Thumbnail"
+                android:scaleType="centerCrop"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.GSMCAMER.RoundedCard" />
+
+            <!-- Text Metadata Column -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <!-- Title -->
+                <TextView
+                    android:id="@+id/tvPreviewTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:maxLines="1"
+                    android:text=""
+                    android:textColor="#0F172A"
+                    android:textSize="14.5sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <!-- Subtitle (Time ago) -->
+                <TextView
+                    android:id="@+id/tvPreviewSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/instrument_sans_regular"
+                    android:maxLines="1"
+                    android:text="Captured 15 mins ago"
+                    android:textColor="#64748B"
+                    android:textSize="11.5sp"
+                    app:fontFamily="@font/instrument_sans_regular" />
+
+                <!-- Coordinates in Vibrant Blue -->
+                <TextView
+                    android:id="@+id/tvPreviewCoords"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:maxLines="1"
+                    android:text=""
+                    android:textColor="#3B82F6"
+                    android:textSize="11.5sp"
+                    app:fontFamily="@font/instrument_sans_medium" />
+
+            </LinearLayout>
+
+            <!-- Circular Blue Action Arrow Button -->
+            <FrameLayout
+                android:id="@+id/btnOpenViewer"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_arrow_next_blue"
+                android:clickable="true"
+                android:elevation="2dp"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Open Viewer"
+                    android:src="@drawable/ic_arrow_white" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 6. EMPTY STATE OVERLAY (if no captures available) -->
+    <LinearLayout
+        android:id="@+id/layoutEmptyCaptures"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="32dp"
+        android:background="@drawable/bg_card_route_inputs"
+        android:elevation="6dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="No captures"
+            android:src="@drawable/ic_camera"
+            app:tint="#94A3B8" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="No Geotagged Captures Found"
+            android:textColor="#0F172A"
+            android:textSize="15sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:gravity="center"
+            android:text="Take photos or record videos to see your geotagged captures pinned on map"
+            android:textColor="#64748B"
+            android:textSize="12sp"
+            app:fontFamily="@font/instrument_sans_regular" />
+
+    </LinearLayout>
+
+    <!-- 7. LOADING PROGRESS -->
+    <ProgressBar
+        android:id="@+id/progressLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:indeterminateTint="#4F46E5"
+        android:visibility="gone" />
+
+</RelativeLayout>

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_dialog"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="24dp">
+
+    <!-- 1. Centered Drag Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_bottom_sheet_drag_handle" />
+
+    <!-- 2. Header: Title & Close Button -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            app:fontFamily="@font/instrument_sans_bold"
+            android:textStyle="bold"
+            android:text="Stamp Positioning"
+            android:textColor="#111827"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnClose"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnClose"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_circular_close_btn"
+            android:contentDescription="Close"
+            android:padding="7dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_close_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 3. Subtitle / Section Header -->
+    <TextView
+        android:id="@+id/tvSectionHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/instrument_sans_bold"
+        app:fontFamily="@font/instrument_sans_bold"
+        android:textStyle="bold"
+        android:letterSpacing="0.04"
+        android:text="STAMP POSITION ON PHOTO"
+        android:textColor="#6B7280"
+        android:textSize="11sp" />
+
+    <!-- 4. 2x2 Grid of Position Options -->
+    <!-- Row 1: Top-Left & Top-Right -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardTopLeft"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="14dp">
+
+                <ImageView
+                    android:id="@+id/ivTopLeftIcon"
+                    android:layout_width="44dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="Top-Left"
+                    android:src="@drawable/ic_stamp_pos_top_left_unselected" />
+
+                <TextView
+                    android:id="@+id/tvTopLeftLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/instrument_sans_semibold"
+                    android:text="Top-Left"
+                    android:textColor="#1F2937"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardTopRight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="14dp">
+
+                <ImageView
+                    android:id="@+id/ivTopRightIcon"
+                    android:layout_width="44dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="Top-Right"
+                    android:src="@drawable/ic_stamp_pos_top_right_unselected" />
+
+                <TextView
+                    android:id="@+id/tvTopRightLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/instrument_sans_semibold"
+                    android:text="Top-Right"
+                    android:textColor="#1F2937"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <!-- Row 2: Bottom-Left & Bottom-Right -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardBottomLeft"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="14dp">
+
+                <ImageView
+                    android:id="@+id/ivBottomLeftIcon"
+                    android:layout_width="44dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="Bottom-Left"
+                    android:src="@drawable/ic_stamp_pos_bottom_left_selected" />
+
+                <TextView
+                    android:id="@+id/tvBottomLeftLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/instrument_sans_semibold"
+                    android:text="Bottom-Left"
+                    android:textColor="#5865F2"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardBottomRight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="14dp">
+
+                <ImageView
+                    android:id="@+id/ivBottomRightIcon"
+                    android:layout_width="44dp"
+                    android:layout_height="30dp"
+                    android:contentDescription="Bottom-Right"
+                    android:src="@drawable/ic_stamp_pos_bottom_right_unselected" />
+
+                <TextView
+                    android:id="@+id/tvBottomRightLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/instrument_sans_semibold"
+                    android:text="Bottom-Right"
+                    android:textColor="#1F2937"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <!-- 5. Bottom Apply Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnApply"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="#5865F2"
+        android:fontFamily="@font/instrument_sans_bold"
+        app:fontFamily="@font/instrument_sans_bold"
+        android:textStyle="bold"
+        android:text="Apply Layout&amp; Alignment"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        app:cornerRadius="16dp" />
+
+</LinearLayout>

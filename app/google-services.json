@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "984225376768",
+    "project_id": "gps-map-camera-timestamp-f9827",
+    "storage_bucket": "gps-map-camera-timestamp-f9827.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984225376768:android:0aa9eb666c2a3b7fb186e5",
+        "android_client_info": {
+          "package_name": "com.gpsmapcamera.gpslocation.timestamp.geotag"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3L6Fk2QxYKmAcHp1KmDD26uARxUDlY7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

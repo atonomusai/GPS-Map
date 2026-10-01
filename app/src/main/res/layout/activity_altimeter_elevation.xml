@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/altimeterElevationRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFC">
+
+    <!-- 1. TOP ACTION BAR -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutTopBar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back_arrow_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Altimeter &amp; Elevation"
+            android:textColor="#1A1C20"
+            android:textSize="18sp"
+            app:fontFamily="@font/instrument_sans_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- UNIT TOGGLE PILL (m / ft) -->
+        <LinearLayout
+            android:id="@+id/layoutUnitToggle"
+            android:layout_width="68dp"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_unit_toggle_track"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvUnitMeter"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_unit_toggle_selected"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:gravity="center"
+                android:text="m"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+            <TextView
+                android:id="@+id/tvUnitFeet"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:gravity="center"
+                android:text="ft"
+                android:textColor="#64748B"
+                android:textSize="13sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 2. SCROLLABLE CONTENT -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutTopBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- CARD 1: MAIN ELEVATION CARD (FLAT - NO SHADOW/SHADE) -->
+            <LinearLayout
+                android:id="@+id/cardElevationGauge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_altimeter_card"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="26dp"
+                android:paddingBottom="22dp">
+
+                <TextView
+                    android:id="@+id/tvAltitudeValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="540 m"
+                    android:textColor="#4F46E5"
+                    android:textSize="36sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvAltitudeSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/instrument_sans_regular"
+                    android:text="Above Mean Sea Level (AMSL)"
+                    android:textColor="#64748B"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_regular" />
+
+                <!-- Accuracy Pill Badge -->
+                <LinearLayout
+                    android:id="@+id/layoutAccuracyPill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_altimeter_accuracy_pill"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:contentDescription="GPS Accuracy"
+                        android:src="@drawable/ic_gps_crosshair"
+                        app:tint="#4F46E5" />
+
+                    <TextView
+                        android:id="@+id/tvGpsAccuracy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:text="GPS Elevation Accuracy: ± 2.5 m"
+                        android:textColor="#4F46E5"
+                        android:textSize="12sp"
+                        app:fontFamily="@font/instrument_sans_medium" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- CARD 2: ELEVATION PROFILE CARD (FLAT - NO SHADOW/SHADE) -->
+            <LinearLayout
+                android:id="@+id/cardElevationProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_altimeter_card"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tvProfileTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="Elevation Profile — Last 60 min"
+                    android:textColor="#4F46E5"
+                    android:textSize="15sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <!-- Inner Graph Box Matching Reference -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="124dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_altimeter_graph_box">
+
+                    <com.autonoumus.ai.presentation.altimeter.view.ElevationProfileGraphView
+                        android:id="@+id/elevationProfileGraphView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </FrameLayout>
+
+                <!-- Min / Max labels row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvMinElevation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:text="Min: 510 m"
+                        android:textColor="#64748B"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_medium" />
+
+                    <TextView
+                        android:id="@+id/tvMaxElevation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:text="Max: 580 m"
+                        android:textColor="#64748B"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_medium" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- CARD 3: SIDE-BY-SIDE METRICS (Barometric Pressure & Incline) (FLAT - NO SHADOW/SHADE) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <!-- 1. Barometric Pressure Card -->
+                <LinearLayout
+                    android:id="@+id/cardBarometricPressure"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_altimeter_card"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="Pressure"
+                        android:src="@drawable/ic_speedo_meter"
+                        app:tint="#4F46E5" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:text="Barometric Pressure"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                    <TextView
+                        android:id="@+id/tvBarometerValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="1013.25 hPa"
+                        android:textColor="#4F46E5"
+                        android:textSize="16sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <!-- 2. Incline / Slope Angle Card -->
+                <LinearLayout
+                    android:id="@+id/cardSlopeAngle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_altimeter_card"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="Incline"
+                        android:src="@drawable/at_slope_angle"
+                        app:tint="#4F46E5" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:text="Incline / Slope Angle"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                    <TextView
+                        android:id="@+id/tvSlopeValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="4.2° Pitch"
+                        android:textColor="#4F46E5"
+                        android:textSize="16sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- CARD 4: CURRENT COORDINATES CARD (FLAT - NO SHADOW/SHADE) -->
+            <LinearLayout
+                android:id="@+id/cardCurrentCoordinates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_altimeter_card"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="14dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="Coordinates"
+                    android:src="@drawable/ic_location"
+                    app:tint="#4F46E5" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:text="Current Coordinates"
+                        android:textColor="#64748B"
+                        android:textSize="11sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                    <TextView
+                        android:id="@+id/tvCoordinatesValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="33.7294° N, 73.0551° E"
+                        android:textColor="#4F46E5"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

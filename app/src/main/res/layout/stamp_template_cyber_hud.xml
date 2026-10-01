@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stampRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_stamp_hud_card"
+    android:paddingHorizontal="14dp"
+    android:paddingVertical="10dp">
+
+    <!-- Top Status Indicator -->
+    <TextView
+        android:id="@+id/tvGpsLive"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:letterSpacing="0.04"
+        android:maxLines="1"
+        android:text="●  GPS LIVE  •  ALT: 540M  •  ACC: ±2.5M"
+        android:textColor="#38BDF8"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@id/ivEditIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Edit Pencil Circle -->
+    <ImageView
+        android:id="@+id/ivEditIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_edit_circle"
+        android:contentDescription="Edit"
+        android:padding="3.5dp"
+        android:src="@drawable/ic_edit_pen"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#FFFFFF"
+        tools:visibility="visible" />
+
+    <!-- Left Map Badge -->
+    <com.autonoumus.ai.core.stamp.view.RoundedImageView
+        android:id="@+id/ivMapBadge"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="6dp"
+        android:contentDescription="Map Thumbnail"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_map_normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvGpsLive"
+        app:riv_cornerRadius="10dp"
+        app:riv_isCircle="false"
+        app:riv_strokeColor="#4038BDF8"
+        app:riv_strokeWidth="1.2dp" />
+
+    <!-- Text Lines on Right of Map -->
+    <LinearLayout
+        android:id="@+id/layoutTexts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/ivMapBadge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivMapBadge"
+        app:layout_constraintTop_toTopOf="@id/ivMapBadge">
+
+        <!-- Location Title -->
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:maxLines="1"
+            android:text="Islamabad, Sector F-7/3, Pakistan"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
+
+        <!-- Coordinates Line -->
+        <TextView
+            android:id="@+id/tvCoordinates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:maxLines="1"
+            android:text="33.7294° N, 73.0551° E"
+            android:textColor="#94A3B8"
+            android:textSize="9.5sp" />
+
+        <!-- Timestamp Line -->
+        <TextView
+            android:id="@+id/tvTimestamp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_semibold"
+            android:maxLines="1"
+            android:text="Sunday, Aug 16, 2026 • 03:09 PM"
+            android:textColor="#38BDF8"
+            android:textSize="9.5sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

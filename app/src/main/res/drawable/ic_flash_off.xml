@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Flash bolt body -->
+    <path
+        android:fillColor="#9CA3AF"
+        android:pathData="M7,2V13H11V22L17,11H13L17,2H7Z" />
+    <!-- Red diagonal cut line -->
+    <path
+        android:strokeColor="#EF4444"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M3,3 L21,21" />
+</vector>

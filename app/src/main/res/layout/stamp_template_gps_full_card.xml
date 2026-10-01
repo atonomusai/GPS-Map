@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stampRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_stamp_gps_full_card"
+    android:paddingHorizontal="14dp"
+    android:paddingVertical="9dp">
+
+    <!-- Top GPS Status Indicator -->
+    <TextView
+        android:id="@+id/tvGpsStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:maxLines="1"
+        android:text="●  GPS LOCKED (±2.5M)"
+        android:textColor="#10B981"
+        android:textSize="10.5sp"
+        app:layout_constraintEnd_toStartOf="@id/tvTopRightBadge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Top Right Status Badge (e.g. NO GEOTAG) -->
+    <TextView
+        android:id="@+id/tvTopRightBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:text="NO GEOTAG"
+        android:textColor="#FFAA00"
+        android:textSize="11sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tvGpsStatus"
+        app:layout_constraintEnd_toStartOf="@id/ivEditIcon"
+        app:layout_constraintTop_toTopOf="@id/tvGpsStatus"
+        tools:visibility="visible" />
+
+    <!-- Edit Pencil Circle -->
+    <ImageView
+        android:id="@+id/ivEditIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_edit_circle"
+        android:contentDescription="Edit"
+        android:padding="3.5dp"
+        android:src="@drawable/ic_edit_pen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#FFFFFF" />
+
+    <!-- Thin Divider -->
+    <View
+        android:id="@+id/viewDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="6dp"
+        android:background="#25FFFFFF"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvGpsStatus"
+        tools:visibility="visible" />
+
+    <!-- Left Map Badge with Guaranteed Rounded Corners -->
+    <com.autonoumus.ai.core.stamp.view.RoundedImageView
+        android:id="@+id/ivMapBadge"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="5dp"
+        android:contentDescription="Map Thumbnail"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_map_normal"
+        app:riv_cornerRadius="12dp"
+        app:riv_isCircle="false"
+        app:riv_strokeColor="#30FFFFFF"
+        app:riv_strokeWidth="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewDivider" />
+
+    <!-- Text Lines on Right of Map -->
+    <LinearLayout
+        android:id="@+id/layoutTexts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivMapBadge"
+        app:layout_constraintTop_toBottomOf="@id/viewDivider">
+
+        <!-- Title Line -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:maxLines="1"
+            android:text="Islamabad, Pakistan"
+            android:textColor="#FFFFFF"
+            android:textSize="12.5sp" />
+
+        <!-- Address Line -->
+        <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:maxLines="1"
+            android:text="Street 4, Sector F-7/3, Islamabad"
+            android:textColor="#CBD5E1"
+            android:textSize="10sp" />
+
+        <!-- Coordinates Line -->
+        <TextView
+            android:id="@+id/tvCoordinates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:maxLines="1"
+            android:text="33.7294° N, 73.0551° E • Alt: 540m"
+            android:textColor="#38BDF8"
+            android:textSize="10sp" />
+
+        <!-- Timestamp Line -->
+        <TextView
+            android:id="@+id/tvTimestamp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:maxLines="1"
+            android:text="Sunday, Aug 16, 2026 • 03:09 PM PKT"
+            android:textColor="#94A3B8"
+            android:textSize="9.5sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

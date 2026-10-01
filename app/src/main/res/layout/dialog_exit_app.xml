@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_dialog"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="28dp">
+
+    <!-- Drag Handle -->
+    <View
+        android:layout_width="44dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_bottom_sheet_drag_handle" />
+
+    <!-- Top Gradient Exit Circle Badge -->
+    <FrameLayout
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_exit_dialog_circle">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:contentDescription="Exit Icon"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_exit_app" />
+
+    </FrameLayout>
+
+    <!-- Exit App Title -->
+    <TextView
+        android:id="@+id/tvExitDialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:text="Exit App"
+        android:textColor="#111827"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <!-- Subtitle Question -->
+    <TextView
+        android:id="@+id/tvExitDialogSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:gravity="center"
+        android:text="Are you sure you want to exit our app?"
+        android:textColor="#1F2937"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <!-- Supporting Note -->
+    <TextView
+        android:id="@+id/tvExitDialogNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/instrument_sans_regular"
+        android:gravity="center"
+        android:text="Your progress will be saved automatically."
+        android:textColor="#64748B"
+        android:textSize="13sp" />
+
+    <!-- Yes, Exit App Primary Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnConfirmExit"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_btn_exit_primary"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:text="Yes, Exit App"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
+        app:elevation="0dp"
+        android:stateListAnimator="@null" />
+
+    <!-- Cancel Secondary Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCancelExit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_btn_exit_cancel"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:text="Cancel"
+        android:textAllCaps="false"
+        android:textColor="#374151"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
+        app:elevation="0dp"
+        android:stateListAnimator="@null" />
+
+</LinearLayout>

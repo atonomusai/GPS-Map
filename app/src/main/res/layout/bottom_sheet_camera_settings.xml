@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_dialog"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="24dp">
+
+    <!-- 1. Centered Drag Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_bottom_sheet_drag_handle" />
+
+    <!-- 2. Header: Title & Reset Defaults -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            app:fontFamily="@font/instrument_sans_bold"
+            android:textStyle="bold"
+            android:text="Capture Resolution &amp; Format"
+            android:textColor="#4F65F6"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnResetDefaults"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/btnResetDefaults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            app:fontFamily="@font/instrument_sans_bold"
+            android:textStyle="bold"
+            android:paddingVertical="4dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="0dp"
+            android:text="Reset Defaults"
+            android:textColor="#4F65F6"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 3. PHOTO RESOLUTION SECTION -->
+    <TextView
+        android:id="@+id/tvPhotoResolutionHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/instrument_sans_bold"
+        app:fontFamily="@font/instrument_sans_bold"
+        android:textStyle="bold"
+        android:letterSpacing="0.04"
+        android:text="PHOTO RESOLUTION"
+        android:textColor="#64748B"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:id="@+id/groupPhotoResolution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_card_outlined"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <LinearLayout
+            android:id="@+id/scrollPhotoResolution"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_segmented_track"
+            android:padding="4dp">
+
+            <LinearLayout
+                android:id="@+id/llPhotoResolutionChips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvPhotoResolutionReadOnly"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:fontFamily="@font/instrument_sans_semibold"
+            app:fontFamily="@font/instrument_sans_semibold"
+            android:gravity="center"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:text="4032 × 3024 (12.2 MP)" />
+
+    </LinearLayout>
+
+    <!-- 4. VIDEO QUALITY & FRAMERATE SECTION -->
+    <TextView
+        android:id="@+id/tvVideoQualityHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/instrument_sans_bold"
+        app:fontFamily="@font/instrument_sans_bold"
+        android:textStyle="bold"
+        android:letterSpacing="0.04"
+        android:text="VIDEO QUALITY &amp; FRAMERATE"
+        android:textColor="#64748B"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:id="@+id/groupVideoQuality"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_card_outlined"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/scrollVideoQuality"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_segmented_track"
+            android:padding="4dp">
+
+            <LinearLayout
+                android:id="@+id/llVideoQualityChips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvVideoQualityReadOnly"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:fontFamily="@font/instrument_sans_semibold"
+            app:fontFamily="@font/instrument_sans_semibold"
+            android:gravity="center"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:text="Full HD (1920 × 1080)" />
+
+        <View
+            android:id="@+id/dividerVideoCard"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="#F1F5F9" />
+
+        <!-- Frame Rate Row -->
+        <LinearLayout
+            android:id="@+id/groupFrameRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/instrument_sans_bold"
+                app:fontFamily="@font/instrument_sans_bold"
+                android:textStyle="bold"
+                android:text="Frame Rate"
+                android:textColor="#4F65F6"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_segmented_track"
+                android:padding="3dp">
+
+                <LinearLayout
+                    android:id="@+id/llFrameRateChips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 5. Save Preference Action Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSavePreference"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#4F65F6"
+        android:fontFamily="@font/instrument_sans_bold"
+        app:fontFamily="@font/instrument_sans_bold"
+        android:textStyle="bold"
+        android:text="Save Preference"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:cornerRadius="16dp" />
+
+</LinearLayout>

@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="32dp"
+    android:viewportWidth="48"
+    android:viewportHeight="32">
+    <!-- Red top stripe -->
+    <path
+        android:fillColor="#AE1C28"
+        android:pathData="M0,0h48v10.67H0z" />
+    <!-- White middle stripe -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M0,10.67h48v10.67H0z" />
+    <!-- Blue bottom stripe -->
+    <path
+        android:fillColor="#21468B"
+        android:pathData="M0,21.33h48v10.67H0z" />
+</vector>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="4dp"
+    android:background="@drawable/bg_mode_card"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="14dp"
+    android:paddingVertical="12dp">
+
+    <!-- Point Letter Badge -->
+    <FrameLayout
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:background="@drawable/bg_point_badge">
+
+        <TextView
+            android:id="@+id/tvPointBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="A"
+            android:textColor="#4F46E5"
+            android:textSize="16sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+    </FrameLayout>
+
+    <!-- Point Info -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvPointTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Point A"
+            android:textColor="#111827"
+            android:textSize="14sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <TextView
+            android:id="@+id/tvPointCoordinates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:text="28.6139° N, 77.2090° E"
+            android:textColor="#64748B"
+            android:textSize="12sp"
+            app:fontFamily="@font/instrument_sans_regular" />
+
+    </LinearLayout>
+
+    <!-- Action: Edit -->
+    <ImageView
+        android:id="@+id/btnEditPoint"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Edit"
+        android:padding="6dp"
+        android:src="@drawable/ic_edit_pencil" />
+
+    <!-- Action: Delete -->
+    <ImageView
+        android:id="@+id/btnDeletePoint"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="4dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Delete"
+        android:padding="6dp"
+        android:src="@drawable/ic_trash_red" />
+
+</LinearLayout>

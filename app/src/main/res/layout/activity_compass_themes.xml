@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/compassThemesRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fitsSystemWindows="true">
+
+    <!-- Top Toolbar Header -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbarLayout"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circular_back_button"
+            android:contentDescription="@string/app_name"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back_arrow_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvThemesTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Compass Themes"
+            android:textColor="#111827"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/instrument_sans_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/tvThemesSubtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="28dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/instrument_sans_regular"
+        android:gravity="center"
+        android:text="Select your preferred compass dial style for navigation and outdoor tracking"
+        android:textColor="#6B7280"
+        android:textSize="13.5sp"
+        app:fontFamily="@font/instrument_sans_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
+
+    <!-- Scrollable Theme Grid -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/btnApply"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvThemesSubtitle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="20dp">
+
+            <!-- ROW 1: Classic Dial & Geometric Star (Dark) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- THEME 1: CLASSIC NAVIGATION DIAL -->
+                <FrameLayout
+                    android:id="@+id/cardThemeClassicDial"
+                    android:layout_width="0dp"
+                    android:layout_height="185dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_theme_card_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivThemeClassicDial"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="Classic Navigation Dial"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_theme_classic_dial" />
+
+                    <ImageView
+                        android:id="@+id/ivCheckClassicDial"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="top|end"
+                        android:contentDescription="Selected"
+                        android:src="@drawable/ic_checkbox_circle_checked"
+                        android:visibility="visible" />
+
+                </FrameLayout>
+
+                <!-- THEME 2: GEOMETRIC STAR -->
+                <FrameLayout
+                    android:id="@+id/cardThemeGeometricStar"
+                    android:layout_width="0dp"
+                    android:layout_height="185dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_theme_card_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivThemeGeometricStar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="Geometric Star Rose"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_theme_geometric_star" />
+
+                    <ImageView
+                        android:id="@+id/ivCheckGeometricStar"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="top|end"
+                        android:contentDescription="Selected"
+                        android:src="@drawable/ic_checkbox_circle_checked"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <!-- ROW 2: Digital HUD & Tactical Gauge (Dark) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <!-- THEME 3: DIGITAL HUD -->
+                <FrameLayout
+                    android:id="@+id/cardThemeDigitalHud"
+                    android:layout_width="0dp"
+                    android:layout_height="185dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_theme_card_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivThemeDigitalHud"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="Digital HUD Dial"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_theme_digital_hud" />
+
+                    <ImageView
+                        android:id="@+id/ivCheckDigitalHud"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="top|end"
+                        android:contentDescription="Selected"
+                        android:src="@drawable/ic_checkbox_circle_checked"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+
+                <!-- THEME 4: TACTICAL GAUGE -->
+                <FrameLayout
+                    android:id="@+id/cardThemeTacticalGauge"
+                    android:layout_width="0dp"
+                    android:layout_height="185dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_theme_card_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivThemeTacticalGauge"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="Tactical Gauge Dial"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_theme_tactical_gauge" />
+
+                    <ImageView
+                        android:id="@+id/ivCheckTacticalGauge"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="top|end"
+                        android:contentDescription="Selected"
+                        android:src="@drawable/ic_checkbox_circle_checked"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <!-- ROW 3: Vintage Red & Maritime Rose (Light) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <!-- THEME 5: VINTAGE RED STAR -->
+                <FrameLayout
+                    android:id="@+id/cardThemeVintageRed"
+                    android:layout_width="0dp"
+                    android:layout_height="185dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_theme_card_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivThemeVintageRed"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="Vintage Red Star"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_theme_vintage_red" />
+
+                    <ImageView
+                        android:id="@+id/ivCheckVintageRed"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="top|end"
+                        android:contentDescription="Selected"
+                        android:src="@drawable/ic_checkbox_circle_checked"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+
+                <!-- THEME 6: MARITIME EXPLORER ROSE -->
+                <FrameLayout
+                    android:id="@+id/cardThemeMaritimeRose"
+                    android:layout_width="0dp"
+                    android:layout_height="185dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_theme_card_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:id="@+id/ivThemeMaritimeRose"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="Maritime Explorer Rose"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/img_theme_maritime_rose" />
+
+                    <ImageView
+                        android:id="@+id/ivCheckMaritimeRose"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="top|end"
+                        android:contentDescription="Selected"
+                        android:src="@drawable/ic_checkbox_circle_checked"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Apply Button -->
+    <TextView
+        android:id="@+id/btnApply"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_primary_button"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:gravity="center"
+        android:text="Apply"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/instrument_sans_bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

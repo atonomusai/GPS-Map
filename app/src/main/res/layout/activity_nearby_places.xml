@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nearbyRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC">
+
+    <!-- 1. FULLSCREEN MAP -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- 2. TOP FLOATING SEARCH, RADIUS SELECTOR & CATEGORIES -->
+    <LinearLayout
+        android:id="@+id/topBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="8dp">
+
+        <!-- Top Search Row (Back + Search Input + Radius Selector) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Back Button -->
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_circular_back_button"
+                android:contentDescription="Back"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_back_arrow_dark" />
+
+            <!-- Search Input Box (Pill Shape) -->
+            <LinearLayout
+                android:id="@+id/layoutSearchBar"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_search_input_pill"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="12dp">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:contentDescription="Search"
+                    android:src="@drawable/ic_search"
+                    app:tint="#94A3B8" />
+
+                <EditText
+                    android:id="@+id/etSearchPlaces"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:fontFamily="@font/instrument_sans_regular"
+                    android:hint="Search nearby fuel, banks,..."
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="#0F172A"
+                    android:textColorHint="#94A3B8"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_regular" />
+
+                <ProgressBar
+                    android:id="@+id/progressSearch"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:indeterminate="true"
+                    android:indeterminateTint="#4F46E5"
+                    android:visibility="gone" />
+
+                <ImageButton
+                    android:id="@+id/btnClearSearch"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Clear"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_close_gray"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <!-- Radius Selector Dropdown (e.g. Within 2 km ▾) -->
+            <LinearLayout
+                android:id="@+id/btnRadiusSelector"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_radius_pill"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp">
+
+                <TextView
+                    android:id="@+id/tvRadiusValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="Within 2 km"
+                    android:textColor="#4F46E5"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginStart="2dp"
+                    android:contentDescription="Dropdown"
+                    android:src="@drawable/ic_dropdown_arrow"
+                    app:tint="#4F46E5" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Search Suggestions Dropdown Overlay -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSearchSuggestions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_trip_card"
+            android:elevation="8dp"
+            android:maxHeight="220dp"
+            android:overScrollMode="never"
+            android:visibility="gone" />
+
+        <!-- Category Filter Chips -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCategoryChips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never" />
+
+    </LinearLayout>
+
+
+
+    <!-- 4. FLOATING MAP CONTROLS (Right Side) -->
+    <LinearLayout
+        android:id="@+id/layoutMapControls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical">
+
+        <!-- Layer Toggle FAB -->
+        <ImageButton
+            android:id="@+id/btnLayerToggle"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_circular_subtle_button"
+            android:contentDescription="Toggle Layers"
+            android:elevation="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_map_layers"
+            app:tint="#1E293B" />
+
+        <!-- Zoom In -->
+        <ImageButton
+            android:id="@+id/btnZoomIn"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_circular_subtle_button"
+            android:contentDescription="Zoom In"
+            android:elevation="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_plus_zoom"
+            app:tint="#1E293B" />
+
+        <!-- Zoom Out -->
+        <ImageButton
+            android:id="@+id/btnZoomOut"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_circular_subtle_button"
+            android:contentDescription="Zoom Out"
+            android:elevation="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_minus_zoom"
+            app:tint="#1E293B" />
+
+        <!-- My Location FAB -->
+        <ImageButton
+            android:id="@+id/btnMyLocation"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_circular_subtle_button"
+            android:contentDescription="My Location"
+            android:elevation="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_my_location"
+            app:tint="#4F46E5" />
+
+    </LinearLayout>
+
+    <!-- 5. PERSISTENT BOTTOM SHEET -->
+    <LinearLayout
+        android:id="@+id/bottomSheetNearby"
+        android:layout_width="match_parent"
+        android:layout_height="540dp"
+        android:background="@drawable/bg_bottom_sheet_dialog"
+        android:elevation="12dp"
+        android:orientation="vertical"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="284dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <!-- Drag Handle -->
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_bottom_sheet_drag_handle" />
+
+        <!-- Bottom Sheet Header Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/tvSheetTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="Closest Results"
+                android:textColor="#0F172A"
+                android:textSize="18sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+            <TextView
+                android:id="@+id/tvPlacesCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="0 found"
+                android:textColor="#4F46E5"
+                android:textSize="13sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+            <!-- Close / Clear Preview Button -->
+            <ImageButton
+                android:id="@+id/btnClosePreview"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Close Preview"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_close_gray"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <!-- Result filters: sort order + quick toggles -->
+        <HorizontalScrollView
+            android:id="@+id/scrollResultFilters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="8dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnSort"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:background="@drawable/bg_radius_pill"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_dropdown_arrow"
+                    android:drawablePadding="2dp"
+                    android:drawableTint="#4F46E5"
+                    android:focusable="true"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="12dp"
+                    android:text="Sort: Nearest"
+                    android:textColor="#4F46E5"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/chipOpenNow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_nearby_chip_unselected"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="12dp"
+                    android:text="🟢 Open now"
+                    android:textColor="#334155"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/chipHasPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_nearby_chip_unselected"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="12dp"
+                    android:text="📞 Has phone"
+                    android:textColor="#334155"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <!-- Loading Progress Indicator -->
+        <ProgressBar
+            android:id="@+id/progressLoading"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:indeterminate="true"
+            android:indeterminateTint="#4F46E5"
+            android:visibility="gone" />
+
+        <!-- A. IN-APP ROUTE PREVIEW CONTAINER (Shown when route calculated) -->
+        <LinearLayout
+            android:id="@+id/layoutRoutePreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="12dp"
+            android:visibility="gone">
+
+            <!-- Route Stats Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_trip_card"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <!-- Origin and Destination -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:background="@drawable/bg_circle_icon_blue"
+                        android:backgroundTint="#4F46E5" />
+
+                    <TextView
+                        android:id="@+id/tvRouteOrigin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:maxLines="1"
+                        android:text="My Location"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:contentDescription="Destination Pin"
+                        android:src="@drawable/ic_map_pin_red" />
+
+                    <TextView
+                        android:id="@+id/tvRouteDestination"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:maxLines="1"
+                        android:text="Destination"
+                        android:textColor="#0F172A"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <!-- Metrics Row: Time & Distance -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvRouteDuration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="12 min"
+                        android:textColor="#059669"
+                        android:textSize="18sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                    <TextView
+                        android:id="@+id/tvRouteDistance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="(4.8 km)"
+                        android:textColor="#64748B"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_nearby_badge"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="3dp"
+                        android:text="Fastest Route"
+                        android:textColor="#4F46E5"
+                        android:textSize="11sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <!-- Action Button Row: Start Navigation -->
+                <LinearLayout
+                    android:id="@+id/btnStartNavigation"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/bg_nearby_chip_selected"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:contentDescription="Start Navigation"
+                        android:src="@drawable/ic_navigation_arrow"
+                        app:tint="#FFFFFF" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="Start Navigation"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- B. SINGLE SELECTED PLACE PREVIEW CONTAINER -->
+        <LinearLayout
+            android:id="@+id/layoutSelectedPlacePreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="12dp"
+            android:visibility="gone">
+
+            <include
+                android:id="@+id/cardSelectedPlace"
+                layout="@layout/item_nearby_place" />
+
+        </LinearLayout>
+
+        <!-- C. EMPTY / ERROR STATE LAYOUT -->
+        <LinearLayout
+            android:id="@+id/layoutEmptyState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="140dp"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:contentDescription="Empty"
+                android:src="@drawable/boxicons_location"
+                app:tint="#94A3B8" />
+
+            <TextView
+                android:id="@+id/tvEmptyMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:gravity="center"
+                android:text="No places found nearby"
+                android:textColor="#64748B"
+                android:textSize="14sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+            <!-- Context action: clear filters / search wider / retry -->
+            <TextView
+                android:id="@+id/btnEmptyAction"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_nearby_chip_selected"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:gravity="center"
+                android:paddingHorizontal="18dp"
+                android:text="Search wider area"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:visibility="gone"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+        </LinearLayout>
+
+        <!-- D. PLACES LIST -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNearbyPlaces"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="24dp" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

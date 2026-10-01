@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="4dp"
+    android:background="@drawable/bg_mode_card"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="14dp">
+
+    <TextView
+        android:id="@+id/tvUnitName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:text="Square Meters (m²)"
+        android:textColor="#111827"
+        android:textSize="15sp"
+        app:fontFamily="@font/instrument_sans_bold" />
+
+    <ImageView
+        android:id="@+id/ivUnitRadio"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:contentDescription="Selected"
+        android:src="@drawable/ic_radio_checked" />
+
+</LinearLayout>

@@ -1,0 +1,1073 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootGpsQuickTools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC"
+    android:orientation="vertical"
+    tools:context=".presentation.tools.GpsQuickToolsActivity">
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:id="@+id/topBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="8dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circular_back_button"
+            android:contentDescription="Back"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back_arrow_dark" />
+
+        <TextView
+            android:id="@+id/tvHeaderTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="GPS Quick Tools"
+            android:textColor="#0F172A"
+            android:textSize="20sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Featured Card (Compass & Altimeter) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardFeaturedCompass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#F1F5F9"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="14dp">
+
+                    <FrameLayout
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_featured_compass_box">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_compass_dial_illustration" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvFeaturedTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/instrument_sans_bold"
+                            android:text="Compass &amp; Altimeter"
+                            android:textColor="#0F172A"
+                            android:textSize="15sp"
+                            app:fontFamily="@font/instrument_sans_bold" />
+
+                        <TextView
+                            android:id="@+id/tvFeaturedSubtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:fontFamily="@font/instrument_sans_medium"
+                            android:text="Accuracy: ±2.5m • Alt: 540m"
+                            android:textColor="#64748B"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/instrument_sans_medium" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/btnFeaturedGo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:background="@drawable/bg_btn_go_pill"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:gravity="center"
+                        android:paddingHorizontal="18dp"
+                        android:text="Go"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Section Title -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:letterSpacing="0.04"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="10dp"
+                android:text="ALL DIAGNOSTIC TOOLS"
+                android:textColor="#0F172A"
+                android:textSize="13.5sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+            <!-- 2-Column Grid Container -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="10dp">
+
+                <!-- ROW 1: GPS Speedometer & Route Finder -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Card 1: GPS Speedometer -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardSpeedometer"
+                        android:layout_width="0dp"
+                        android:layout_height="146dp"
+                        android:layout_margin="6dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="#F1F5F9"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:background="@drawable/bg_circle_tool_blue">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:contentDescription="@null"
+                                        android:src="@drawable/gauge"
+                                        app:tint="#2563EB" />
+                                </FrameLayout>
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_pill_tool_blue"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="3.5dp"
+                                    android:text="0.0 km/h"
+                                    android:textColor="#2563EB"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_bold"
+                                android:maxLines="1"
+                                android:text="GPS Speedometer"
+                                android:textColor="#0F172A"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/instrument_sans_bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_regular"
+                                android:lineSpacingExtra="1.5dp"
+                                android:maxLines="2"
+                                android:text="Live velocity &amp; max speed tracking"
+                                android:textColor="#64748B"
+                                android:textSize="11.5sp"
+                                app:fontFamily="@font/instrument_sans_regular" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Card 2: Route Finder -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardRouteFinder"
+                        android:layout_width="0dp"
+                        android:layout_height="146dp"
+                        android:layout_margin="6dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="#F1F5F9"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:background="@drawable/bg_circle_tool_green">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:contentDescription="@null"
+                                        android:src="@drawable/ic_navigation_arrow"
+                                        app:tint="#059669" />
+                                </FrameLayout>
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_pill_tool_green"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="3.5dp"
+                                    android:text="Ready"
+                                    android:textColor="#059669"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_bold"
+                                android:maxLines="1"
+                                android:text="Route Finder"
+                                android:textColor="#0F172A"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/instrument_sans_bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_regular"
+                                android:lineSpacingExtra="1.5dp"
+                                android:maxLines="2"
+                                android:text="GPS trails &amp; trip navigation"
+                                android:textColor="#64748B"
+                                android:textSize="11.5sp"
+                                app:fontFamily="@font/instrument_sans_regular" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- ROW 2: Area Measure & Satellite Map -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Card 3: Area Measure -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardAreaMeasure"
+                        android:layout_width="0dp"
+                        android:layout_height="146dp"
+                        android:layout_margin="6dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="#F1F5F9"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:background="@drawable/bg_circle_tool_amber">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:contentDescription="@null"
+                                        android:src="@drawable/ic_ruler_measure"
+                                        app:tint="#D97706" />
+                                </FrameLayout>
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_pill_tool_amber"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="3.5dp"
+                                    android:text="m² / Acres"
+                                    android:textColor="#B45309"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_bold"
+                                android:maxLines="1"
+                                android:text="Area Measure"
+                                android:textColor="#0F172A"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/instrument_sans_bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_regular"
+                                android:lineSpacingExtra="1.5dp"
+                                android:maxLines="2"
+                                android:text="Land &amp; perimeter calculation"
+                                android:textColor="#64748B"
+                                android:textSize="11.5sp"
+                                app:fontFamily="@font/instrument_sans_regular" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Card 4: Satellite Map -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardSatelliteMap"
+                        android:layout_width="0dp"
+                        android:layout_height="146dp"
+                        android:layout_margin="6dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="#F1F5F9"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:background="@drawable/bg_circle_tool_purple">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:contentDescription="@null"
+                                        android:src="@drawable/ic_world"
+                                        app:tint="#7C3AED" />
+                                </FrameLayout>
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_pill_tool_purple"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="3.5dp"
+                                    android:text="3D View"
+                                    android:textColor="#7C3AED"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_bold"
+                                android:maxLines="1"
+                                android:text="Satellite Map"
+                                android:textColor="#0F172A"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/instrument_sans_bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_regular"
+                                android:lineSpacingExtra="1.5dp"
+                                android:maxLines="2"
+                                android:text="High-res terrain &amp; hybrid layers"
+                                android:textColor="#64748B"
+                                android:textSize="11.5sp"
+                                app:fontFamily="@font/instrument_sans_regular" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- ROW 3: Compass & Altimeter Elevation -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Card 5: Compass & Altimeter -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardCompassAltimeter"
+                        android:layout_width="0dp"
+                        android:layout_height="146dp"
+                        android:layout_margin="6dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="#F1F5F9"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:background="@drawable/bg_circle_tool_rose">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:contentDescription="@null"
+                                        android:src="@drawable/ic_compas"
+                                        app:tint="#E11D48" />
+                                </FrameLayout>
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_pill_tool_rose"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="3.5dp"
+                                    android:text="245° SW"
+                                    android:textColor="#E11D48"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_bold"
+                                android:maxLines="1"
+                                android:text="Compass"
+                                android:textColor="#0F172A"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/instrument_sans_bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_regular"
+                                android:lineSpacingExtra="1.5dp"
+                                android:maxLines="2"
+                                android:text="Heading, elevation &amp; barometry"
+                                android:textColor="#64748B"
+                                android:textSize="11.5sp"
+                                app:fontFamily="@font/instrument_sans_regular" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Card 6: Altimeter Elevation -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardAltimeter"
+                        android:layout_width="0dp"
+                        android:layout_height="146dp"
+                        android:layout_margin="6dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="#F1F5F9"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:background="@drawable/bg_circle_tool_indigo">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:contentDescription="@null"
+                                        android:src="@drawable/ic_altimeter"
+                                        app:tint="#6366F1" />
+                                </FrameLayout>
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_pill_tool_indigo"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="3.5dp"
+                                    android:text="Elevation"
+                                    android:textColor="#6366F1"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_bold"
+                                android:maxLines="1"
+                                android:text="Altimeter Elevation"
+                                android:textColor="#0F172A"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/instrument_sans_bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_regular"
+                                android:lineSpacingExtra="1.5dp"
+                                android:maxLines="2"
+                                android:text="Barometric altitude &amp; live graph"
+                                android:textColor="#64748B"
+                                android:textSize="11.5sp"
+                                app:fontFamily="@font/instrument_sans_regular" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- ROW 4: Nearby Places & Trip History -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Card 7: Nearby Places -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardNearbyPlaces"
+                        android:layout_width="0dp"
+                        android:layout_height="146dp"
+                        android:layout_margin="6dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="#F1F5F9"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:background="@drawable/bg_circle_tool_blue">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:contentDescription="@null"
+                                        android:src="@drawable/boxicons_location"
+                                        app:tint="#2563EB" />
+                                </FrameLayout>
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_pill_tool_blue"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="3.5dp"
+                                    android:text="Explore"
+                                    android:textColor="#2563EB"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_bold"
+                                android:maxLines="1"
+                                android:text="Nearby Places"
+                                android:textColor="#0F172A"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/instrument_sans_bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_regular"
+                                android:lineSpacingExtra="1.5dp"
+                                android:maxLines="2"
+                                android:text="Discover Nearby, Wherever You Go"
+                                android:textColor="#64748B"
+                                android:textSize="11.5sp"
+                                app:fontFamily="@font/instrument_sans_regular" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Card 8: Trip History -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardTripHistory"
+                        android:layout_width="0dp"
+                        android:layout_height="146dp"
+                        android:layout_margin="6dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="#F1F5F9"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:background="@drawable/bg_circle_tool_teal">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:contentDescription="@null"
+                                        android:src="@drawable/ic_trip_history"
+                                        app:tint="#0D9488" />
+                                </FrameLayout>
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_pill_tool_teal"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="3.5dp"
+                                    android:text="20+ Categories"
+                                    android:textColor="#0D9488"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_bold"
+                                android:maxLines="1"
+                                android:text="Trip History"
+                                android:textColor="#0F172A"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/instrument_sans_bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_regular"
+                                android:lineSpacingExtra="1.5dp"
+                                android:maxLines="2"
+                                android:text="Navigate with Confidence, Wherever You Go"
+                                android:textColor="#64748B"
+                                android:textSize="11.5sp"
+                                app:fontFamily="@font/instrument_sans_regular" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- ROW 5: Images on Map & Live Street View -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Card 9: Images on Map -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardImagesOnMap"
+                        android:layout_width="0dp"
+                        android:layout_height="146dp"
+                        android:layout_margin="6dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="#F1F5F9"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:background="@drawable/bg_circle_tool_amber">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:contentDescription="@null"
+                                        android:src="@drawable/ic_images_on_map"
+                                        app:tint="#D97706" />
+                                </FrameLayout>
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_pill_tool_amber"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="3.5dp"
+                                    android:text="GPS Tags"
+                                    android:textColor="#B45309"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_bold"
+                                android:maxLines="1"
+                                android:text="Images on Map"
+                                android:textColor="#0F172A"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/instrument_sans_bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_regular"
+                                android:lineSpacingExtra="1.5dp"
+                                android:maxLines="2"
+                                android:text="Geotagged photos &amp; media map"
+                                android:textColor="#64748B"
+                                android:textSize="11.5sp"
+                                app:fontFamily="@font/instrument_sans_regular" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Card 10: Live Street View -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardLiveStreetView"
+                        android:layout_width="0dp"
+                        android:layout_height="146dp"
+                        android:layout_margin="6dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardBackgroundColor="#FFFFFF"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="#F1F5F9"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="14dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="38dp"
+                                    android:layout_height="38dp"
+                                    android:background="@drawable/bg_circle_tool_rose">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:contentDescription="@null"
+                                        android:src="@drawable/ic_street_view"
+                                        app:tint="#E11D48" />
+                                </FrameLayout>
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/bg_pill_tool_rose"
+                                    android:fontFamily="@font/instrument_sans_bold"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="3.5dp"
+                                    android:text="Live Cam"
+                                    android:textColor="#E11D48"
+                                    android:textSize="10.5sp"
+                                    app:fontFamily="@font/instrument_sans_bold" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_bold"
+                                android:maxLines="1"
+                                android:text="Live Street View"
+                                android:textColor="#0F172A"
+                                android:textSize="14sp"
+                                app:fontFamily="@font/instrument_sans_bold" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/instrument_sans_regular"
+                                android:lineSpacingExtra="1.5dp"
+                                android:maxLines="2"
+                                android:text="Global street webcams &amp; live cams"
+                                android:textColor="#64748B"
+                                android:textSize="11.5sp"
+                                app:fontFamily="@font/instrument_sans_regular" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

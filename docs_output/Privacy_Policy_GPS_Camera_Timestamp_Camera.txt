@@ -1,0 +1,52 @@
+PRIVACY POLICY – GPS Camera: Timestamp Camera
+
+Last updated: 30 September 2026
+
+This Privacy Policy explains how [DEVELOPER NAME – exactly as shown on your Google Play developer page] ("we", "us") handles information in the Android app "GPS Camera: Timestamp Camera" (package com.gpsmapcamera.gpslocation.timestamp.geotag) ("the App").
+
+1. SUMMARY
+• The App has no user accounts, no advertising and no analytics or tracking SDKs.
+• We do not operate a server that receives your data, and we do not sell, rent or share your personal information for advertising.
+• Photos, videos, audio and trip history stay on your device.
+
+2. PERMISSIONS AND DATA THE APP USES
+• Location (precise and approximate): to stamp your address, coordinates and a map on photos and videos; to show your position on maps; to find nearby places, routes and nearby webcams; and, only after you tap "Start" in the Speedometer, to measure speed, distance and route. While a trip is running, location is also used when the App is minimised or the screen is off; a notification is shown the whole time and you can stop at any time.
+• Camera: to take photos and record videos.
+• Microphone: to record sound with videos. Audio is saved only inside the video file on your device.
+• Photos and videos: the App saves what you capture to your device gallery. Saved photos contain the location in the file's EXIF data (GPS coordinates), so anyone you share a photo with can see where it was taken. When you import a photo, you pick it with the Android Photo Picker and the App only receives the item you choose.
+• Notifications: to show the ongoing trip-tracking notification.
+• Motion sensors: used on the device to improve walking-speed estimates. This data is not stored or sent anywhere.
+
+3. INFORMATION SENT TO THIRD-PARTY SERVICES
+To provide maps and location features, the App sends the minimum data needed – your coordinates or the text you search for, plus your device's IP address as part of any internet request – directly from your device to these services. They process it in real time to answer your request, under their own privacy policies:
+• OpenStreetMap Nominatim – turning coordinates into an address and searching places.
+• Overpass API (OpenStreetMap) – finding nearby places.
+• FOSSGIS / OSRM routing servers – calculating routes.
+• Map tile providers – Esri (ArcGIS), CARTO and EOX – showing the map for the area you view.
+• Windy.com Webcams – listing webcams, including webcams near you.
+• Wikipedia, Wikidata, Wikivoyage, Openverse and Wikimedia Commons – city and landmark information and images.
+We do not receive or store this information.
+
+4. INFORMATION STORED ON YOUR DEVICE
+Captured photos and videos, stamp settings, saved custom locations, trip history (speed, distance, route and addresses) and app preferences are stored only on your device. App data is not backed up to the cloud by the App. You can delete trips and saved locations in the App, delete media from your gallery, or remove all App data by clearing the App's storage or uninstalling it.
+
+5. PERMISSIONS ARE OPTIONAL
+You can deny or revoke any permission in Android Settings. Without location you can still use the camera without a GPS stamp; location-based features (maps, speedometer, nearby places, route finder) will not work.
+
+6. FEEDBACK
+If you send us feedback by e-mail, we receive your e-mail address and whatever you write. We use it only to reply and delete it when it is no longer needed.
+
+7. SECURITY
+All network requests made by the App use encrypted HTTPS connections.
+
+8. CHILDREN
+The App is not directed to children under 13, and we do not knowingly collect personal information from children.
+
+9. YOUR RIGHTS
+Depending on where you live (for example under the EU/UK GDPR or California's CCPA/CPRA) you may have the right to access, correct or delete personal data. Because we do not hold personal data on our own systems, most requests can be handled on your device; contact us for help and we will respond within 30 days.
+
+10. CHANGES
+We may update this policy. The new version will be posted at this address with a new "Last updated" date.
+
+11. CONTACT
+E-mail: info@atonomus.ai

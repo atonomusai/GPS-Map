@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/streetCameraRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC"
+    android:orientation="vertical"
+    tools:context=".presentation.streetcamera.StreetCameraActivity">
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:id="@+id/topBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="6dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circular_back_button"
+            android:contentDescription="Back"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back_arrow_dark" />
+
+        <TextView
+            android:id="@+id/tvHeaderTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Live Street Camera"
+            android:textColor="#0F172A"
+            android:textSize="20sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+    </LinearLayout>
+
+    <!-- Top 3-Segmented Tab Bar matching Screenshots 1, 2, 4 -->
+    <LinearLayout
+        android:id="@+id/tabBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="10dp">
+
+        <!-- Tab 1: Live -->
+        <LinearLayout
+            android:id="@+id/tabLive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="4dp">
+
+            <FrameLayout
+                android:id="@+id/pillTabLive"
+                android:layout_width="54dp"
+                android:layout_height="32dp"
+                android:background="@drawable/bg_tab_pill_selected">
+
+                <ImageView
+                    android:id="@+id/ivTabLive"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Live"
+                    android:src="@drawable/ic_tab_live"
+                    app:tint="#4F46E5" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvTabLive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="Live"
+                android:textColor="#4F46E5"
+                android:textSize="12sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+        </LinearLayout>
+
+        <!-- Tab 2: Places -->
+        <LinearLayout
+            android:id="@+id/tabPlaces"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="4dp">
+
+            <FrameLayout
+                android:id="@+id/pillTabPlaces"
+                android:layout_width="54dp"
+                android:layout_height="32dp"
+                android:background="@null">
+
+                <ImageView
+                    android:id="@+id/ivTabPlaces"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Places"
+                    android:src="@drawable/ic_tab_places"
+                    app:tint="#94A3B8" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvTabPlaces"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/instrument_sans_medium"
+                android:text="Places"
+                android:textColor="#94A3B8"
+                android:textSize="12sp"
+                app:fontFamily="@font/instrument_sans_medium" />
+        </LinearLayout>
+
+        <!-- Tab 3: Countries -->
+        <LinearLayout
+            android:id="@+id/tabCountries"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="4dp">
+
+            <FrameLayout
+                android:id="@+id/pillTabCountries"
+                android:layout_width="54dp"
+                android:layout_height="32dp"
+                android:background="@null">
+
+                <ImageView
+                    android:id="@+id/ivTabCountries"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Countries"
+                    android:src="@drawable/ic_tab_countries"
+                    app:tint="#94A3B8" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvTabCountries"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/instrument_sans_medium"
+                android:text="Countries"
+                android:textColor="#94A3B8"
+                android:textSize="12sp"
+                app:fontFamily="@font/instrument_sans_medium" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F1F5F9" />
+
+    <!-- Content ViewPager for smooth swipe tab switching -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerStreetCamera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- Global Progress Bar -->
+        <ProgressBar
+            android:id="@+id/progressLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/primary"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <!-- Windy Attribution footer -->
+    <TextView
+        android:id="@+id/tvWindyAttribution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface"
+        android:fontFamily="@font/instrument_sans_regular"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/windy_attribution"
+        android:textColor="@color/text_hint"
+        android:textSize="11sp"
+        app:fontFamily="@font/instrument_sans_regular" />
+
+</LinearLayout>

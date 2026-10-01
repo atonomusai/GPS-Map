@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/timestampSettingsRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Top App Bar / Header -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbarLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="56dp"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circular_back_button"
+            android:contentDescription="@string/app_name"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back_arrow_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSettingsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Timestamp Settings"
+            android:textColor="#111827"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/btnSavePreferences"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="24dp">
+
+            <!-- PREVIEW CARD -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardPreview"
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#EAEFF5"
+                app:strokeWidth="1dp">
+
+                <com.autonoumus.ai.presentation.templates.view.StampTemplatePreviewView
+                    android:id="@+id/templatePreviewView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ROW 0: Add Custom Location -->
+            <LinearLayout
+                android:id="@+id/rowAddCustomLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="12dp">
+
+                <ImageView
+                    android:id="@+id/ivCustomLocIcon"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="Add Custom Location"
+                    android:src="@drawable/ic_pin_blue" />
+
+                <TextView
+                    android:id="@+id/tvAddCustomLocation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:text="Add Custom Location"
+                    android:textColor="#1A1C20"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="7dp"
+                    android:layout_height="12dp"
+                    android:contentDescription="Next"
+                    android:src="@drawable/ic_chevron_right_thin" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/dividerAddCustomLocation"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F4F5F8" />
+
+            <!-- ROW 1: Title/Main header -->
+            <LinearLayout
+                android:id="@+id/rowTitleHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/ivTitleIcon"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="Title"
+                    android:src="@drawable/ic_title_header" />
+
+                <TextView
+                    android:id="@+id/tvTitleHeader"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:text="Title/Main header"
+                    android:textColor="#1A1C20"
+                    android:textSize="15sp" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchTitleHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:showText="false"
+                    android:splitTrack="false"
+                    android:thumb="@drawable/bg_switch_thumb"
+                    app:thumbTint="@null"
+                    app:track="@drawable/bg_switch_track"
+                    app:trackTint="@null" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/dividerTitleHeader"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F4F5F8" />
+
+            <!-- ROW 2: Show map -->
+            <LinearLayout
+                android:id="@+id/rowShowMap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/ivShowMapIcon"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="Show map"
+                    android:src="@drawable/ic_location" />
+
+                <TextView
+                    android:id="@+id/tvShowMap"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:text="Show map"
+                    android:textColor="#1A1C20"
+                    android:textSize="15sp" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchShowMap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:showText="false"
+                    android:splitTrack="false"
+                    android:thumb="@drawable/bg_switch_thumb"
+                    app:thumbTint="@null"
+                    app:track="@drawable/bg_switch_track"
+                    app:trackTint="@null" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/dividerShowMap"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F4F5F8" />
+
+            <!-- ROW 3: Select Map Type -->
+            <LinearLayout
+                android:id="@+id/rowSelectMapType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="12dp">
+
+                <ImageView
+                    android:id="@+id/ivMapTypeIcon"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="Select Map Type"
+                    android:src="@drawable/ic_settlite" />
+
+                <TextView
+                    android:id="@+id/tvSelectMapType"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:text="Select Map Type"
+                    android:textColor="#1A1C20"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="7dp"
+                    android:layout_height="12dp"
+                    android:contentDescription="Next"
+                    android:src="@drawable/ic_chevron_right_thin" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/dividerSelectMapType"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F4F5F8" />
+
+            <!-- ROW 4: Show Address -->
+            <LinearLayout
+                android:id="@+id/rowShowAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/ivAddressIcon"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="Show Address"
+                    android:src="@drawable/ic_location" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvShowAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:text="Show Address"
+                        android:textColor="#1A1C20"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvAddressSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:text="Bahawalpur, Punjab, Pakistan"
+                        android:textColor="#8E95A5"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchShowAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:showText="false"
+                    android:splitTrack="false"
+                    android:thumb="@drawable/bg_switch_thumb"
+                    app:thumbTint="@null"
+                    app:track="@drawable/bg_switch_track"
+                    app:trackTint="@null" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/dividerShowAddress"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F4F5F8" />
+
+            <!-- ROW 5: Time Zone -->
+            <LinearLayout
+                android:id="@+id/rowTimeZone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/ivTimeZoneIcon"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="Time Zone"
+                    android:src="@drawable/ic_globe_timezone" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTimeZone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:text="Time Zone"
+                        android:textColor="#1A1C20"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvTimeZoneSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:text="Bahawalpur, Punjab, Pakistan"
+                        android:textColor="#8E95A5"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchTimeZone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:showText="false"
+                    android:splitTrack="false"
+                    android:thumb="@drawable/bg_switch_thumb"
+                    app:thumbTint="@null"
+                    app:track="@drawable/bg_switch_track"
+                    app:trackTint="@null" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/dividerTimeZone"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F4F5F8" />
+
+            <!-- ROW 6: Show Location -->
+            <LinearLayout
+                android:id="@+id/rowShowLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:id="@+id/ivLocationIcon"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:contentDescription="Show Location"
+                    android:src="@drawable/ic_navigation_arrow" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvShowLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:text="Show Location"
+                        android:textColor="#1A1C20"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvLocationSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:text="Lat: 29.3956°, Long: 71.6836°"
+                        android:textColor="#8E95A5"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchShowLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:showText="false"
+                    android:splitTrack="false"
+                    android:thumb="@drawable/bg_switch_thumb"
+                    app:thumbTint="@null"
+                    app:track="@drawable/bg_switch_track"
+                    app:trackTint="@null" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/dividerShowLocation"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F4F5F8" />
+
+            <!-- ROW 7: OPACITY (BACKGROUND) SLIDER -->
+            <LinearLayout
+                android:id="@+id/rowOpacity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:text="Opacity (Background)"
+                        android:textColor="#1A1C20"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvOpacityValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:text="50 %"
+                        android:textColor="#8E95A5"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <SeekBar
+                    android:id="@+id/seekBarOpacity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:max="100"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:progress="50"
+                    android:progressBackgroundTint="#EBF0FE"
+                    android:progressTint="#5263FF"
+                    android:splitTrack="false"
+                    android:thumbTint="#5263FF" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="#F4F5F8" />
+
+            </LinearLayout>
+
+            <!-- ROW 8: TEXT COLOR ROW -->
+            <LinearLayout
+                android:id="@+id/rowTextColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="14dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:text="Text Color"
+                    android:textColor="#1A1C20"
+                    android:textSize="15sp" />
+
+                <View
+                    android:id="@+id/viewColorPreview"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bg_color_preview_square" />
+
+                <ImageView
+                    android:layout_width="7dp"
+                    android:layout_height="12dp"
+                    android:contentDescription="Next"
+                    android:src="@drawable/ic_chevron_right_thin" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/dividerTextColor"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F4F5F8" />
+
+            <!-- ROW 9: STAMP POSITION ROW -->
+            <LinearLayout
+                android:id="@+id/rowStampPosition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="14dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/instrument_sans_medium"
+                    android:text="Stamp position"
+                    android:textColor="#1A1C20"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="7dp"
+                    android:layout_height="12dp"
+                    android:contentDescription="Next"
+                    android:src="@drawable/ic_chevron_right_thin" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- SAVE PREFERENCES BUTTON -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSavePreferences"
+        android:layout_width="0dp"
+        android:layout_height="54dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#5263FF"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:text="Save Preferences"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:cornerRadius="14dp"
+        app:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

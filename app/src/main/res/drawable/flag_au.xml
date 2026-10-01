@@ -1,0 +1,34 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="32dp"
+    android:viewportWidth="48"
+    android:viewportHeight="32">
+    <!-- Blue background -->
+    <path
+        android:fillColor="#00008B"
+        android:pathData="M0,0h48v32H0z" />
+    <!-- Mini Union Jack canton -->
+    <path
+        android:fillColor="#012169"
+        android:pathData="M0,0h20v14H0z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2"
+        android:pathData="M0,0L20,14M20,0L0,14" />
+    <path
+        android:fillColor="#C8102E"
+        android:strokeColor="#C8102E"
+        android:strokeWidth="1"
+        android:pathData="M0,0L20,14M20,0L0,14" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M0,5h20v4H0zM8,0h4v14H8z" />
+    <path
+        android:fillColor="#C8102E"
+        android:pathData="M0,6h20v2H0zM9,0h2v14H9z" />
+    <!-- Southern cross stars -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M35,6h2v2h-2zM41,12h2v2h-2zM33,18h2v2h-2zM38,24h2v2h-2zM10,22h3v3h-3z" />
+</vector>

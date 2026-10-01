@@ -1,0 +1,89 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme: forced Light so system dark mode does not alter app designs -->
+    <style name="Theme.GSMCAMER" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_variant</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/background</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+
+        <item name="fontFamily">@font/instrument_sans</item>
+        <item name="android:fontFamily">@font/instrument_sans</item>
+        <item name="materialButtonStyle">@style/Widget.GSMCAMER.Button</item>
+        <item name="borderlessButtonStyle">@style/Widget.GSMCAMER.Button</item>
+        <item name="android:buttonStyle">@style/Widget.GSMCAMER.Button</item>
+        <item name="bottomSheetDialogTheme">@style/Theme.GSMCAMER.BottomSheetDialog</item>
+    </style>
+
+    <style name="Widget.GSMCAMER.Button" parent="Widget.MaterialComponents.Button">
+        <item name="elevation">0dp</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:translationZ">0dp</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="fontFamily">@font/instrument_sans_bold</item>
+        <item name="android:fontFamily">@font/instrument_sans_bold</item>
+    </style>
+
+    <style name="Theme.GSMCAMER.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.GSMCAMER.BottomSheet</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+    </style>
+
+    <style name="Widget.GSMCAMER.BottomSheet" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_bottom_sheet_dialog</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.GSMCAMER.BottomSheet</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.GSMCAMER.BottomSheet</item>
+        <item name="backgroundTint">@android:color/white</item>
+        <item name="behavior_peekHeight">auto</item>
+    </style>
+
+    <style name="ShapeAppearance.GSMCAMER.BottomSheet" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">28dp</item>
+        <item name="cornerSizeTopRight">28dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <style name="ShapeAppearance.AppIconRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">22%</item>
+    </style>
+
+    <style name="ShapeAppearance.MapRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">14dp</item>
+    </style>
+
+    <style name="ShapeAppearance.GSMCAMER.RoundedCard" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="Theme.GSMCAMER.Camera" parent="Theme.GSMCAMER">
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="android:statusBarColor">@android:color/black</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        <item name="materialButtonStyle">@style/Widget.GSMCAMER.Button</item>
+        <item name="borderlessButtonStyle">@style/Widget.GSMCAMER.Button</item>
+        <item name="android:buttonStyle">@style/Widget.GSMCAMER.Button</item>
+        <item name="bottomSheetDialogTheme">@style/Theme.GSMCAMER.BottomSheetDialog</item>
+    </style>
+
+    <style name="Theme.GSMCAMER.Splash" parent="Theme.GSMCAMER">
+        <item name="android:windowBackground">@drawable/bg_splash_gradient</item>
+        <item name="android:statusBarColor">@color/splash_bg_start</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/splash_bg_end</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+    </style>
+</resources>

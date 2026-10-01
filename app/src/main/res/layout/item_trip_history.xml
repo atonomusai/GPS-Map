@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="12dp">
+
+    <!-- HEADER ROW: TRIP SOURCE BADGE (Route Finder / Speedometer) + DATE/TIME -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="4dp">
+
+        <TextView
+            android:id="@+id/tvTripSourceBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_nearby_badge"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="2dp"
+            android:text="🧭 ROUTE FINDER"
+            android:textColor="#4F46E5"
+            android:textSize="10sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvTripDateBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="TODAY, 09:15 AM"
+            android:textColor="#94A3B8"
+            android:textSize="11sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+    </LinearLayout>
+
+    <!-- TRIP CARD CONTAINER -->
+    <LinearLayout
+        android:id="@+id/cardTripContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_trip_card"
+        android:orientation="vertical"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="14dp">
+
+        <!-- TOP METRICS & ROUTE ROW -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Route Map Thumbnail Preview -->
+            <ImageView
+                android:id="@+id/ivRouteThumbnail"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:contentDescription="Route preview"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_route_thumb_placeholder" />
+
+            <!-- Metrics (Time, Distance, Speed) -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:baselineAligned="false"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- 1. Total Time -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:contentDescription="Time"
+                        android:src="@drawable/griddy_icons_time"
+                        app:tint="#64748B" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:text="TOTAL TIME"
+                        android:textColor="#64748B"
+                        android:textSize="9sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                    <TextView
+                        android:id="@+id/tvItemTotalTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="48 min"
+                        android:textColor="#111827"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <!-- Divider 1 -->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="32dp"
+                    android:background="#F1F5F9" />
+
+                <!-- 2. Total Distance -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:contentDescription="Distance"
+                        android:src="@drawable/ic_navigation_arrow"
+                        app:tint="#64748B" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:text="TOTAL DISTANCE"
+                        android:textColor="#64748B"
+                        android:textSize="9sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                    <TextView
+                        android:id="@+id/tvItemTotalDistance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="26.1 km"
+                        android:textColor="#111827"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <!-- Divider 2 -->
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="32dp"
+                    android:background="#F1F5F9" />
+
+                <!-- 3. Average Speed -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:contentDescription="Speed"
+                        android:src="@drawable/ic_trip_speed_pulse"
+                        app:tint="#64748B" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:text="AVERAGE SPEED"
+                        android:textColor="#64748B"
+                        android:textSize="9sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                    <TextView
+                        android:id="@+id/tvItemAvgSpeed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="33 km/h"
+                        android:textColor="#111827"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Divider Line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="#F1F5F9" />
+
+        <!-- BOTTOM ROUTE LOCATIONS (Origin & Destination) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Origin -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="7dp"
+                    android:layout_height="7dp"
+                    android:background="@drawable/bg_circle_icon_blue"
+                    android:backgroundTint="#4F46E5" />
+
+                <TextView
+                    android:id="@+id/tvItemStartAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:maxLines="1"
+                    android:text="DOWNTOWN, CITY CENTER"
+                    android:textColor="#64748B"
+                    android:textSize="10sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+            </LinearLayout>
+
+            <!-- Destination -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:contentDescription="Destination Pin"
+                    android:src="@drawable/ic_map_pin_red" />
+
+                <TextView
+                    android:id="@+id/tvItemEndAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:maxLines="1"
+                    android:text="GREEN PARK, EAST SIDE"
+                    android:textColor="#64748B"
+                    android:textSize="10sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

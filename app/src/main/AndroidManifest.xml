@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+    <!--
+      READ_EXTERNAL_STORAGE is only actually needed on API 24-28 (runtime-requested in
+      GalleryActivity for that range). On API 29+ the app only ever reads media it created
+      itself, which is exempt from any storage permission under scoped storage, and importing
+      an existing photo/video uses the permission-less system Photo Picker - so
+      READ_MEDIA_IMAGES/READ_MEDIA_VIDEO (API 33+) are intentionally NOT declared here; they'd
+      be unused sensitive-permission declarations with no functional benefit.
+    -->
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="true" />
+
+    <application
+        android:name=".GsmCameraApp"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.GSMCAMER">
+
+        <activity
+            android:name=".presentation.splash.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.GSMCAMER.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".presentation.onboarding.OnboardingActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.main.MainActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.settings.SettingsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.settings.TimestampSettingsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.settings.MapTypeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.compass.CompassAltimeterActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.speedometer.SpeedometerActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.speedometer.SpeedometerSettingsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.altimeter.AltimeterElevationActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.compass.CompassThemesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.compass.CompassCameraActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.GSMCAMER.Camera" />
+
+        <activity
+            android:name=".presentation.camera.CameraActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.GSMCAMER.Camera" />
+
+        <activity
+            android:name=".presentation.templates.TemplatesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.gallery.GalleryActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.gallery.MediaViewerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.GSMCAMER.Camera" />
+
+        <activity
+            android:name=".presentation.camera.ImportImageStampActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.map.PickLocationMapActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.speedometer.TripSummaryActivity"
+            android:exported="false"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".presentation.speedometer.TripHistoryActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.speedometer.TripMapActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.speedometer.TripStopRoutingActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:theme="@style/Theme.GSMCAMER" />
+
+        <activity
+            android:name=".presentation.area.AreaMeasurementActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.area.EnterCoordinatesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.nearby.NearbyPlacesActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".presentation.routefinder.RouteFinderActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".presentation.map.ImagesOnMapActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".presentation.streetcamera.StreetCameraActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".presentation.tools.GpsQuickToolsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.streetcamera.PopularLocationsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.streetcamera.StreetCameraDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.GSMCAMER.Camera" />
+
+        <activity
+            android:name=".presentation.streetcamera.TimelapsePlayerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.GSMCAMER.Camera" />
+
+        <service
+            android:name=".data.service.TripTrackingService"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+    </application>
+
+</manifest>

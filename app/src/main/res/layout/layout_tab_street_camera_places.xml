@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Search Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_search_input_pill"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="14dp">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:contentDescription="Search"
+                android:src="@drawable/ic_search"
+                app:tint="#94A3B8" />
+
+            <EditText
+                android:id="@+id/etSearchPlaces"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:fontFamily="@font/instrument_sans_regular"
+                android:hint="Search places, countries..."
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="#0F172A"
+                android:textColorHint="#94A3B8"
+                android:textSize="14sp"
+                app:fontFamily="@font/instrument_sans_regular" />
+
+            <ImageView
+                android:id="@+id/btnClearPlacesSearch"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Clear"
+                android:src="@drawable/ic_close_gray"
+                android:visibility="gone"
+                app:tint="#94A3B8"
+                tools:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 14 Place Categories Grid -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPlaceCategories"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingHorizontal="10dp"
+        android:paddingBottom="16dp"
+        tools:listitem="@layout/item_place_category_card" />
+
+    <!-- Empty Search State -->
+    <LinearLayout
+        android:id="@+id/layoutPlacesEmptyState"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="32dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <!-- Center Circular Icon -->
+        <FrameLayout
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:background="@drawable/bg_empty_circle_icon">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_empty_location" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:text="Location Not Available"
+            android:textColor="#0F172A"
+            android:textSize="18sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <TextView
+            android:id="@+id/tvEmptyPlacesDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:gravity="center"
+            android:lineSpacingExtra="3dp"
+            android:textColor="#64748B"
+            android:textSize="13sp"
+            tools:text="We couldn't find live cameras for &quot;Tokyo Tower&quot;. Try searching for a different location or browse categories." />
+
+        <TextView
+            android:id="@+id/btnBrowseCategories"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_browse_categories_btn"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:paddingHorizontal="24dp"
+            android:text="Browse Categories"
+            android:textColor="#4F46E5"
+            android:textSize="14sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+    </LinearLayout>
+
+</LinearLayout>

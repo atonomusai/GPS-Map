@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_dialog"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="28dp">
+
+    <!-- Drag Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/bg_bottom_sheet_drag_handle" />
+
+    <!-- Header Row -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/tvSheetTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Set Speed Limit"
+            android:textColor="#111827"
+            android:textSize="20sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <ImageButton
+            android:id="@+id/btnClose"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_circular_close_btn"
+            android:contentDescription="Close"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_close_gray" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/instrument_sans_regular"
+        android:text="Receive visual &amp; audio alerts when exceeding limit"
+        android:textColor="#64748B"
+        android:textSize="13sp"
+        app:fontFamily="@font/instrument_sans_regular" />
+
+    <!-- Current Limit Value Counter Row with - and + buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_speed_card"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingVertical="14dp">
+
+        <ImageButton
+            android:id="@+id/btnDecrement"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_segment_inactive"
+            android:contentDescription="Decrease"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_chevron_right_thin"
+            android:rotation="180"
+            app:tint="#111827" />
+
+        <TextView
+            android:id="@+id/tvCurrentLimitValue"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:text="60 KM/H"
+            android:textColor="#4F46E5"
+            android:textSize="24sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <ImageButton
+            android:id="@+id/btnIncrement"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_segment_inactive"
+            android:contentDescription="Increase"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_chevron_right_thin"
+            app:tint="#111827" />
+
+    </LinearLayout>
+
+    <!-- Quick Preset Chips -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/instrument_sans_medium"
+        android:text="Quick Presets"
+        android:textColor="#334155"
+        android:textSize="13sp"
+        app:fontFamily="@font/instrument_sans_medium" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/chipLimit40"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_segment_inactive"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:text="40"
+            android:textColor="#475569"
+            android:textSize="13sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <TextView
+            android:id="@+id/chipLimit60"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_segment_active"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:text="60"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <TextView
+            android:id="@+id/chipLimit80"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_segment_inactive"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:text="80"
+            android:textColor="#475569"
+            android:textSize="13sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <TextView
+            android:id="@+id/chipLimit100"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_segment_inactive"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:text="100"
+            android:textColor="#475569"
+            android:textSize="13sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <TextView
+            android:id="@+id/chipLimit120"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_segment_inactive"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:text="120"
+            android:textColor="#475569"
+            android:textSize="13sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/chipLimit140"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_segment_inactive"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:text="140"
+            android:textColor="#475569"
+            android:textSize="13sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <TextView
+            android:id="@+id/chipLimit160"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_segment_inactive"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:text="160"
+            android:textColor="#475569"
+            android:textSize="13sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <TextView
+            android:id="@+id/chipLimitOff"
+            android:layout_width="0dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_segment_inactive"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:text="Off (No Limit)"
+            android:textColor="#475569"
+            android:textSize="13sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+    </LinearLayout>
+
+    <!-- Sound Alert Toggle Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="Audio Warning Alert"
+                android:textColor="#111827"
+                android:textSize="14sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/instrument_sans_regular"
+                android:text="Play beep sound when over speed limit"
+                android:textColor="#64748B"
+                android:textSize="12sp"
+                app:fontFamily="@font/instrument_sans_regular" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchAudioAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:thumb="@drawable/bg_switch_thumb"
+            app:track="@drawable/bg_switch_track"
+            app:showText="false"
+            app:useMaterialThemeColors="false" />
+
+    </LinearLayout>
+
+    <!-- Apply Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnApplyLimit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_speed_start_button"
+        android:fontFamily="@font/instrument_sans_bold"
+        android:text="Apply Speed Limit"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        app:fontFamily="@font/instrument_sans_bold" />
+
+</LinearLayout>

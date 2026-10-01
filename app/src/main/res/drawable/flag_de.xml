@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="32dp"
+    android:viewportWidth="48"
+    android:viewportHeight="32">
+    <!-- Black stripe -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M0,0h48v10.67H0z" />
+    <!-- Red stripe -->
+    <path
+        android:fillColor="#DD0000"
+        android:pathData="M0,10.67h48v10.67H0z" />
+    <!-- Gold stripe -->
+    <path
+        android:fillColor="#FFCE00"
+        android:pathData="M0,21.33h48v10.67H0z" />
+</vector>

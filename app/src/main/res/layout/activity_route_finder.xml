@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/routeFinderRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC">
+
+    <!-- 1. FULLSCREEN MAP -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- 2. TOP FLOATING CONTAINER (Header + Route Inputs Card + Suggestions Dropdown) -->
+    <LinearLayout
+        android:id="@+id/topBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="8dp">
+
+        <!-- Top Header (Back Button + Title) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_circular_back_button"
+                android:contentDescription="Back"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_back_arrow_dark" />
+
+            <TextView
+                android:id="@+id/tvHeaderTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="Route Finder &amp; GPS Trail"
+                android:textColor="#0F172A"
+                android:textSize="17sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+        </LinearLayout>
+
+        <!-- Route Inputs Card (Origin + Dotted Line + Destination + Swap + Travel Modes) -->
+        <LinearLayout
+            android:id="@+id/cardRouteInputs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_card_route_inputs"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <!-- Dual Inputs Container with Swap Button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- Left Column: Pins & Dotted Connector -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <!-- Green Origin Pin -->
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:contentDescription="Start Pin"
+                        android:src="@drawable/ic_map_pin_green" />
+
+                    <!-- Dotted Connector -->
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="22dp"
+                        android:layout_marginVertical="2dp"
+                        android:background="#CBD5E1" />
+
+                    <!-- Red Destination Pin -->
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:contentDescription="Destination Pin"
+                        android:src="@drawable/ic_map_pin_red" />
+
+                </LinearLayout>
+
+                <!-- Middle Column: Start and Destination Text Inputs -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <!-- Start Location Input -->
+                    <EditText
+                        android:id="@+id/etStartLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:background="@null"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:hint="Current Location (GPS)"
+                        android:imeOptions="actionSearch|flagNoExtractUi"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="#0F172A"
+                        android:textColorHint="#94A3B8"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="4dp"
+                        android:background="#F1F5F9" />
+
+                    <!-- Destination Location Input -->
+                    <EditText
+                        android:id="@+id/etDestLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:background="@null"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:hint="Search destination..."
+                        android:imeOptions="actionSearch|flagNoExtractUi"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="#0F172A"
+                        android:textColorHint="#94A3B8"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <!-- Right Column: Swap Button -->
+                <ImageButton
+                    android:id="@+id/btnSwapLocations"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/bg_swap_button"
+                    android:contentDescription="Swap Locations"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_swap" />
+
+            </LinearLayout>
+
+            <!-- Divider -->
+       <!--     <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="10dp"
+                android:background="#F1F5F9" />-->
+
+            <!-- Travel Mode Selector Pills (Car / Bike / Walking) -->
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Mode: Car -->
+                <LinearLayout
+                    android:id="@+id/btnModeCar"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_travel_mode_selected"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivIconCar"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:contentDescription="Car"
+                        android:src="@drawable/ic_car"
+                        app:tint="#FFFFFF" />
+
+                    <TextView
+                        android:id="@+id/tvLabelCar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="Car"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <!-- Mode: Bike -->
+                <LinearLayout
+                    android:id="@+id/btnModeBike"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_marginHorizontal="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_travel_mode_unselected"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivIconBike"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:contentDescription="Bike"
+                        android:src="@drawable/ic_bike"
+                        app:tint="#334155" />
+
+                    <TextView
+                        android:id="@+id/tvLabelBike"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="Bike"
+                        android:textColor="#334155"
+                        android:textSize="12sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <!-- Mode: Walking -->
+                <LinearLayout
+                    android:id="@+id/btnModeWalking"
+                    android:layout_width="0dp"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_travel_mode_unselected"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivIconWalking"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:contentDescription="Walking"
+                        android:src="@drawable/ic_walking"
+                        app:tint="#334155" />
+
+                    <TextView
+                        android:id="@+id/tvLabelWalking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:text="Walking"
+                        android:textColor="#334155"
+                        android:textSize="12sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Search Suggestions Dropdown Overlay -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSuggestions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="8dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRouteSuggestions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="240dp"
+                android:overScrollMode="never" />
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <!-- 3. FLOATING ON-MAP ROUTE BADGE (e.g. 12 mins • 4.6 km • 🟢 Low Traffic) -->
+    <LinearLayout
+        android:id="@+id/layoutOnMapInfoBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/bg_route_on_map_pill"
+        android:elevation="6dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="7dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvOnMapStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="12 mins • 4.6 km"
+            android:textColor="#0F172A"
+            android:textSize="12sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+        <View
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_circle_icon_green" />
+
+        <TextView
+            android:id="@+id/tvOnMapTraffic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Low Traffic"
+            android:textColor="#059669"
+            android:textSize="12sp"
+            app:fontFamily="@font/instrument_sans_bold" />
+
+    </LinearLayout>
+
+    <!-- 4. FLOATING MAP CONTROLS (Right Side) -->
+    <LinearLayout
+        android:id="@+id/layoutMapControls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical">
+
+        <!-- Layer Toggle FAB -->
+        <ImageButton
+            android:id="@+id/btnLayerToggle"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_circular_subtle_button"
+            android:contentDescription="Toggle Layers"
+            android:elevation="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_map_layers"
+            app:tint="#1E293B" />
+
+        <!-- Zoom In -->
+        <ImageButton
+            android:id="@+id/btnZoomIn"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_circular_subtle_button"
+            android:contentDescription="Zoom In"
+            android:elevation="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_plus_zoom"
+            app:tint="#1E293B" />
+
+        <!-- Zoom Out -->
+        <ImageButton
+            android:id="@+id/btnZoomOut"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_circular_subtle_button"
+            android:contentDescription="Zoom Out"
+            android:elevation="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_minus_zoom"
+            app:tint="#1E293B" />
+
+        <!-- My Location FAB -->
+        <ImageButton
+            android:id="@+id/btnMyLocation"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_circular_subtle_button"
+            android:contentDescription="My Location"
+            android:elevation="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_my_location"
+            app:tint="#4F46E5" />
+
+    </LinearLayout>
+
+    <!-- 5. BOTTOM ROUTE SUMMARY & NAVIGATION DOCK -->
+    <LinearLayout
+        android:id="@+id/layoutBottomRouteDock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_bottom_sheet_dialog"
+        android:elevation="12dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="24dp"
+        android:visibility="visible">
+
+        <!-- Drag Handle -->
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_bottom_sheet_drag_handle" />
+
+        <!-- Route Title & ETA Badge Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvRouteTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:maxLines="1"
+                android:text="Fastest Route via Faisal Avenue"
+                android:textColor="#0F172A"
+                android:textSize="16sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+            <!-- ETA Time Badge (e.g. 03:45 PM) -->
+            <TextView
+                android:id="@+id/tvRouteEtaBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_route_badge_eta"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:text="03:45 PM"
+                android:textColor="#4F46E5"
+                android:textSize="13sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+        </LinearLayout>
+
+        <!-- Route Subtitle (Distance • Tolls • Tracking status) -->
+        <TextView
+            android:id="@+id/tvRouteSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:maxLines="1"
+            tools:text="4.6 km • Live GPS Tracking Enabled"
+            android:textColor="#64748B"
+            android:textSize="12sp"
+            app:fontFamily="@font/instrument_sans_regular" />
+
+        <!-- Optional Route Comparison Cards (Fastest vs Alternate) -->
+        <LinearLayout
+            android:id="@+id/layoutRouteOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <!-- Route Option 1 (Selected) -->
+            <LinearLayout
+                android:id="@+id/cardOptionPrimary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_route_option_card_selected"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:background="@drawable/bg_circle_icon_green" />
+
+                    <TextView
+                        android:id="@+id/tvOption1Name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:maxLines="1"
+                        android:text="Via Main Rd"
+                        android:textColor="#0F172A"
+                        android:textSize="12sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvOption1Duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="12 mins"
+                    android:textColor="#059669"
+                    android:textSize="15sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvOption1Distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_regular"
+                    android:text="4.6 km • Fastest"
+                    android:textColor="#64748B"
+                    android:textSize="11sp"
+                    app:fontFamily="@font/instrument_sans_regular" />
+
+            </LinearLayout>
+
+            <!-- Route Option 2 (Alternate) -->
+            <LinearLayout
+                android:id="@+id/cardOptionAlternate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_route_option_card_unselected"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:background="@drawable/bg_circle_icon_blue"
+                        android:backgroundTint="#94A3B8" />
+
+                    <TextView
+                        android:id="@+id/tvOption2Name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:maxLines="1"
+                        android:text="Via Ring Road"
+                        android:textColor="#64748B"
+                        android:textSize="12sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvOption2Duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="18 mins"
+                    android:textColor="#334155"
+                    android:textSize="15sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvOption2Distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_regular"
+                    android:text="6.2 km • +6 min"
+                    android:textColor="#94A3B8"
+                    android:textSize="11sp"
+                    app:fontFamily="@font/instrument_sans_regular" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Primary Start Navigation Action Button -->
+        <LinearLayout
+            android:id="@+id/btnStartNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_travel_mode_selected"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:contentDescription="Navigation"
+                android:src="@drawable/ic_navigation_arrow"
+                app:tint="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/tvStartNavText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="Start Navigation (12 mins)"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 6. LOADING PROGRESS BAR -->
+    <ProgressBar
+        android:id="@+id/progressRouteLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:indeterminateTint="#4F46E5"
+        android:visibility="gone" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

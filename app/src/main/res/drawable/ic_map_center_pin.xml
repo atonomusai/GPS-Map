@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="44dp"
+    android:height="44dp"
+    android:viewportWidth="44"
+    android:viewportHeight="44">
+    <!-- Pin Body (Indigo/Blue #5865F2) -->
+    <path
+        android:fillColor="#5865F2"
+        android:pathData="M22,3C14.27,3 8,9.27 8,17c0,10.5 14,24 14,24s14,-13.5 14,-24C36,9.27 29.73,3 22,3z" />
+    <!-- White center ring -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M22,17m-5,0a5,5 0,1,1 10,0a5,5 0,1,1 -10,0" />
+    <!-- Inner blue accent dot -->
+    <path
+        android:fillColor="#5865F2"
+        android:pathData="M22,17m-2.5,0a2.5,2.5 0,1,1 5,0a2.5,2.5 0,1,1 -5,0" />
+</vector>

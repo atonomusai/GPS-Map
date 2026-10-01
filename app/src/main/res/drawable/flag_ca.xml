@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="32dp"
+    android:viewportWidth="48"
+    android:viewportHeight="32">
+    <!-- Red stripes -->
+    <path
+        android:fillColor="#FF0000"
+        android:pathData="M0,0h12v32H0zM36,0h12v32H36z" />
+    <!-- White center -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M12,0h24v32H12z" />
+    <!-- Maple leaf hint -->
+    <path
+        android:fillColor="#FF0000"
+        android:pathData="M24,7l2,4 4,-1 -2,4 3,1 -3,3 2,2 -4,0 0,5 -4,0 0,-5 -4,0 2,-2 -3,-3 3,-1 -2,-4 4,1z" />
+</vector>

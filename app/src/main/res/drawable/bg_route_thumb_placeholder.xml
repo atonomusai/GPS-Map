@@ -1,0 +1,58 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="72dp"
+    android:height="72dp"
+    android:viewportWidth="72"
+    android:viewportHeight="72">
+
+  <!-- Map Background -->
+  <path
+      android:fillColor="#E2E8F0"
+      android:pathData="M8,0h56c4.4,0 8,3.6 8,8v56c0,4.4 -3.6,8 -8,8H8c-4.4,0 -8,-3.6 -8,-8V8c0,-4.4 3.6,-8 8,-8z"/>
+
+  <!-- Green Park Land Shapes -->
+  <path
+      android:fillColor="#CBD5E1"
+      android:pathData="M0,0h32v24H0z M44,48h28v24H44z"/>
+
+  <path
+      android:fillColor="#D1FAE5"
+      android:pathData="M6,6h24v18H6z M44,44h22v22H44z"/>
+
+  <!-- Road Grid Lines -->
+  <path
+      android:strokeColor="#FFFFFF"
+      android:strokeWidth="2.5"
+      android:pathData="M0,28h72 M0,48h72 M24,0v72 M48,0v72"/>
+
+  <!-- Route Polyline (Blue + Orange/Red) -->
+  <path
+      android:strokeColor="#3B82F6"
+      android:strokeWidth="3"
+      android:strokeLineCap="round"
+      android:strokeLineJoin="round"
+      android:pathData="M14,18 L14,38 L38,38"/>
+
+  <path
+      android:strokeColor="#EF4444"
+      android:strokeWidth="3"
+      android:strokeLineCap="round"
+      android:strokeLineJoin="round"
+      android:pathData="M38,38 L38,54 L58,54"/>
+
+  <!-- Start Pin (Green Dot) -->
+  <path
+      android:fillColor="#10B981"
+      android:pathData="M14,18m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0"/>
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M14,18m-1.5,0a1.5,1.5 0,1 1,3 0a1.5,1.5 0,1 1,-3 0"/>
+
+  <!-- Destination Pin (Red Marker) -->
+  <path
+      android:fillColor="#EF4444"
+      android:pathData="M58,48c-2.2,0 -4,1.8 -4,4c0,3 4,7 4,7s4,-4 4,-7c0,-2.2 -1.8,-4 -4,-4z"/>
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M58,52m-1.2,0a1.2,1.2 0,1 1,2.4 0a1.2,1.2 0,1 1,-2.4 0"/>
+
+</vector>

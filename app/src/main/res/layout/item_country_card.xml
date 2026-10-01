@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp">
+
+    <LinearLayout
+        android:id="@+id/cardCountryRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_country_card"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="18dp">
+
+        <ImageView
+            android:id="@+id/ivCountryFlag"
+            android:layout_width="52dp"
+            android:layout_height="34dp"
+            android:contentDescription="@null"
+            android:scaleType="fitCenter"
+            tools:src="@drawable/flag_us" />
+
+        <TextView
+            android:id="@+id/tvCountryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:gravity="center"
+            android:textColor="#0F172A"
+            android:textSize="14sp"
+            app:fontFamily="@font/instrument_sans_bold"
+            tools:text="USA" />
+
+        <TextView
+            android:id="@+id/tvCountryCameraCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:gravity="center"
+            android:textColor="#64748B"
+            android:textSize="12sp"
+            app:fontFamily="@font/instrument_sans_regular"
+            tools:text="1240 cameras" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

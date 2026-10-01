@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="38dp"
+    android:height="46dp"
+    android:viewportWidth="38"
+    android:viewportHeight="46">
+    <!-- Pin Body (Vibrant Crimson Red #EA4335) -->
+    <path
+        android:fillColor="#EA4335"
+        android:pathData="M19,2C10.16,2 3,9.16 3,18c0,11.8 16,26 16,26s16,-14.2 16,-26C35,9.16 27.84,2 19,2z" />
+    <!-- Darker Pin Edge/Shadow Accent for 3D depth -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M19,2C27.84,2 35,9.16 35,18c0,11.8 -16,26 -16,26V2z" />
+    <!-- Outer White Ring -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M19,18m-7,0a7,7 0,1,1 14,0a7,7 0,1,1 -14,0" />
+    <!-- Inner Crimson Red Core Dot -->
+    <path
+        android:fillColor="#EA4335"
+        android:pathData="M19,18m-3.5,0a3.5,3.5 0,1,1 7,0a3.5,3.5 0,1,1 -7,0" />
+</vector>

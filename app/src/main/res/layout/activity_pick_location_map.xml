@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mapRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F5F9">
+
+    <!-- 1. OpenStreetMap Canvas -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <!-- 2. Fixed center pin: the map moves underneath it, and the place under the pin tip (the
+         exact map center) is what gets reverse-geocoded, shown on the stamp and captured.
+         The container is centered on the map and symmetric around its middle: the pin's tip (2dp
+         above the drawable's bottom) lands exactly on the map center at 16dp top margin
+         (16 + 44 = 60 = half of 120). The extra 14dp above the pin is headroom for the 12dp lift
+         while dragging - with none, the lifted pin's top was clipped flat. -->
+    <FrameLayout
+        android:id="@+id/centerPinContainer"
+        android:layout_width="38dp"
+        android:layout_height="120dp"
+        android:clipChildren="false"
+        android:layout_centerInParent="true"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no">
+
+        <!-- Ground shadow marking the exact point; stays put while the pin lifts during a drag -->
+        <View
+            android:layout_width="10dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_center_pin_shadow" />
+
+        <ImageView
+            android:id="@+id/ivCenterPin"
+            android:layout_width="38dp"
+            android:layout_height="46dp"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="16dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_search_location_pin" />
+
+    </FrameLayout>
+
+    <!-- 3. Top Floating Search Bar Header & Suggestions Overlay -->
+    <LinearLayout
+        android:id="@+id/topBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:paddingStart="14dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="14dp">
+
+        <!-- Top Header Row: Back Button, Search Bar Pill, Layers Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Back Circular Button -->
+            <FrameLayout
+                android:id="@+id/btnBack"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_map_action_circle"
+                android:clickable="true"
+                android:elevation="0dp"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Back"
+                    android:src="@drawable/ic_back_arrow_dark" />
+
+            </FrameLayout>
+
+            <!-- Search Bar Pill Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardSearchBar"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="22dp"
+                app:cardElevation="2dp"
+                app:cardPreventCornerOverlap="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp">
+
+                    <ImageView
+                        android:id="@+id/ivSearchIcon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:contentDescription="Search"
+                        android:focusable="true"
+                        android:padding="3dp"
+                        android:src="@drawable/ic_search" />
+
+                    <EditText
+                        android:id="@+id/etMapSearch"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:hint="Search location, places..."
+                        android:imeOptions="actionSearch|flagNoExtractUi"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="#1A1C20"
+                        android:textColorHint="#94A3B8"
+                        android:textSize="13sp"
+                        app:fontFamily="@font/instrument_sans_medium" />
+
+                    <ProgressBar
+                        android:id="@+id/pbSearchLoading"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="4dp"
+                        android:indeterminateTint="#5865F2"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/btnClearSearch"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Clear"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_close_gray"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Layers Circular Button with Green Dot -->
+            <FrameLayout
+                android:id="@+id/btnLayers"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_map_action_circle"
+                android:clickable="true"
+                android:elevation="0dp"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Layers"
+                    android:src="@drawable/ic_map_layers_icon" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <!-- Search Results Dropdown Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSearchResults"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSearchResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:maxHeight="220dp"
+                android:overScrollMode="never"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp" />
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <!-- 4. Top-Right Map Types Panel (Directly under Layers Button) -->
+    <LinearLayout
+        android:id="@+id/panelMapTypes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topBarContainer"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="14dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <!-- SATELLITE Tile -->
+        <LinearLayout
+            android:id="@+id/cardSatellite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/flSatelliteBorder"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_map_type_thumb_selected">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2.5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_map_satellite"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.GSMCAMER.RoundedCard" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvSatelliteLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="SATELLITE"
+                android:textColor="#3B82F6"
+                android:textSize="9sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+        </LinearLayout>
+
+        <!-- HYBRID Tile -->
+        <LinearLayout
+            android:id="@+id/cardHybrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/flHybridBorder"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_map_type_thumb_unselected">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1.5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_map_hybrid"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.GSMCAMER.RoundedCard" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvHybridLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="HYBRID"
+                android:textColor="#475569"
+                android:textSize="9sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+        </LinearLayout>
+
+        <!-- TERRAIN Tile -->
+        <LinearLayout
+            android:id="@+id/cardTerrain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/flTerrainBorder"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_map_type_thumb_unselected">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1.5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_map_terrain"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.GSMCAMER.RoundedCard" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvTerrainLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="TERRAIN"
+                android:textColor="#475569"
+                android:textSize="9sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+        </LinearLayout>
+
+        <!-- STREET Tile -->
+        <LinearLayout
+            android:id="@+id/cardStreet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/flStreetBorder"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_map_type_thumb_unselected">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1.5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_map_normal"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.GSMCAMER.RoundedCard" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvStreetLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:text="STREET"
+                android:textColor="#475569"
+                android:textSize="9sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 5. Right Side Floating Action Buttons (GPS My Location, Zoom Controls, Capture Stamp Map) -->
+    <LinearLayout
+        android:id="@+id/rightControlsContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomStampContainer"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <!-- GPS My Location Button -->
+        <FrameLayout
+            android:id="@+id/btnMyLocation"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_map_action_circle"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:contentDescription="My Location"
+                android:src="@drawable/ic_target_reticle"
+                app:tint="#4F65F6" />
+
+        </FrameLayout>
+
+        <!-- Zoom Controls Pill Card (+ / -) -->
+        <LinearLayout
+            android:id="@+id/cardZoomControls"
+            android:layout_width="42dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_zoom_pill_card"
+            android:elevation="0dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/btnZoomIn"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="#334155"
+                android:textSize="20sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E2E8F0" />
+
+            <TextView
+                android:id="@+id/btnZoomOut"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:gravity="center"
+                android:text="−"
+                android:textColor="#334155"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <!-- Capture Stamp Map Button -->
+        <LinearLayout
+            android:id="@+id/cardCaptureStampMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <FrameLayout
+                android:id="@+id/btnCaptureStampMap"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_capture_shutter_circle"
+                android:clickable="true"
+                android:elevation="0dp"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Capture Stamp Map"
+                    android:src="@drawable/ic_camera_shutter_white" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/bg_capture_label_pill"
+                android:fontFamily="@font/instrument_sans_bold"
+                android:gravity="center"
+                android:lineSpacingMultiplier="0.88"
+                android:text="Capture\nStamp Map"
+                android:textColor="#FFFFFF"
+                android:textSize="8sp"
+                app:fontFamily="@font/instrument_sans_bold" />
+        </LinearLayout>
+
+        <!-- Hidden Share Button for compatibility -->
+        <FrameLayout
+            android:id="@+id/btnShare"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <!-- 6. Bottom Floating Stamp Preview Card Container -->
+    <FrameLayout
+        android:id="@+id/bottomStampContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="16dp">
+
+        <LinearLayout
+            android:id="@+id/bottomStampCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_dark_stamp_bottom_card"
+            android:clickable="true"
+            android:elevation="12dp"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <!-- Stamp Map Mini Thumbnail Preview -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivStampThumbnail"
+                android:layout_width="62dp"
+                android:layout_height="62dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_map_normal"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.GSMCAMER.RoundedCard" />
+
+            <!-- Stamp Text Details Column with Shimmer only on text/timestamp -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:id="@+id/layoutStampTextDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="64dp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <!-- Title: Place Name -->
+                    <TextView
+                        android:id="@+id/tvStampTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/instrument_sans_bold"
+                        android:maxLines="1"
+                        android:text=""
+                        android:textColor="#FFFFFF"
+                        android:textSize="13.5sp"
+                        app:fontFamily="@font/instrument_sans_bold" />
+
+                    <!-- Subtitle: Street & Sector Address -->
+                    <TextView
+                        android:id="@+id/tvStampAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:maxLines="1"
+                        android:text=""
+                        android:textColor="#94A3B8"
+                        android:textSize="11sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                    <!-- Coordinates & Altitude Highlight Line (Cyan / Bright Blue) -->
+                    <TextView
+                        android:id="@+id/tvStampCoordsAlt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:maxLines="1"
+                        android:text=""
+                        android:textColor="#38BDF8"
+                        android:textSize="11sp"
+                        app:fontFamily="@font/instrument_sans_medium" />
+
+                    <!-- Date & Timestamp Line -->
+                    <TextView
+                        android:id="@+id/tvStampDateTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        android:maxLines="1"
+                        android:text=""
+                        android:textColor="#94A3B8"
+                        android:textSize="10.5sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+
+                </LinearLayout>
+
+                <!-- Shimmer Skeleton Overlay View only on Timestamp/Address Text Details -->
+                <com.autonoumus.ai.presentation.common.view.ShimmerOverlayView
+                    android:id="@+id/viewStampShimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:elevation="2dp"
+                    app:shimmerBaseColor="#FF232733"
+                    app:shimmerCornerRadius="8dp"
+                    app:shimmerHighlightColor="#26FFFFFF"
+                    app:shimmerShowTextPlaceholder="true"
+                    app:shimmerTextLines="4"
+                    app:shimmerTextPlaceholderColor="#3A4152"
+                    android:visibility="visible"
+                    tools:visibility="visible" />
+
+            </FrameLayout>
+
+            <!-- Right Side Arrow (Click to select location and go next) -->
+            <FrameLayout
+                android:id="@+id/btnSelectLocationNext"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_arrow_next_blue"
+                android:clickable="true"
+                android:elevation="0dp"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="Select Location"
+                    android:src="@drawable/arrow_right"
+                    app:tint="#FFFFFF" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</RelativeLayout>

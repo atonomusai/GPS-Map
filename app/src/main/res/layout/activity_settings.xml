@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settingsRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FD"
+    android:fitsSystemWindows="true">
+
+    <!-- Top App Bar / Header -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbarLayout"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_circular_back_button"
+            android:contentDescription="@string/app_name"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back_arrow_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSettingsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Settings"
+            android:textColor="#1A1C20"
+            android:textSize="18sp"
+            app:fontFamily="@font/instrument_sans_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Scrollable Settings Content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="36dp">
+
+            <!-- SECTION 1: GENERAL -->
+            <TextView
+                android:id="@+id/tvHeaderGeneral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/instrument_sans_medium"
+                android:text="General"
+                android:textColor="#7E8594"
+                android:textSize="13sp"
+                app:fontFamily="@font/instrument_sans_medium" />
+
+            <LinearLayout
+                android:id="@+id/cardGeneral"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_settings_card"
+                android:orientation="vertical">
+
+                <!-- Row: Stamp Settings -->
+                <LinearLayout
+                    android:id="@+id/rowStampSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_settings_item_single_ripple"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="14dp">
+
+                    <ImageView
+                        android:id="@+id/ivStampSettings"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:contentDescription="Stamp Settings"
+                        android:src="@drawable/ic_settings_stamp" />
+
+                    <TextView
+                        android:id="@+id/tvStampSettings"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:text="Stamp Settings"
+                        android:textColor="#1A1C20"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/instrument_sans_medium" />
+
+                    <ImageView
+                        android:layout_width="7dp"
+                        android:layout_height="12dp"
+                        android:contentDescription="Next"
+                        android:src="@drawable/ic_chevron_right_thin" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <!-- SECTION 3: UNITS -->
+            <TextView
+                android:id="@+id/tvHeaderUnits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/instrument_sans_semibold"
+                android:letterSpacing="0.03"
+                android:text="UNITS"
+                android:textColor="#7E8594"
+                android:textSize="12sp"
+                app:fontFamily="@font/instrument_sans_semibold" />
+
+            <LinearLayout
+                android:id="@+id/cardUnits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_settings_card"
+                android:orientation="vertical">
+
+                <!-- Row: Distance Unit -->
+                <LinearLayout
+                    android:id="@+id/rowDistanceUnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="10dp">
+
+                    <TextView
+                        android:id="@+id/tvDistanceUnitTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:text="Distance Unit"
+                        android:textColor="#1A1C20"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/instrument_sans_medium" />
+
+                    <!-- Distance Segmented Toggle -->
+                    <LinearLayout
+                        android:id="@+id/toggleDistanceUnit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_segment_toggle_container"
+                        android:orientation="horizontal"
+                        android:padding="3dp">
+
+                        <TextView
+                            android:id="@+id/tvUnitKilometers"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_segment_active"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/instrument_sans_semibold"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="5dp"
+                            android:text="Kilometers"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/instrument_sans_semibold" />
+
+                        <TextView
+                            android:id="@+id/tvUnitMiles"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_segment_inactive"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/instrument_sans_medium"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="5dp"
+                            android:text="Miles"
+                            android:textColor="#7E8594"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/instrument_sans_medium" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:background="#F0F2F6" />
+
+                <!-- Row: Speed Unit -->
+                <LinearLayout
+                    android:id="@+id/rowSpeedUnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="10dp">
+
+                    <TextView
+                        android:id="@+id/tvSpeedUnitTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:text="Speed Unit"
+                        android:textColor="#1A1C20"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/instrument_sans_medium" />
+
+                    <!-- Speed Segmented Toggle -->
+                    <LinearLayout
+                        android:id="@+id/toggleSpeedUnit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_segment_toggle_container"
+                        android:orientation="horizontal"
+                        android:padding="3dp">
+
+                        <TextView
+                            android:id="@+id/tvUnitKmh"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_segment_active"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/instrument_sans_semibold"
+                            android:paddingHorizontal="14dp"
+                            android:paddingVertical="5dp"
+                            android:text="km/h"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/instrument_sans_semibold" />
+
+                        <TextView
+                            android:id="@+id/tvUnitMph"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_segment_inactive"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:fontFamily="@font/instrument_sans_medium"
+                            android:paddingHorizontal="14dp"
+                            android:paddingVertical="5dp"
+                            android:text="mph"
+                            android:textColor="#7E8594"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/instrument_sans_medium" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <!-- SECTION 4: HELP & SUPPORT -->
+            <TextView
+                android:id="@+id/tvHeaderHelpSupport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/instrument_sans_semibold"
+                android:letterSpacing="0.03"
+                android:text="HELP &amp; SUPPORT"
+                android:textColor="#7E8594"
+                android:textSize="12sp"
+                app:fontFamily="@font/instrument_sans_semibold" />
+
+            <LinearLayout
+                android:id="@+id/cardHelpSupport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_settings_card"
+                android:orientation="vertical">
+
+                <!-- Row: Share App -->
+                <LinearLayout
+                    android:id="@+id/rowShareApp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_settings_item_top_ripple"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="13dp">
+
+                    <ImageView
+                        android:id="@+id/ivShareApp"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:contentDescription="Share App"
+                        android:src="@drawable/ic_settings_share" />
+
+                    <TextView
+                        android:id="@+id/tvShareApp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:text="Share App"
+                        android:textColor="#1A1C20"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/instrument_sans_medium" />
+
+                    <ImageView
+                        android:layout_width="7dp"
+                        android:layout_height="12dp"
+                        android:contentDescription="Next"
+                        android:src="@drawable/ic_chevron_right_thin" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:background="#F0F2F6" />
+
+                <!-- Row: Rate Us -->
+                <LinearLayout
+                    android:id="@+id/rowRateUs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_settings_item_middle_ripple"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="13dp">
+
+                    <ImageView
+                        android:id="@+id/ivRateUs"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:contentDescription="Rate Us"
+                        android:src="@drawable/ic_settings_rate" />
+
+                    <TextView
+                        android:id="@+id/tvRateUs"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:text="Rate Us"
+                        android:textColor="#1A1C20"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/instrument_sans_medium" />
+
+                    <ImageView
+                        android:layout_width="7dp"
+                        android:layout_height="12dp"
+                        android:contentDescription="Next"
+                        android:src="@drawable/ic_chevron_right_thin" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/dividerRateUs"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:background="#F0F2F6" />
+
+                <!-- Row: Privacy Policy -->
+                <LinearLayout
+                    android:id="@+id/rowPrivacyPolicy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_settings_item_bottom_ripple"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="13dp">
+
+                    <ImageView
+                        android:id="@+id/ivPrivacyPolicy"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:contentDescription="Privacy Policy"
+                        android:src="@drawable/ic_settings_privacy" />
+
+                    <TextView
+                        android:id="@+id/tvPrivacyPolicy"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:text="Privacy Policy"
+                        android:textColor="#1A1C20"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/instrument_sans_medium" />
+
+                    <ImageView
+                        android:layout_width="7dp"
+                        android:layout_height="12dp"
+                        android:contentDescription="Next"
+                        android:src="@drawable/ic_chevron_right_thin" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <!-- SECTION 5: ABOUT -->
+            <TextView
+                android:id="@+id/tvHeaderAbout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/instrument_sans_semibold"
+                android:letterSpacing="0.03"
+                android:text="ABOUT"
+                android:textColor="#7E8594"
+                android:textSize="12sp"
+                app:fontFamily="@font/instrument_sans_semibold" />
+
+            <LinearLayout
+                android:id="@+id/cardAbout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_settings_card"
+                android:orientation="vertical">
+
+                <!-- Row: Terms of Service -->
+                <LinearLayout
+                    android:id="@+id/rowTermsOfService"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_settings_item_top_ripple"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="14dp">
+
+                    <TextView
+                        android:id="@+id/tvTermsOfService"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:text="Terms of Service"
+                        android:textColor="#1A1C20"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/instrument_sans_medium" />
+
+                    <ImageView
+                        android:layout_width="7dp"
+                        android:layout_height="12dp"
+                        android:contentDescription="Next"
+                        android:src="@drawable/ic_chevron_right_thin" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="14dp"
+                    android:background="#F0F2F6" />
+
+                <!-- Row: App Version -->
+                <LinearLayout
+                    android:id="@+id/rowAppVersion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_settings_item_bottom_ripple"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="14dp">
+
+                    <TextView
+                        android:id="@+id/tvAppVersionTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/instrument_sans_medium"
+                        android:text="App Version"
+                        android:textColor="#1A1C20"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/instrument_sans_medium" />
+
+                    <TextView
+                        android:id="@+id/tvAppVersionValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/instrument_sans_regular"
+                        tools:text="1.0"
+                        android:textColor="#8E95A5"
+                        android:textSize="14sp"
+                        app:fontFamily="@font/instrument_sans_regular" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stampRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_stamp_frosted_blur"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingHorizontal="14dp"
+    android:paddingVertical="12dp">
+
+    <!-- Left Map Badge in White Rounded Card Frame -->
+    <FrameLayout
+        android:id="@+id/layoutMapFrame"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_stamp_map_frame_white"
+        android:elevation="2dp"
+        android:padding="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.autonoumus.ai.core.stamp.view.RoundedImageView
+            android:id="@+id/ivMapBadge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Map Thumbnail"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_map_normal"
+            app:riv_cornerRadius="11dp"
+            app:riv_isCircle="false" />
+
+    </FrameLayout>
+
+    <!-- Center Texts (Location & Coordinates) -->
+    <LinearLayout
+        android:id="@+id/layoutTexts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/layoutRight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/layoutMapFrame"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Place / Address Title -->
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_semibold"
+            android:maxLines="2"
+            android:text="F-7 Markaz, Jinnah Super Market, Islamabad"
+            android:textColor="#000000"
+            android:textSize="13.5sp"
+            app:fontFamily="@font/instrument_sans_semibold" />
+
+        <!-- Coordinates Line -->
+        <TextView
+            android:id="@+id/tvCoordinates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2.5dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:maxLines="1"
+            android:text="33.7294° N, 73.0551° E"
+            android:textColor="#000000"
+            android:textSize="11sp"
+            app:fontFamily="@font/instrument_sans_regular" />
+
+    </LinearLayout>
+
+    <!-- Right Container (Date / Time) -->
+    <LinearLayout
+        android:id="@+id/layoutRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="6dp"
+        android:gravity="end|center_vertical"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivEditIcon"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Date Line (Uppercase) -->
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_semibold"
+            android:gravity="end"
+            android:letterSpacing="0.04"
+            android:text="14 DEC 2024"
+            android:textAllCaps="true"
+            android:textColor="#000000"
+            android:textSize="11.5sp"
+            app:fontFamily="@font/instrument_sans_semibold" />
+
+        <!-- Time Line -->
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/instrument_sans_medium"
+            android:gravity="end"
+            android:letterSpacing="0.02"
+            android:text="09:42 AM"
+            android:textColor="#000000"
+            android:textSize="11sp"
+            app:fontFamily="@font/instrument_sans_medium" />
+
+    </LinearLayout>
+
+    <!-- Edit Pencil Icon (Top-Right Corner per Image 2) -->
+    <ImageView
+        android:id="@+id/ivEditIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_edit_circle"
+        android:contentDescription="Edit"
+        android:padding="3.5dp"
+        android:src="@drawable/ic_edit_pen"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#FFFFFF"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stampRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_stamp_paris_glass"
+    android:padding="11dp">
+
+    <!-- Left Circular Map Badge with Center Pin -->
+    <FrameLayout
+        android:id="@+id/layoutMapBadge"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.autonoumus.ai.core.stamp.view.RoundedImageView
+            android:id="@+id/ivMapBadge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Map Badge"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_map_normal"
+            app:riv_isCircle="true"
+            app:riv_strokeColor="#FFFFFF"
+            app:riv_strokeWidth="1.2dp" />
+
+        <ImageView
+            android:id="@+id/ivMapPin"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:contentDescription="Pin"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_map_pin_red"
+            android:translationY="-1dp" />
+
+    </FrameLayout>
+
+    <!-- Container for Texts (Right Aligned next to Circular Map) -->
+    <LinearLayout
+        android:id="@+id/layoutTexts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivEditIcon"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/layoutMapBadge"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Top Location Line -->
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_regular"
+            android:maxLines="2"
+            android:text="Pisa, 56126 pisa, Province of paisa,Italy"
+            android:textColor="#E5E7EB"
+            android:textSize="9.5sp" />
+
+        <!-- Bottom Alarm Clock Time Line -->
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:maxLines="1"
+            android:text="⏰ 4:23 PM"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+    <!-- Edit Pencil Circle (Top-Right Corner per Image 2) -->
+    <ImageView
+        android:id="@+id/ivEditIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_edit_circle"
+        android:contentDescription="Edit"
+        android:padding="3.5dp"
+        android:src="@drawable/ic_edit_pen"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#FFFFFF"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

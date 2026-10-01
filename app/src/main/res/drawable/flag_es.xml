@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="32dp"
+    android:viewportWidth="48"
+    android:viewportHeight="32">
+    <!-- Red top stripe -->
+    <path
+        android:fillColor="#AA151B"
+        android:pathData="M0,0h48v8H0z" />
+    <!-- Yellow middle stripe -->
+    <path
+        android:fillColor="#F1BF00"
+        android:pathData="M0,8h48v16H0z" />
+    <!-- Red bottom stripe -->
+    <path
+        android:fillColor="#AA151B"
+        android:pathData="M0,24h48v8H0z" />
+    <!-- Coat of arms badge hint -->
+    <path
+        android:fillColor="#AA151B"
+        android:pathData="M12,12h4v8h-4z" />
+</vector>

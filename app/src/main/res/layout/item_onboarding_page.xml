@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <!-- Top illustration ImageView with 9:9 ratio, edge to edge -->
+    <ImageView
+        android:id="@+id/ivOnboarding"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:contentDescription="@null"
+        android:src="@drawable/obboarding_image_three"
+        app:layout_constraintBottom_toTopOf="@+id/layoutText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/obboarding_image_three" />
+
+    <!-- Bottom gradient fade over the image -->
+    <View
+        android:id="@+id/viewBottomFade"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@drawable/gradient_bottom_fade"
+        app:layout_constraintBottom_toBottomOf="@+id/ivOnboarding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Text Information below image -->
+    <LinearLayout
+        android:id="@+id/layoutText"
+        android:layout_width="0dp"
+        android:layout_height="73dp"
+        android:gravity="left"
+        android:orientation="vertical"
+        android:paddingHorizontal="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/instrument_sans_bold"
+            app:fontFamily="@font/urbanist_bold"
+            android:gravity="left"
+            android:textColor="@color/text_primary"
+            android:textSize="20dp"
+            tools:text="Photo Timestamp" />
+
+        <TextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/urbanist_medium"
+            app:fontFamily="@font/urbanist_medium"
+            android:gravity="left"
+            android:lineSpacingExtra="3dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="14dp"
+            tools:text="Automatically &amp; manually attach time &amp; date to images you've taken" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

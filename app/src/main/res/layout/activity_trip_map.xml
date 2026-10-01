@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tripMapRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0F172A">
+
+    <!-- 1. FULL SCREEN MAP VIEW -->
+    <org.osmdroid.views.MapView
+        android:id="@+id/mapView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- 2. TOP ACTION BAR -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutTopBar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_trip_card"
+        android:elevation="6dp"
+        android:paddingHorizontal="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_circular_back_button"
+            android:contentDescription="Back"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back_arrow_dark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvMapTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/instrument_sans_bold"
+            android:text="Trip Route &amp; Markers"
+            android:textColor="#111827"
+            android:textSize="16sp"
+            app:fontFamily="@font/instrument_sans_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnFitRoute"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_circular_subtle_button"
+            android:contentDescription="Fit Route"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_expand"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#4F46E5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 3. FLOATING MAP CONTROLS (RIGHT SIDE) -->
+    <LinearLayout
+        android:id="@+id/layoutFloatingControls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:elevation="6dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutTopBar">
+
+        <!-- Layer toggle button -->
+        <ImageButton
+            android:id="@+id/btnLayerToggle"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_circular_back_button"
+            android:contentDescription="Map Layers"
+            android:elevation="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_map_layers"
+            app:tint="#1E293B" />
+
+        <!-- Zoom In -->
+        <ImageButton
+            android:id="@+id/btnZoomIn"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/bg_circular_back_button"
+            android:contentDescription="Zoom In"
+            android:elevation="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_plus_zoom"
+            app:tint="#1E293B" />
+
+        <!-- Zoom Out -->
+        <ImageButton
+            android:id="@+id/btnZoomOut"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/bg_circular_back_button"
+            android:contentDescription="Zoom Out"
+            android:elevation="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_minus_zoom"
+            app:tint="#1E293B" />
+
+        <!-- Focus Start Point -->
+        <FrameLayout
+            android:id="@+id/btnFocusStart"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/bg_circular_back_button"
+            android:elevation="4dp">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:contentDescription="Start Point"
+                android:src="@drawable/ic_map_pin_green" />
+        </FrameLayout>
+
+        <!-- Focus End Point -->
+        <FrameLayout
+            android:id="@+id/btnFocusEnd"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_circular_back_button"
+            android:elevation="4dp">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:contentDescription="End Point"
+                android:src="@drawable/ic_map_pin_red" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <!-- 4. BOTTOM TRIP DETAILS FLOATING CARD -->
+    <LinearLayout
+        android:id="@+id/bottomTripCard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_trip_card"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- START LOCATION ROW -->
+        <LinearLayout
+            android:id="@+id/rowStartLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="Start"
+                android:src="@drawable/ic_map_pin_green" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="START POINT"
+                    android:textColor="#10B981"
+                    android:textSize="10sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvStartAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/instrument_sans_regular"
+                    android:maxLines="1"
+                    android:text="Start Location"
+                    android:textColor="#1E293B"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_regular" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- CONNECTING DOTTED LINE -->
+        <View
+            android:layout_width="2dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginVertical="2dp"
+            android:background="#CBD5E1" />
+
+        <!-- END LOCATION ROW -->
+        <LinearLayout
+            android:id="@+id/rowEndLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="Destination"
+                android:src="@drawable/ic_map_pin_red" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="DESTINATION"
+                    android:textColor="#EF4444"
+                    android:textSize="10sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvEndAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/instrument_sans_regular"
+                    android:maxLines="1"
+                    android:text="Destination"
+                    android:textColor="#1E293B"
+                    android:textSize="13sp"
+                    app:fontFamily="@font/instrument_sans_regular" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- DIVIDER -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="#E2E8F0" />
+
+        <!-- 3 STATS PILL COLUMNS -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- DISTANCE -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="DISTANCE"
+                    android:textColor="#64748B"
+                    android:textSize="9sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvStatDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="0.0 km"
+                    android:textColor="#1E293B"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="28dp"
+                android:background="#E2E8F0" />
+
+            <!-- TIME -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="TIME"
+                    android:textColor="#64748B"
+                    android:textSize="9sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvStatTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="0 min"
+                    android:textColor="#1E293B"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="28dp"
+                android:background="#E2E8F0" />
+
+            <!-- AVG SPEED -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="AVG SPEED"
+                    android:textColor="#64748B"
+                    android:textSize="9sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvStatAvgSpeed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="0 km/h"
+                    android:textColor="#1E293B"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="28dp"
+                android:background="#E2E8F0" />
+
+            <!-- MAX SPEED -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="MAX SPEED"
+                    android:textColor="#64748B"
+                    android:textSize="9sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvStatMaxSpeed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/instrument_sans_bold"
+                    android:text="0 km/h"
+                    android:textColor="#1E293B"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/instrument_sans_bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
